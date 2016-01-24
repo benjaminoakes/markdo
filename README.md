@@ -1,24 +1,42 @@
 # Markdo
 
-TODO: Write a gem description
+Markdown-based task manager.  Inspired by OmniFocus and GitHub Flavored Markdown's task lists.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install Ruby, and then:
 
-    gem 'markdo'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install markdo
+    gem install markdo
 
 ## Usage
 
-TODO: Write usage instructions here
+You might already be using Markdo-formatted text already!
+
+Basically, you write Markdown, and use the GFM "task list" syntax:
+
+```
+# Example
+
+Any Markdown you want
+
+## Like headings
+
+## And subheadings
+
+> Quoted text.
+
+And of course:
+
+- [x] A completed task
+- [ ] An incomplete task
+  - [ ] A subtask
+- [ ] 2016-01-01 A task with a date
+- [ ] A task with a @tag
+```
+
+Then you can use `markdo` to interact with your files.
+
+See `markdo help` for more information.
 
 ## Contributing
 
