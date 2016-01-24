@@ -1,4 +1,3 @@
-#encoding: utf-8
 require 'markdo/command'
 
 module Markdo
@@ -8,7 +7,7 @@ module Markdo
 
       matches = Dir.
         glob(markdown_glob).
-        map { |path| File.readlines(path) }.
+        map { |path| File.readlines(path, encoding: 'UTF-8') }.
         flatten.
         grep(regexp)
 
