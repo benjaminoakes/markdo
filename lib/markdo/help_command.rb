@@ -10,6 +10,7 @@ Markdown-based task manager.
     edit                  Edit $MARKDO_ROOT in $EDITOR.
     help, --help          Display this help text.
     version, --version    Display the version.
+    query, q              Search *.md files for string.
 EOF
 
       exit 1
