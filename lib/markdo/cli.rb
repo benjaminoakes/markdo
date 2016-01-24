@@ -5,6 +5,7 @@ require 'markdo/query_command'
 require 'markdo/star_command'
 require 'markdo/tag_command'
 require 'markdo/today_command'
+require 'markdo/tomorrow_command'
 require 'markdo/version_command'
 
 module Markdo
@@ -29,6 +30,8 @@ module Markdo
                   TagCommand
                 when 'today'
                   TodayCommand
+                when 'tomorrow'
+                  TomorrowCommand
                 when 'version', '--version'
                   VersionCommand
                 else

@@ -2,9 +2,9 @@ require 'date'
 require 'markdo/date_command'
 
 module Markdo
-  class TodayCommand < DateCommand
+  class TomorrowCommand < DateCommand
     def run
-      super(Date.today)
+      super(Date.today + 1)
     end
   end
 end
