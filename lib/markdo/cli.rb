@@ -1,6 +1,7 @@
 require 'markdo/add_command'
 require 'markdo/edit_command'
 require 'markdo/help_command'
+require 'markdo/overview_command'
 require 'markdo/query_command'
 require 'markdo/star_command'
 require 'markdo/tag_command'
@@ -22,6 +23,8 @@ module Markdo
                   AddCommand
                 when 'edit'
                   EditCommand
+                when 'overview'
+                  OverviewCommand
                 when 'query', 'q'
                   QueryCommand
                 when 'star', 'starred'
