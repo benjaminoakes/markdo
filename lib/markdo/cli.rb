@@ -1,4 +1,5 @@
 require 'markdo/add_command'
+require 'markdo/edit_command'
 require 'markdo/help_command'
 require 'markdo/version_command'
 
@@ -14,6 +15,8 @@ module Markdo
       command = case command_name
                 when 'add'
                   AddCommand
+                when 'edit'
+                  EditCommand
                 when 'version', '--version'
                   VersionCommand
                 else
