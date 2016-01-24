@@ -11,6 +11,7 @@ Markdown-based task manager.
     help, --help          Display this help text.
     version, --version    Display the version.
     tag                   Search *.md files for @tag.
+    today                 Search *.md files for today's date.  (YYYY-MM-DD format.)
     star, starred         Search *.md files for @star.
     query, q              Search *.md files for string.
 EOF

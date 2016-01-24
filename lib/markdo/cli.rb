@@ -4,6 +4,7 @@ require 'markdo/help_command'
 require 'markdo/query_command'
 require 'markdo/star_command'
 require 'markdo/tag_command'
+require 'markdo/today_command'
 require 'markdo/version_command'
 
 module Markdo
@@ -26,6 +27,8 @@ module Markdo
                   StarCommand
                 when 'tag'
                   TagCommand
+                when 'today'
+                  TodayCommand
                 when 'version', '--version'
                   VersionCommand
                 else
