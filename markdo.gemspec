@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Markdo::VERSION
   spec.authors       = ["Benjamin Oakes"]
   spec.email         = ["hello@benjaminoakes.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Markdown-based task manager}
+  spec.summary       = %q{Markdown-based task manager}
+  spec.homepage      = "http://github.com/benjaminoakes/markdo"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
