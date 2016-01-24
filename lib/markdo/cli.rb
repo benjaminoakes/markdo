@@ -23,6 +23,8 @@ module Markdo
                   AddCommand
                 when 'edit'
                   EditCommand
+                when 'overdue'
+                  OverdueCommand
                 when 'overview'
                   OverviewCommand
                 when 'query', 'q'
