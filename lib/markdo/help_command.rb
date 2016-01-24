@@ -11,6 +11,7 @@ Markdown-based task manager.
     help, --help          Display this help text.
     version, --version    Display the version.
     tag                   Search *.md files for @tag.
+    star, starred         Search *.md files for @star.
     query, q              Search *.md files for string.
 EOF
 

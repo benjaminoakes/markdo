@@ -2,6 +2,7 @@ require 'markdo/add_command'
 require 'markdo/edit_command'
 require 'markdo/help_command'
 require 'markdo/query_command'
+require 'markdo/star_command'
 require 'markdo/tag_command'
 require 'markdo/version_command'
 
@@ -21,6 +22,8 @@ module Markdo
                   EditCommand
                 when 'query', 'q'
                   QueryCommand
+                when 'star', 'starred'
+                  StarCommand
                 when 'tag'
                   TagCommand
                 when 'version', '--version'
