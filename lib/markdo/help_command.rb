@@ -6,6 +6,7 @@ module Markdo
       @stderr.puts <<-EOF
 Markdown-based task manager.
 
+    add                   Add a task to the inbox.  (Set MARKDO_ROOT and MARKDO_INBOX.)
     help, --help          Display this help text.
     version, --version    Display the version.
 EOF
