@@ -9,12 +9,14 @@ module Markdo
     end
 
     def run(command_name = 'help')
-      case command_name
-      when 'version', '--version'
-        VersionCommand.new(@stdout, @stderr).run
-      else
-        HelpCommand.new(@stdout, @stderr).run
-      end
+      command = case command_name
+                when 'version', '--version'
+                  VersionCommand
+                else
+                  HelpCommand
+                end
+
+      command.new(@stdout, @stderr).run
     end
   end
 end
