@@ -1,10 +1,7 @@
-module Markdo
-  class HelpCommand
-    def initialize(stdout, stderr)
-      @stdout = stdout
-      @stderr = stderr
-    end
+require 'markdo/command'
 
+module Markdo
+  class HelpCommand < Command
     def run
       @stderr.puts <<-EOF
 Markdown-based task manager.

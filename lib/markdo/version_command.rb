@@ -1,12 +1,8 @@
+require 'markdo/command'
 require 'markdo/version'
 
 module Markdo
-  class VersionCommand
-    def initialize(stdout, stderr)
-      @stdout = stdout
-      @stderr = stderr
-    end
-
+  class VersionCommand < Command
     def run
       @stdout.puts("v#{Markdo::VERSION}")
     end
