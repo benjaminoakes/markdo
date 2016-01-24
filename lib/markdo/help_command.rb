@@ -11,7 +11,7 @@ Markdown-based task manager.
     help, --help          Display this help text.
     overview              Get overview of overdue, starred, today's, and tomorrow's tasks.
     overdue               Search *.md files for previous dates.  (YYYY-MM-DD format.)
-    tag "string'          Search *.md files for @tag.
+    tag "string"          Search *.md files for @string.
     today                 Search *.md files for today's date.  (YYYY-MM-DD format.)
     tomorrow              Search *.md files for tomorrow's date.  (YYYY-MM-DD format.)
     star, starred         Search *.md files for @star.
