@@ -1,8 +1,10 @@
 # Markdo
 
-Markdown-based task manager.  Inspired by OmniFocus and [GitHub Flavored Markdown's task lists][gfm-task-lists].
+Markdown-based task manager.  Inspired by [OmniFocus][omnifocus], [TaskPaper][taskpaper], and [GitHub Flavored Markdown's task lists][gfm-task-lists].
 
   [gfm-task-lists]: https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments
+  [omnifocus]: https://www.omnigroup.com/omnifocus/
+  [taskpaper]: http://www.hogbaysoftware.com/products/taskpaper
 
 ## Installation
 
