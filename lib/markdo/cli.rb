@@ -3,6 +3,7 @@ require 'markdo/edit_command'
 require 'markdo/help_command'
 require 'markdo/overview_command'
 require 'markdo/query_command'
+require 'markdo/rss_command'
 require 'markdo/star_command'
 require 'markdo/tag_command'
 require 'markdo/today_command'
@@ -29,6 +30,8 @@ module Markdo
                   OverviewCommand
                 when 'query', 'q'
                   QueryCommand
+                when 'rss'
+                  RssCommand
                 when 'star', 'starred'
                   StarCommand
                 when 'tag'

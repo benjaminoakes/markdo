@@ -1,0 +1,4 @@
+- [ ] Task 1
+- [ ] Task with HTTP URL http://www.example.com/
+- [ ] Task with HTTPS URL https://www.example.com/
+- [ ] Task with HTTP URL http://www.example.com/ and trailing text
