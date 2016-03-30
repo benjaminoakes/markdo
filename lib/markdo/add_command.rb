@@ -3,8 +3,12 @@ require 'markdo/command'
 module Markdo
   class AddCommand < Command
     def run(task)
-      File.open(inbox_path, 'a') do |file|
-        file.puts(template(task))
+      task = String(task)
+
+      unless task.strip.empty?
+        File.open(inbox_path, 'a') do |file|
+          file.puts(template(task))
+        end
       end
     end
 
