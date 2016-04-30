@@ -9,10 +9,10 @@ module Markdo
         glob(markdown_glob).
         map { |path| File.readlines(path, encoding: 'UTF-8') }.
         flatten.
-        grep(%r(\b\d{4}-\d{2}-\d{2}\b)).
+        grep(date_regexp).
         map { |line|
           begin
-            raw_due_date = line.match(%r(\b\d{4}-\d{2}-\d{2}\b))
+            raw_due_date = line.match(date_regexp)
             due_date = Date.parse(raw_due_date[0])
             Event.new(due_date, due_date, clean(line))
           rescue ArgumentError
@@ -43,10 +43,14 @@ module Markdo
       "#{@env['MARKDO_ROOT']}/*.md"
     end
 
+    def date_regexp
+      %r(\b\d{4}-\d{2}-\d{2}\b)
+    end
+
     def clean(line)
       line.
         sub(/\s*[-*] \[.\]\s+/, '').
-        sub(%r(\b\d{4}-\d{2}-\d{2}\b), '').
+        sub(date_regexp, '').
         strip
     end
 
