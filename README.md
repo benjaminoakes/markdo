@@ -1,5 +1,7 @@
 # Markdo
 
+[![Build Status](https://travis-ci.org/benjaminoakes/markdo.svg?branch=master)](https://travis-ci.org/benjaminoakes/markdo)
+
 Markdown-based task manager.  Inspired by [OmniFocus][omnifocus], [TaskPaper][taskpaper], and [GitHub Flavored Markdown's task lists][gfm-task-lists].
 
   [gfm-task-lists]: https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments
