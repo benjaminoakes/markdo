@@ -3,7 +3,7 @@ require 'markdo/ics_command'
 
 module Markdo
   describe IcsCommand do
-    it 'outputs an iCalendar feed from the input Markdown' do
+    it 'outputs an iCalendar feed from the input Markdown, skipping invalid dates' do
       out = StringIO.new
       err = StringIO.new
       env = { 'MARKDO_ROOT' => 'test/fixtures' }

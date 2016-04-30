@@ -11,10 +11,14 @@ module Markdo
         flatten.
         grep(%r(\b\d{4}-\d{2}-\d{2}\b)).
         map { |line|
-          raw_due_date = line.match(%r(\b\d{4}-\d{2}-\d{2}\b))
-          due_date = Date.parse(raw_due_date[0])
-          Event.new(due_date, due_date, clean(line))
-        }
+          begin
+            raw_due_date = line.match(%r(\b\d{4}-\d{2}-\d{2}\b))
+            due_date = Date.parse(raw_due_date[0])
+            Event.new(due_date, due_date, clean(line))
+          rescue ArgumentError
+            # invalid date, skip it
+          end
+        }.compact
 
       ics = template(events)
 
