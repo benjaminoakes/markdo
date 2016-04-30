@@ -40,30 +40,26 @@ module Markdo
     end
 
     def template(items)
-      # No beginning of line whitespace allowed
-      buf = %(<?xml version="1.0" encoding="UTF-8"?>\n)
+      buf = []
 
-      buf << <<-XML
-        <rss version="2.0">
-          <channel>
-            <title>Links in Markdo</title>
-      XML
+      # No beginning of line whitespace allowed
+      buf << %(<?xml version="1.0" encoding="UTF-8"?>)
+
+      buf << %(<rss version="2.0">)
+      buf << %(<channel>)
+      buf << %(<title>Links in Markdo</title>)
 
       items.each do |item|
-        buf << <<-XML
-          <item>
-            <title>#{item.title}</title>
-            <link>#{item.link}</link>
-          </item>
-        XML
+        buf << %(<item>)
+        buf << %(<title>#{item.title}</title>)
+        buf << %(<link>#{item.link}</link>)
+        buf << %(</item>)
       end
 
-      buf << <<-XML
-          </channel>
-        </rss>
-      XML
+      buf << %(</channel>)
+      buf << %(</rss>)
 
-      buf
+      buf.join("\n")
     end
   end
 end

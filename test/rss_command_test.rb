@@ -10,10 +10,8 @@ module Markdo
 
       RssCommand.new(out, err, env).run
 
-      puts out.string
-
-      out.string.must_equal <<-XML
-<?xml version="1.0" encoding="UTF-8"?>
+      xml_must_equal out.string, <<-XML
+        <?xml version="1.0" encoding="UTF-8"?>
         <rss version="2.0">
           <channel>
             <title>Links in Markdo</title>
@@ -32,6 +30,10 @@ module Markdo
           </channel>
         </rss>
       XML
+    end
+
+    def xml_must_equal(actual, expected)
+      actual.must_equal(expected.gsub(/^\s*/, ''))
     end
   end
 end
