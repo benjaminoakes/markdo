@@ -10,9 +10,11 @@ module Markdo
 
       RssCommand.new(out, err, env).run
 
+      puts out.string
+
       out.string.must_equal <<-XML
-        <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-        <rss>
+<?xml version="1.0" encoding="UTF-8"?>
+        <rss version="2.0">
           <channel>
             <title>Links in Markdo</title>
           <item>

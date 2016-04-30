@@ -41,9 +41,9 @@ module Markdo
 
     def template(items)
       # No beginning of line whitespace allowed
-      buf = '<?xml version="1.0" encoding="UTF-8"?>'
+      buf = %(<?xml version="1.0" encoding="UTF-8"?>\n)
 
-      buf = <<-XML
+      buf << <<-XML
         <rss version="2.0">
           <channel>
             <title>Links in Markdo</title>
