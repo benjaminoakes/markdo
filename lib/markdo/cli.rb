@@ -6,6 +6,7 @@ require 'markdo/overview_command'
 require 'markdo/query_command'
 require 'markdo/rss_command'
 require 'markdo/star_command'
+require 'markdo/summary_command'
 require 'markdo/tag_command'
 require 'markdo/today_command'
 require 'markdo/tomorrow_command'
@@ -37,6 +38,8 @@ module Markdo
                   RssCommand
                 when 'star', 'starred'
                   StarCommand
+                when 'summary'
+                  SummaryCommand
                 when 'tag'
                   TagCommand
                 when 'today'
