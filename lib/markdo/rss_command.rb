@@ -4,12 +4,14 @@ require 'uri'
 module Markdo
   class RssCommand < Command
     def run
+      uri_parser = URI::Parser.new
+
       items = Dir.
         glob(markdown_glob).
         map { |path| File.readlines(path, encoding: 'UTF-8') }.
         flatten.
         grep(%r(https?://)).
-        map { |line| Item.new(title: clean(line), links: URI.extract(line)) }
+        map { |line| Item.new(title: clean(line), links: uri_parser.extract(line)) }
 
       xml = template(items)
 
