@@ -56,6 +56,7 @@ See `markdo help` for more information.
     tomorrow              Search *.md files for tomorrow's date.  (YYYY-MM-DD format.)
     rss                   Make an RSS feed of all links in Markdo.  Useful as a live bookmark.
     star, starred         Search *.md files for @star.
+    summary               Display counts.
     query, q "string"     Search *.md files for string.
     version, --version    Display the version.
 
