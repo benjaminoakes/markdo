@@ -9,7 +9,8 @@ module Markdo
         glob(markdown_glob).
         map { |path| File.readlines(path, encoding: 'UTF-8') }.
         flatten.
-        grep(regexp)
+        grep(regexp).
+        reject { |line| line.match(/[-*] \[x\]/) }
 
       @stdout.puts(matches)
     end

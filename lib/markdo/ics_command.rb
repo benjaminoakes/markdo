@@ -10,6 +10,7 @@ module Markdo
         map { |path| File.readlines(path, encoding: 'UTF-8') }.
         flatten.
         grep(date_regexp).
+        reject { |line| line.match(/[-*] \[x\]/) }.
         map { |line|
           begin
             raw_due_date = line.match(date_regexp)
