@@ -1,2 +1,2 @@
-gem install bundler
+gem install --no-ri --no-rdoc bundler
 bundle
