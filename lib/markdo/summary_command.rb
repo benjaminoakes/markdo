@@ -5,11 +5,12 @@ require 'markdo/overdue_command'
 require 'markdo/star_command'
 require 'markdo/today_command'
 require 'markdo/tomorrow_command'
+require 'markdo/week_command'
 
 module Markdo
   class SummaryCommand < Command
     def run
-      commands = [OverdueCommand, StarCommand, TodayCommand, TomorrowCommand]
+      commands = [OverdueCommand, StarCommand, TodayCommand, TomorrowCommand, WeekCommand]
 
       commands.each do |command|
         out = StringIO.new
