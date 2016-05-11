@@ -12,9 +12,6 @@ module Markdo
 
       out.string.must_equal <<-XML
 Overdue: 2
-Star: 0
-Today: 0
-Tomorrow: 0
       XML
     end
   end
