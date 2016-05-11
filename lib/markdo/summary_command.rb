@@ -18,9 +18,11 @@ module Markdo
 
         title = command.to_s.sub(/^Markdo::/, '').sub(/Command$/, '')
         lines = out.string.split("\n")
-        sum =  lines.length.inspect
+        sum =  lines.length
 
-        @stdout.puts("#{title}: #{sum}")
+        unless sum.zero?
+          @stdout.puts("#{title}: #{sum}")
+        end
       end
     end
   end
