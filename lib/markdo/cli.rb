@@ -10,6 +10,7 @@ require 'markdo/summary_command'
 require 'markdo/tag_command'
 require 'markdo/today_command'
 require 'markdo/tomorrow_command'
+require 'markdo/week_command'
 require 'markdo/version_command'
 
 module Markdo
@@ -48,6 +49,8 @@ module Markdo
                   TomorrowCommand
                 when 'version', '--version'
                   VersionCommand
+                when 'week'
+                  WeekCommand
                 else
                   HelpCommand
                 end

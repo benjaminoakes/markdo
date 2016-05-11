@@ -20,6 +20,7 @@ Markdown-based task manager.
     star, starred         Search *.md files for @star.
     summary               Display counts.
     query, q "string"     Search *.md files for string.
+    week                  Search *.md files for dates in the next week.  (YYYY-MM-DD format.)
     version, --version    Display the version.
 EOF
 
