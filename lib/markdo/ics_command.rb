@@ -52,6 +52,7 @@ module Markdo
       line.
         sub(/\s*[-*] \[.\]\s+/, '').
         sub(date_regexp, '').
+        sub('@due()', '').
         strip
     end
 

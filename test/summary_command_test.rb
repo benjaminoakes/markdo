@@ -11,7 +11,7 @@ module Markdo
       SummaryCommand.new(out, err, env).run
 
       out.string.must_equal <<-XML
-Overdue: 2
+Overdue: 3
       XML
     end
   end
