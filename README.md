@@ -67,3 +67,10 @@ See `markdo help` for more information.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+### Development Environment
+
+    host$ sudo docker build -t markdo .
+    host$ sudo docker run --rm -v $PWD:/src -i -t markdo
+    container$ cd /src
+    container$ rake
