@@ -36,7 +36,7 @@ And of course:
 - [x] A completed task
 - [ ] An incomplete task
   - [ ] A subtask
-- [ ] 2016-01-01 A task with a date
+- [ ] @due(2016-01-01) A task with a due date
 - [ ] A task with a @tag
 ```
 
