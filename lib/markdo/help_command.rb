@@ -9,6 +9,7 @@ Markdown-based task manager.
     add "string"          Add a task to the inbox.  (Set $MARKDO_ROOT and $MARKDO_INBOX.)
     edit                  Edit $MARKDO_ROOT in $EDITOR.
     help, --help          Display this help text.
+    inbox                 Display contents of $MARKDO_INBOX.
     ics                   Make an iCalendar feed of all due dates in Markdo.  Can be imported
                           or subscribed to if on a remote server.
     overview              Get overview of overdue, starred, today's, and tomorrow's tasks.
