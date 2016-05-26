@@ -13,3 +13,5 @@ COPY lib/markdo/fake_version.rb $HOME/lib/markdo/version.rb
 
 COPY markdo.gemspec $HOME/
 RUN bundle
+
+WORKDIR /src
