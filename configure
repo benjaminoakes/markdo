@@ -1,2 +1,0 @@
-gem install --no-ri --no-rdoc bundler
-bundle

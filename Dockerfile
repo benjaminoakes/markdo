@@ -8,4 +8,5 @@ RUN apt-get install -y git
 
 COPY . $HOME/markdo
 WORKDIR $HOME/markdo/
-RUN ./configure
+RUN gem install --no-ri --no-rdoc bundler
+RUN bundle
