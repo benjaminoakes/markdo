@@ -5,6 +5,8 @@ module Markdo
   # TODO: More testing of this logic.  As of 2016-01-23, I was building this
   # project as a proof of concept.
   class WeekCommand < Command
+    attr_accessor :date
+
     def initialize(*)
       @date = Date.today
       super

@@ -1,5 +1,6 @@
 require 'markdo/add_command'
 require 'markdo/edit_command'
+require 'markdo/forecast_command'
 require 'markdo/help_command'
 require 'markdo/ics_command'
 require 'markdo/inbox_command'
@@ -28,6 +29,8 @@ module Markdo
                   AddCommand
                 when 'edit'
                   EditCommand
+                when 'forecast'
+                  ForecastCommand
                 when 'ics'
                   IcsCommand
                 when 'inbox'
