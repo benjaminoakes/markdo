@@ -15,6 +15,7 @@ Markdown-based task manager.
                           or subscribed to if on a remote server.
     overview              Get overview of overdue, starred, today's, and tomorrow's tasks.
     overdue               Search *.md files for previous dates.  (YYYY-MM-DD format.)
+    process               Move lines from $MARKDO_INBOX to other files, one at a time.
     tag "string"          Search *.md files for @string.
     today                 Search *.md files for today's date.  (YYYY-MM-DD format.)
     tomorrow              Search *.md files for tomorrow's date.  (YYYY-MM-DD format.)

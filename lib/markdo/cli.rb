@@ -5,6 +5,7 @@ require 'markdo/help_command'
 require 'markdo/ics_command'
 require 'markdo/inbox_command'
 require 'markdo/overview_command'
+require 'markdo/process_command'
 require 'markdo/query_command'
 require 'markdo/rss_command'
 require 'markdo/star_command'
@@ -39,6 +40,8 @@ module Markdo
                   OverdueCommand
                 when 'overview'
                   OverviewCommand
+                when 'process'
+                  ProcessCommand
                 when 'query', 'q'
                   QueryCommand
                 when 'rss'
