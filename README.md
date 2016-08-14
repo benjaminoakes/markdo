@@ -71,5 +71,5 @@ See `markdo help` for more information.
 ### Development Environment
 
     host$ sudo docker build -t markdo .
-    host$ sudo docker run --rm -v $PWD:/src -i -t markdo
+    host$ sudo docker run --rm -v $PWD:/src -i -t markdo sh -l
     container$ rake
