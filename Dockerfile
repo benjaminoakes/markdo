@@ -8,6 +8,12 @@ RUN chmod +x /usr/local/bin/pkg-*
 RUN pkg-deb git
 
 RUN pkg-deb ruby2.3
+RUN pkg-deb ruby2.3-dev
+RUN pkg-deb build-essential=12.1ubuntu2
+
+RUN pkg-deb libffi-dev=3.2.1-4
+RUN pkg-gem ffi:1.9.14
+
 RUN pkg-gem bundler:1.12.5
 
 COPY Gemfile $HOME/
@@ -17,3 +23,4 @@ COPY markdo.gemspec $HOME/
 RUN bundle
 
 WORKDIR /src
+CMD guard
