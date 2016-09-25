@@ -1,13 +1,14 @@
-FROM alpine:3.4
+FROM ubuntu:16.04
 
-RUN echo 'apk update && apk add "$1"' > /usr/local/bin/pkg-apk
+RUN echo 'apt-get update && apt-get install --no-install-recommends -y "$1"' > /usr/local/bin/pkg-deb
+RUN echo 'gem install --no-ri --no-rdoc "$1"' > /usr/local/bin/pkg-gem
 RUN chmod +x /usr/local/bin/pkg-*
 
 # Used for building the gem
-RUN pkg-apk git
+RUN pkg-deb git
 
-RUN pkg-apk ruby
-RUN pkg-apk ruby-bundler
+RUN pkg-deb ruby2.3
+RUN pkg-gem bundler:1.12.5
 
 COPY Gemfile $HOME/
 COPY lib/markdo/fake_version.rb $HOME/lib/markdo/version.rb
