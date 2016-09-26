@@ -13,20 +13,6 @@ module Markdo
         assert_inequality(Task.new('- [ ] Foo'),
                           Task.new('- [ ] Bar'))
       end
-
-      def assert_equality(attribute_1, attribute_2)
-        expect(attribute_1).to eq(attribute_1)
-
-        expect(attribute_1).to eq(attribute_2)
-        expect(attribute_2).to eq(attribute_1)
-
-        expect(attribute_2).to eq(attribute_2)
-      end
-
-      def assert_inequality(attribute_1, attribute_2)
-        expect(attribute_1).not_to eq(attribute_2)
-        expect(attribute_2).not_to eq(attribute_1)
-      end
     end
 
     describe 'given no tags' do
