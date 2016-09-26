@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'stringio'
 require 'markdo/commands/inbox_command'
 
 module Markdo

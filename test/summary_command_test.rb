@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'stringio'
 require 'markdo/commands/summary_command'
 
 module Markdo

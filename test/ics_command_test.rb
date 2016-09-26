@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'stringio'
 require 'markdo/commands/ics_command'
 
 module Markdo
