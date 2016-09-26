@@ -1,7 +1,7 @@
 require "bundler/gem_tasks"
 require 'rake/testtask'
 
-task default: 'test'
+task default: %w(test spec spec:opal)
 
 Rake::TestTask.new('test') do |t|
   t.libs = %w(lib test)
