@@ -19,9 +19,9 @@ module Markdo
 
     describe 'given tags' do
       describe '#tags' do
-        it 'is an array of tags in the order they appear, without arguments' do
-          task = Task.new('- [ ] A task @downtown @star @due(2016-01-01)')
-          expect(task.tags).to eq(%w(downtown star due))
+        it 'is an array of lowercase tags in the order they appear, without arguments' do
+          task = Task.new('- [ ] A task @downtown @star @due(2016-01-01) @ALLCAPS')
+          expect(task.tags).to eq(%w(downtown star due allcaps))
         end
       end
 
