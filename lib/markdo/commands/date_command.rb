@@ -1,4 +1,4 @@
-require 'markdo/query_command'
+require 'markdo/commands/query_command'
 
 module Markdo
   class DateCommand < QueryCommand

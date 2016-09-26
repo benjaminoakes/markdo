@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'markdo/ics_command'
+require 'markdo/commands/ics_command'
 
 module Markdo
   describe IcsCommand do

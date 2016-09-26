@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'markdo/summary_command'
+require 'markdo/commands/summary_command'
 
 module Markdo
   describe SummaryCommand do

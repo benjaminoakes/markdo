@@ -1,8 +1,8 @@
 require 'markdo/command'
-require 'markdo/overdue_command'
-require 'markdo/star_command'
-require 'markdo/today_command'
-require 'markdo/tomorrow_command'
+require 'markdo/commands/overdue_command'
+require 'markdo/commands/star_command'
+require 'markdo/commands/today_command'
+require 'markdo/commands/tomorrow_command'
 
 module Markdo
   class OverviewCommand < Command

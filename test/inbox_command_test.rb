@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'markdo/inbox_command'
+require 'markdo/commands/inbox_command'
 
 module Markdo
   describe InboxCommand do

@@ -1,7 +1,7 @@
 require 'date'
 require 'stringio'
-require 'markdo/query_command'
-require 'markdo/week_command'
+require 'markdo/commands/query_command'
+require 'markdo/commands/week_command'
 
 module Markdo
   # TODO: More testing of this logic.  As of 2016-01-23, I was building this

@@ -1,4 +1,4 @@
-require 'markdo/tag_command'
+require 'markdo/commands/tag_command'
 
 module Markdo
   class StarCommand < TagCommand

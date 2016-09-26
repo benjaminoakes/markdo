@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'markdo/rss_command'
+require 'markdo/commands/rss_command'
 
 module Markdo
   describe RssCommand do
