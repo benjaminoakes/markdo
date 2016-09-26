@@ -29,4 +29,4 @@ COPY markdo.gemspec $HOME/
 RUN bundle install
 
 WORKDIR /src
-CMD guard
+CMD guard --no-bundler-warning
