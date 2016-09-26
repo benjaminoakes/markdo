@@ -19,3 +19,8 @@ desc "Run the specs."
 RSpec::Core::RakeTask.new('spec') do |t|
   t.pattern = "spec/*/*_spec.rb"
 end
+
+require 'opal/rspec/rake_task'
+Opal::RSpec::RakeTask.new('spec:opal') do |server, task|
+  server.append_path 'lib'
+end
