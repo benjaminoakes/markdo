@@ -11,6 +11,14 @@ module Markdo
       end
     end
 
+    describe '#starred' do
+      it 'returns tasks with the @star tag' do
+        expect(build_task_collection.starred).to eq([
+          Task.new('- [ ] Example @star'),
+        ])
+      end
+    end
+
     describe '#with_attribute' do
       it 'returns tasks with the given tag, with or without a value' do
         expect(build_task_collection.with_attribute('priority')).to eq([
@@ -74,6 +82,7 @@ module Markdo
       lines = [
         '- [ ] No tags',
         '- [ ] Example @tag',
+        '- [ ] Example @star',
         '- [ ] Example @priority',
         '- [ ] Example @priority(1)',
         '- [ ] Example @priority(2)',

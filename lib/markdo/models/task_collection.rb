@@ -16,6 +16,10 @@ module Markdo
       with_tag(tag)
     end
 
+    def starred
+      with_tag('star')
+    end
+
     def overdue
       with_date('due') { |date| date < @reference_date }
     end
