@@ -1,3 +1,6 @@
+require 'markdo/data_source'
+require 'markdo/models/task_collection'
+
 module Markdo
   class Command
     def initialize(stdout, stderr, env, reference_date = Date.today)
