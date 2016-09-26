@@ -7,7 +7,6 @@ require 'markdo/commands/inbox_command'
 require 'markdo/commands/overview_command'
 require 'markdo/commands/process_command'
 require 'markdo/commands/query_command'
-require 'markdo/commands/rss_command'
 require 'markdo/commands/star_command'
 require 'markdo/commands/summary_command'
 require 'markdo/commands/tag_command'
@@ -44,8 +43,6 @@ module Markdo
                   ProcessCommand
                 when 'query', 'q'
                   QueryCommand
-                when 'rss'
-                  RssCommand
                 when 'star', 'starred'
                   StarCommand
                 when 'summary'
