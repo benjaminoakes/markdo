@@ -1,4 +1,4 @@
-require 'markdo/task_attribute'
+require 'markdo/models/task_attribute'
 
 module Markdo
   class Task

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'markdo/task_collection'
+require 'markdo/models/task_collection'
 
 module Markdo
   describe TaskCollection do

@@ -1,7 +1,7 @@
 require 'markdo/command'
 require 'markdo/data_source'
 require 'markdo/ics_exporter'
-require 'markdo/task_collection'
+require 'markdo/models/task_collection'
 
 module Markdo
   class IcsCommand < Command

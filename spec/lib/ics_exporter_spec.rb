@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'markdo/models/task_collection'
 require 'markdo/ics_exporter'
 
 module Markdo

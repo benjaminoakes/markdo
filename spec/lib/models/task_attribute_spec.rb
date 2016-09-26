@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'markdo/task_attribute'
+require 'markdo/models/task_attribute'
 
 module Markdo
   describe TaskAttribute do

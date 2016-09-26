@@ -16,9 +16,7 @@ end
 require 'rspec/core/rake_task'
 
 desc "Run the specs."
-RSpec::Core::RakeTask.new('spec') do |t|
-  t.pattern = "spec/*/*_spec.rb"
-end
+RSpec::Core::RakeTask.new('spec')
 
 require 'opal/rspec/rake_task'
 Opal::RSpec::RakeTask.new('spec:opal') do |server, task|

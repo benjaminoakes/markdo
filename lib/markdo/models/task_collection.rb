@@ -1,5 +1,5 @@
 require 'date'
-require 'markdo/task'
+require 'markdo/models/task'
 
 module Markdo
   class TaskCollection
