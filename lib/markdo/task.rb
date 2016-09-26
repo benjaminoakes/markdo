@@ -8,6 +8,10 @@ module Markdo
       @line = line
     end
 
+    def ==(other)
+      other.line == line
+    end
+
     def tags
       attributes.keys
     end
