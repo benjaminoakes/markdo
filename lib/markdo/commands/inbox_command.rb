@@ -3,13 +3,9 @@ require 'markdo/command'
 module Markdo
   class InboxCommand < Command
     def run
-      @stdout.puts(File.read(inbox_path))
-    end
-
-    protected
-
-    def inbox_path
-      File.join(@env['MARKDO_ROOT'], @env['MARKDO_INBOX'])
+      inbox_task_collection.all.each do |task|
+        @stdout.puts(task.line)
+      end
     end
   end
 end
