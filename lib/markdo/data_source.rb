@@ -11,6 +11,11 @@ module Markdo
         flatten
     end
 
+    def from_file(filename)
+      path = "#{@env['MARKDO_ROOT']}/#{filename}"
+      File.readlines(path, encoding: 'UTF-8')
+    end
+
     private
 
     def markdown_glob

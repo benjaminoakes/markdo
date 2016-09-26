@@ -1,29 +1,25 @@
 require 'stringio'
-
 require 'markdo/command'
-require 'markdo/commands/inbox_command'
-require 'markdo/commands/overdue_command'
-require 'markdo/commands/star_command'
-require 'markdo/commands/today_command'
-require 'markdo/commands/tomorrow_command'
-require 'markdo/commands/week_command'
 
 module Markdo
   class SummaryCommand < Command
     def run
-      commands = [OverdueCommand, StarCommand, TodayCommand, TomorrowCommand, WeekCommand, InboxCommand]
+      print_count('Overdue', task_collection.overdue)
+      print_count('Starred', task_collection.with_tag('star'))
+      print_count('Today', task_collection.due_today)
+      print_count('Tomorrow', task_collection.due_tomorrow)
+      print_count('Soon', task_collection.due_soon)
 
-      commands.each do |command|
-        out = StringIO.new
-        command.new(out, @stderr, @env).run
+      print_count('Inbox', inbox_task_collection.all)
+    end
 
-        title = command.to_s.sub(/^Markdo::/, '').sub(/Command$/, '')
-        lines = out.string.split("\n")
-        sum =  lines.length
+    private
 
-        unless sum.zero?
-          @stdout.puts("#{title}: #{sum}")
-        end
+    def print_count(name, tasks)
+      count = tasks.length
+
+      unless count.zero?
+        @stdout.puts "#{name}: #{count}"
       end
     end
   end

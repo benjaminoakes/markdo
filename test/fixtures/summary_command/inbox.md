@@ -1,0 +1,6 @@
+- [ ] @due(2016-01-01) Overdue in inbox
+- [ ] @star Starred in inbox
+- [ ] @due(2016-02-28) Due today in inbox
+- [ ] @due(2016-02-29) Due tomorrow in inbox
+- [ ] @due(2016-03-06) Due soon in inbox
+- [ ] @due(2016-03-07) Not due soon in inbox
