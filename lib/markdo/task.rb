@@ -12,6 +12,10 @@ module Markdo
       other.line == line
     end
 
+    def complete?
+      !!line.match(/\s*[-*] \[x\]\s+/)
+    end
+
     def body
       line.
         sub(/\s*[-*] \[.\]\s+/, '').

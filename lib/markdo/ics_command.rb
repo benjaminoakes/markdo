@@ -9,11 +9,11 @@ module Markdo
       lines = Dir.
         glob(markdown_glob).
         map { |path| File.readlines(path, encoding: 'UTF-8') }.
-        flatten.
-        reject { |line| line.match(/[-*] \[x\]/) }
+        flatten
 
       events = TaskCollection.new(lines).
         with_attribute('due').
+        reject { |task| task.complete? }.
         map { |task|
           due_date = task.attributes['due'].date_value
           Event.new(due_date, due_date, clean(task.body))

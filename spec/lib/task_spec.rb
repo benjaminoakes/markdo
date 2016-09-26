@@ -15,6 +15,20 @@ module Markdo
       end
     end
 
+    describe '#complete?' do
+      describe 'given an incomplete task' do
+        it 'is false' do
+          expect(Task.new('- [ ] Incomplete task').complete?).to eq(false)
+        end
+      end
+
+      describe 'given a complete task' do
+        it 'is true' do
+          expect(Task.new('- [x] Complete task').complete?).to eq(true)
+        end
+      end
+    end
+
     describe '#body' do
       it 'strips the markdown checkbox' do
         expect(Task.new('- [ ] Incomplete task').body).to eq('Incomplete task')
