@@ -8,5 +8,12 @@ module Markdo
 
     def run
     end
+
+    protected
+
+    def task_collection
+      lines = DataSource.new(@env).all_lines
+      TaskCollection.new(lines)
+    end
   end
 end

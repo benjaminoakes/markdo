@@ -11,12 +11,5 @@ module Markdo
 
       @stdout.puts(ics)
     end
-
-    private
-
-    def task_collection
-      lines = DataSource.new(@env).all_lines
-      TaskCollection.new(lines)
-    end
   end
 end
