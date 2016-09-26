@@ -6,7 +6,7 @@ module Markdo
     it 'outputs an iCalendar feed from the input Markdown, skipping invalid dates' do
       out = StringIO.new
       err = StringIO.new
-      env = { 'MARKDO_ROOT' => 'test/fixtures' }
+      env = { 'MARKDO_ROOT' => 'test/fixtures/ics_command' }
 
       IcsCommand.new(out, err, env).run
 
