@@ -31,7 +31,7 @@ module Markdo
     private
 
     def clean(line)
-      line.sub(%r(@due\(\d{4}-\d{2}-\d{2}\b\)\s), '')
+      line.sub(%r(@due\(.*\)\s), '')
     end
 
     class Event
