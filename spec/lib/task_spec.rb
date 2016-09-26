@@ -6,20 +6,14 @@ module Markdo
     describe 'given no tags' do
       describe '#tags' do
         it 'is empty' do
-          task = build_task_no_attributes
-          expect(task.tags).to eq([])
+          expect(Task.new('- [ ] A task').tags).to eq([])
         end
       end
 
       describe '#attributes' do
         it 'is empty' do
-          task = build_task_no_attributes
-          expect(task.attributes).to eq({})
+          expect(Task.new('- [ ] A task').attributes).to eq({})
         end
-      end
-
-      def build_task_no_attributes
-        Task.new('- [ ] A task')
       end
     end
 
