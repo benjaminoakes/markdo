@@ -1,4 +1,3 @@
-require 'date'
 require 'markdo/command'
 require 'markdo/ics_exporter'
 require 'markdo/task_collection'
