@@ -1,7 +1,6 @@
+require 'date'
 require 'markdo/command'
 require 'markdo/task_collection'
-require 'date'
-require 'uri'
 
 module Markdo
   class IcsCommand < Command
