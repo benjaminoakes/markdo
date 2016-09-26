@@ -15,6 +15,19 @@ module Markdo
       end
     end
 
+    describe '#body' do
+      it 'strips the markdown checkbox' do
+        expect(Task.new('- [ ] Incomplete task').body).to eq('Incomplete task')
+        expect(Task.new('- [x] Complete task').body).to eq('Complete task')
+      end
+
+      it 'strips whitespace' do
+        expect(Task.new(" \t - [ ] Incomplete task\n").body).to eq('Incomplete task')
+        expect(Task.new(" \t - [x] Complete task\n").body).to eq('Complete task')
+        expect(Task.new("- [x] Complete task \t \n").body).to eq('Complete task')
+      end
+    end
+
     describe 'given no tags' do
       describe '#tags' do
         it 'is empty' do

@@ -12,6 +12,12 @@ module Markdo
       other.line == line
     end
 
+    def body
+      line.
+        sub(/\s*[-*] \[.\]\s+/, '').
+        sub(/\s*$/, '')
+    end
+
     def tags
       attributes.keys
     end

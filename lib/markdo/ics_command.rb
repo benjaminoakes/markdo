@@ -1,25 +1,23 @@
 require 'markdo/command'
+require 'markdo/task_collection'
 require 'date'
 require 'uri'
 
 module Markdo
   class IcsCommand < Command
     def run
-      events = Dir.
+      lines = Dir.
         glob(markdown_glob).
         map { |path| File.readlines(path, encoding: 'UTF-8') }.
         flatten.
-        grep(date_regexp).
-        reject { |line| line.match(/[-*] \[x\]/) }.
-        map { |line|
-          begin
-            raw_due_date = line.match(date_regexp)
-            due_date = Date.parse(raw_due_date[0])
-            Event.new(due_date, due_date, clean(line))
-          rescue ArgumentError
-            # invalid date, skip it
-          end
-        }.compact
+        reject { |line| line.match(/[-*] \[x\]/) }
+
+      events = TaskCollection.new(lines).
+        with_attribute('due').
+        map { |task|
+          due_date = task.attributes['due'].date_value
+          Event.new(due_date, due_date, clean(task.body))
+        }
 
       ics = template(events)
 
@@ -50,16 +48,8 @@ module Markdo
       "#{@env['MARKDO_ROOT']}/*.md"
     end
 
-    def date_regexp
-      %r(\b\d{4}-\d{2}-\d{2}\b)
-    end
-
     def clean(line)
-      line.
-        sub(/\s*[-*] \[.\]\s+/, '').
-        sub(date_regexp, '').
-        sub('@due()', '').
-        strip
+      line.sub(%r(@due\(\b\d{4}-\d{2}-\d{2}\b\)\s), '')
     end
 
     def template(events)
