@@ -1,17 +1,9 @@
+require 'date'
+
 module Markdo
   class IcsExporter
     def initialize(task_collection)
       @task_collection = task_collection
-    end
-
-    def events
-      @task_collection.
-        with_attribute('due').
-        reject { |task| task.complete? }.
-        map { |task|
-          due_date = task.attributes['due'].date_value
-          Event.new(due_date, due_date, clean(task.body))
-        }
     end
 
     def to_ics
@@ -25,10 +17,28 @@ module Markdo
       buf << events.map { |event| event.to_ics }
       buf << 'END:VCALENDAR'
 
-      buf.flatten.join("\n")
+      buf.
+        flatten.
+        map { |line| "#{line}\n" }.
+        join
     end
 
     private
+
+    def events
+      @task_collection.
+        with_attribute('due').
+        reject { |task| task.complete? }.
+        map { |task|
+          due_date = task.attributes['due'].date_value
+          summary = clean(task.body)
+
+          if due_date
+            Event.new(due_date, due_date, summary)
+          end
+        }.
+        compact
+    end
 
     def clean(line)
       line.sub(%r(@due\(.*\)\s), '')
