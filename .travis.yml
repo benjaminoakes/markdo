@@ -1,7 +1,7 @@
-language: ruby
-sudo: false
-cache: bundler
-rvm:
-  - 2.2.5
-  - 2.3.1
-  - 2.4.0-preview2
+sudo: required
+services:
+  - docker
+install:
+  - docker build -t markdo .
+script:
+  - docker run --rm -v $PWD:/src -i -t markdo rake
