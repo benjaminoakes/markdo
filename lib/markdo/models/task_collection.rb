@@ -8,6 +8,10 @@ module Markdo
       @reference_date = reference_date
     end
 
+    def all
+      tasks
+    end
+
     def with_tag(tag)
       tasks.select { |task| task.attributes[tag.downcase] }
     end

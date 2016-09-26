@@ -3,6 +3,20 @@ require 'markdo/models/task_collection'
 
 module Markdo
   describe TaskCollection do
+    describe '#all' do
+      it 'returns all tasks' do
+        task_collection = TaskCollection.new([
+          '- [ ] Example 1',
+          '- [ ] Example 2',
+        ])
+
+        expect(task_collection.all).to eq([
+          Task.new('- [ ] Example 1'),
+          Task.new('- [ ] Example 2'),
+        ])
+      end
+    end
+
     describe '#with_tag' do
       it 'returns tasks with the given tag' do
         expect(build_task_collection.with_tag('tag')).to eq([
