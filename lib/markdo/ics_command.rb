@@ -28,13 +28,19 @@ module Markdo
 
     protected
 
-    Event = Struct.new(:date_start, :date_end, :summary) do
+    class Event
+      def initialize(date_start, date_end, summary)
+        @date_start = date_start
+        @date_end = date_end
+        @summary = summary
+      end
+
       def to_ics
         buf = []
         buf << 'BEGIN:VEVENT'
-        buf << "DTSTART;VALUE=DATE:#{date_start.strftime('%Y%m%d')}"
-        buf << "DTEND;VALUE=DATE:#{date_end.strftime('%Y%m%d')}"
-        buf << "SUMMARY:#{summary}"
+        buf << "DTSTART;VALUE=DATE:#{@date_start.strftime('%Y%m%d')}"
+        buf << "DTEND;VALUE=DATE:#{@date_end.strftime('%Y%m%d')}"
+        buf << "SUMMARY:#{@summary}"
         buf << 'END:VEVENT'
         buf.join("\n")
       end
