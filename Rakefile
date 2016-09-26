@@ -1,7 +1,7 @@
 require "bundler/gem_tasks"
 require 'rake/testtask'
 
-task default: %w(test spec spec:opal)
+task default: %w(test spec spec:opal:phantomjs spec:opal:nodejs)
 
 Rake::TestTask.new('test') do |t|
   t.libs = %w(lib test)
@@ -19,6 +19,11 @@ desc "Run the specs."
 RSpec::Core::RakeTask.new('spec')
 
 require 'opal/rspec/rake_task'
-Opal::RSpec::RakeTask.new('spec:opal') do |server, task|
+Opal::RSpec::RakeTask.new('spec:opal:phantomjs') do |server, task|
+  server.append_path 'lib'
+end
+
+Opal::RSpec::RakeTask.new('spec:opal:nodejs') do |server, task|
+  task.runner = :node
   server.append_path 'lib'
 end
