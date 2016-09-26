@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'spec_helper'
 require 'markdo/task_attribute'
 
 module Markdo
@@ -6,13 +6,13 @@ module Markdo
     describe 'given no value' do
       describe '#value' do
         it 'is nil' do
-          TaskAttribute.new('foo', nil).value.must_be_nil
+          expect(TaskAttribute.new('foo', nil).value).to be_nil
         end
       end
 
       describe '#date_value' do
         it 'is nil' do
-          TaskAttribute.new('foo', nil).date_value.must_be_nil
+          expect(TaskAttribute.new('foo', nil).date_value).to be_nil
         end
       end
 
@@ -32,13 +32,13 @@ module Markdo
     describe 'given a word value' do
       describe '#value' do
         it 'is that word' do
-          TaskAttribute.new('foo', 'bar').value.must_equal('bar')
+          expect(TaskAttribute.new('foo', 'bar').value).to eq('bar')
         end
       end
 
       describe '#date_value' do
         it 'is nil' do
-          TaskAttribute.new('foo', 'bar').date_value.must_be_nil
+          expect(TaskAttribute.new('foo', 'bar').date_value).to be_nil
         end
       end
 
@@ -58,14 +58,14 @@ module Markdo
     describe 'given an ISO-8601-formatted date value' do
       describe '#value' do
         it 'is the string' do
-          TaskAttribute.new('due', '2016-01-01').value.must_equal('2016-01-01')
+          expect(TaskAttribute.new('due', '2016-01-01').value).to eq('2016-01-01')
         end
       end
 
       describe '#date_value' do
         it 'is the date' do
-          TaskAttribute.new('due', '2016-01-01').date_value.
-            must_equal(Date.new(2016, 1, 1))
+          expect(TaskAttribute.new('due', '2016-01-01').date_value).
+            to eq(Date.new(2016, 1, 1))
         end
       end
 
@@ -83,17 +83,17 @@ module Markdo
     end
 
     def assert_equality(attribute_1, attribute_2)
-      attribute_1.must_equal(attribute_1)
+      expect(attribute_1).to eq(attribute_1)
 
-      attribute_1.must_equal(attribute_2)
-      attribute_2.must_equal(attribute_1)
+      expect(attribute_1).to eq(attribute_2)
+      expect(attribute_2).to eq(attribute_1)
 
-      attribute_2.must_equal(attribute_2)
+      expect(attribute_2).to eq(attribute_2)
     end
 
     def assert_inequality(attribute_1, attribute_2)
-      attribute_1.wont_equal(attribute_2)
-      attribute_2.wont_equal(attribute_1)
+      expect(attribute_1).not_to eq(attribute_2)
+      expect(attribute_2).not_to eq(attribute_1)
     end
   end
 end

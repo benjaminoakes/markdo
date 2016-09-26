@@ -1,3 +1,5 @@
+require 'date'
+
 module Markdo
   class TaskAttribute
     attr_reader :key, :value
