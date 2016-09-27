@@ -15,14 +15,16 @@ module Markdo
 
     protected
 
+    def data_source
+      DataSource.new(@env)
+    end
+
     def task_collection
-      lines = DataSource.new(@env).all_lines
-      TaskCollection.new(lines, @reference_date)
+      TaskCollection.new(data_source.lines_from_all, @reference_date)
     end
 
     def inbox_task_collection
-      lines = DataSource.new(@env).from_file(@env['MARKDO_INBOX'])
-      TaskCollection.new(lines, @reference_date)
+      TaskCollection.new(data_source.lines_from_inbox, @reference_date)
     end
   end
 end
