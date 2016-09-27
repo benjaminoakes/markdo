@@ -6,6 +6,16 @@ def build_command_support(env = {})
   [out, err, env]
 end
 
+def build_date_commands_support
+  out, err = build_command_support
+  env = {
+    'MARKDO_ROOT' => 'spec/fixtures/date_commands',
+    'MARKDO_INBOX' => 'inbox.md'
+  }
+
+  [out, err, env, Date.new(2016, 2, 28)]
+end
+
 def assert_equality(left, right)
   expect(left).to eq(left)
 
