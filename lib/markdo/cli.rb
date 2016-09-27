@@ -38,18 +38,25 @@ module Markdo
                   TodayCommand
                 when 'tomorrow'
                   TomorrowCommand
-                when 'version', '--version'
+                when '--version'
                   VersionCommand
                 when 'week'
                   WeekCommand
                 else
-                  HelpCommand
+                  choose_command_class(command_name)
                 end
 
       command.new(@stdout, @stderr, env).run(*args)
     end
 
     private
+
+    def choose_command_class(command_name)
+      command_class_name = "#{command_name.capitalize}Command"
+      ::Markdo.const_get(command_class_name)
+    rescue NameError
+      HelpCommand
+    end
 
     def default_env
       {
