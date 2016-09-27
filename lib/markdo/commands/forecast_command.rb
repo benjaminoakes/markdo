@@ -1,5 +1,4 @@
 require 'date'
-require 'stringio'
 require 'markdo/commands/query_command'
 require 'markdo/commands/week_command'
 

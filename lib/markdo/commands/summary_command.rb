@@ -1,4 +1,3 @@
-require 'stringio'
 require 'markdo/commands/command'
 
 module Markdo

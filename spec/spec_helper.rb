@@ -1,3 +1,5 @@
+require 'stringio'
+
 def build_command_support(env = {})
   out = StringIO.new
   err = StringIO.new
