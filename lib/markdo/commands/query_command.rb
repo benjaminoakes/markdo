@@ -1,4 +1,4 @@
-require 'markdo/command'
+require 'markdo/commands/command'
 
 module Markdo
   class QueryCommand < Command

@@ -1,4 +1,4 @@
-require 'markdo/command'
+require 'markdo/commands/command'
 require 'markdo/data_source'
 require 'markdo/ics_exporter'
 require 'markdo/models/task_collection'

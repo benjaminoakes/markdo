@@ -1,5 +1,5 @@
 require 'stringio'
-require 'markdo/command'
+require 'markdo/commands/command'
 
 module Markdo
   class SummaryCommand < Command

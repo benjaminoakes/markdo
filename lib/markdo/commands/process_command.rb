@@ -1,5 +1,5 @@
 require 'date'
-require 'markdo/command'
+require 'markdo/commands/command'
 
 module Markdo
   class ProcessCommand < Command

@@ -1,5 +1,5 @@
 require 'shellwords'
-require 'markdo/command'
+require 'markdo/commands/command'
 
 module Markdo
   class EditCommand < Command

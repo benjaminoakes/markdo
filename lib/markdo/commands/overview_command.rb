@@ -1,4 +1,4 @@
-require 'markdo/command'
+require 'markdo/commands/command'
 require 'markdo/commands/overdue_command'
 require 'markdo/commands/star_command'
 require 'markdo/commands/today_command'
