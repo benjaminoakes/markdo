@@ -9,7 +9,7 @@ module Markdo
 
       out, err = build_command_support
       env = {
-        'MARKDO_ROOT' => 'spec/fixtures/summary_command',
+        'MARKDO_ROOT' => 'spec/fixtures/date_commands',
         'MARKDO_INBOX' => 'inbox.md'
       }
 
