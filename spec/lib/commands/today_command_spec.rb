@@ -3,7 +3,7 @@ require 'markdo/commands/today_command'
 
 module Markdo
   describe TodayCommand do
-    it 'outputs summary counts' do
+    it 'outputs tasks due today' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
       out, *rest = build_date_commands_support
