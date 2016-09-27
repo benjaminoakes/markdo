@@ -1,19 +1,4 @@
-require 'markdo/commands/add_command'
-require 'markdo/commands/edit_command'
-require 'markdo/commands/forecast_command'
-require 'markdo/commands/help_command'
-require 'markdo/commands/ics_command'
-require 'markdo/commands/inbox_command'
-require 'markdo/commands/overview_command'
-require 'markdo/commands/process_command'
-require 'markdo/commands/query_command'
-require 'markdo/commands/star_command'
-require 'markdo/commands/summary_command'
-require 'markdo/commands/tag_command'
-require 'markdo/commands/today_command'
-require 'markdo/commands/tomorrow_command'
-require 'markdo/commands/week_command'
-require 'markdo/commands/version_command'
+require 'markdo/commands'
 
 module Markdo
   class CLI
