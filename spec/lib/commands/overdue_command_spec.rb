@@ -11,8 +11,8 @@ module Markdo
       OverdueCommand.new(out, *rest).run
 
       expect(out.string).to eq(<<-EOF)
-- [ ] @due(2016-01-01) Overdue
 - [ ] @due(2016-01-01) Overdue in inbox
+- [ ] @due(2016-01-01) Overdue
       EOF
     end
   end

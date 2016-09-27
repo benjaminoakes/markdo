@@ -7,6 +7,7 @@ module Markdo
     def lines_from_all
       Dir.
         glob("#{@env['MARKDO_ROOT']}/*.md").
+        sort.
         map { |path| File.readlines(path, encoding: 'UTF-8') }.
         flatten
     end
