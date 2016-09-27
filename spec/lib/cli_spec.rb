@@ -14,6 +14,16 @@ module Markdo
       end
     end
 
+    describe 'given "--version"' do
+      it 'prints the version' do
+        out, err, env = build_command_support
+
+        CLI.new(out, err, env).run('--version')
+
+        assert_version_printed out
+      end
+    end
+
     describe 'given an unknown command' do
       it 'defaults to help text' do
         out, err, env = build_command_support
