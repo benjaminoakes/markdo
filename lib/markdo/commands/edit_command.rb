@@ -4,7 +4,7 @@ require 'markdo/commands/command'
 module Markdo
   class EditCommand < Command
     def run
-      system("#{@env['EDITOR']} #{safe_markdo_root}")
+      Kernel.system("#{@env['EDITOR']} #{safe_markdo_root}")
     end
 
     private
