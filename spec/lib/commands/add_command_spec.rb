@@ -12,12 +12,12 @@ module Markdo
       clear_inbox
       markdo_add 'Example task'
       expect(read_inbox).to eq([
-        "- [ ] Example task\n"
+        '- [ ] Example task',
       ])
       markdo_add 'Another example task'
       expect(read_inbox).to eq([
-        "- [ ] Example task\n",
-        "- [ ] Another example task\n"
+        '- [ ] Example task',
+        '- [ ] Another example task',
       ])
     end
 
@@ -50,7 +50,9 @@ module Markdo
     end
 
     def read_inbox
-      File.readlines('spec/fixtures/add_command/inbox.md')
+      File.
+        readlines('spec/fixtures/add_command/inbox.md').
+        map { |line| line.chomp }
     end
 
     def markdo_add(task_body)
