@@ -11,16 +11,21 @@ module Markdo
     it 'appends to the inbox' do
       clear_inbox
       markdo_add 'Example task'
-      expect(read_inbox).to eq("- [ ] Example task\n")
+      expect(read_inbox).to eq([
+        "- [ ] Example task\n"
+      ])
       markdo_add 'Another example task'
-      expect(read_inbox).to eq("- [ ] Example task\n- [ ] Another example task\n")
+      expect(read_inbox).to eq([
+        "- [ ] Example task\n",
+        "- [ ] Another example task\n"
+      ])
     end
 
     describe 'given a nil' do
       it 'appends to the inbox' do
         clear_inbox
         markdo_add nil
-        expect(read_inbox).to eq('')
+        assert_inbox_empty
       end
     end
 
@@ -28,7 +33,7 @@ module Markdo
       it 'appends to the inbox' do
         clear_inbox
         markdo_add ''
-        expect(read_inbox).to eq('')
+        assert_inbox_empty
       end
     end
 
@@ -36,7 +41,7 @@ module Markdo
       it 'appends to the inbox' do
         clear_inbox
         markdo_add ' '
-        expect(read_inbox).to eq('')
+        assert_inbox_empty
       end
     end
 
@@ -45,7 +50,7 @@ module Markdo
     end
 
     def read_inbox
-      File.read('spec/fixtures/add_command/inbox.md')
+      File.readlines('spec/fixtures/add_command/inbox.md')
     end
 
     def markdo_add(task_body)
@@ -56,6 +61,10 @@ module Markdo
       }
 
       AddCommand.new(out, err, env).run(task_body)
+    end
+
+    def assert_inbox_empty
+      expect(read_inbox).to be_empty
     end
   end
 end
