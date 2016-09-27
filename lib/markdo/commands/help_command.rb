@@ -26,7 +26,7 @@ Markdown-based task manager.
     version, --version    Display the version.
 EOF
 
-      exit 1
+      Kernel.exit(1)
     end
   end
 end
