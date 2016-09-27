@@ -24,6 +24,17 @@ module Markdo
       end
     end
 
+    describe 'given "--help"' do
+      it 'prints help text' do
+        out, err, env = build_command_support
+        expect(Kernel).to receive(:exit).with(1)
+
+        CLI.new(out, err, env).run('--help')
+
+        assert_help_printed err
+      end
+    end
+
     describe 'given an unknown command' do
       it 'defaults to help text' do
         out, err, env = build_command_support
