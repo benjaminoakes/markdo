@@ -7,8 +7,7 @@ module Markdo
     it 'outputs summary counts' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
-      out = StringIO.new
-      err = StringIO.new
+      out, err = build_command_support
       env = {
         'MARKDO_ROOT' => 'spec/fixtures/summary_command',
         'MARKDO_INBOX' => 'inbox.md'

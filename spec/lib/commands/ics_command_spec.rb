@@ -7,8 +7,7 @@ module Markdo
     it 'outputs an iCalendar feed from the input Markdown, skipping invalid dates' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
       
-      out = StringIO.new
-      err = StringIO.new
+      out, err = build_command_support
       env = { 'MARKDO_ROOT' => 'spec/fixtures/ics_command' }
 
       IcsCommand.new(out, err, env).run

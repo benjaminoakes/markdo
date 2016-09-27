@@ -1,3 +1,9 @@
+def build_command_support(env = {})
+  out = StringIO.new
+  err = StringIO.new
+  [out, err, env]
+end
+
 def assert_equality(left, right)
   expect(left).to eq(left)
 
