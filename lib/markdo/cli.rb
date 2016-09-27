@@ -10,38 +10,12 @@ module Markdo
 
     def run(command_name = 'help', *args)
       command = case command_name
-                when 'add'
-                  AddCommand
-                when 'edit'
-                  EditCommand
-                when 'forecast'
-                  ForecastCommand
-                when 'ics'
-                  IcsCommand
-                when 'inbox'
-                  InboxCommand
-                when 'overdue'
-                  OverdueCommand
-                when 'overview'
-                  OverviewCommand
-                when 'process'
-                  ProcessCommand
-                when 'query', 'q'
+                when 'q'
                   QueryCommand
-                when 'star', 'starred'
+                when 'starred'
                   StarCommand
-                when 'summary'
-                  SummaryCommand
-                when 'tag'
-                  TagCommand
-                when 'today'
-                  TodayCommand
-                when 'tomorrow'
-                  TomorrowCommand
                 when '--version'
                   VersionCommand
-                when 'week'
-                  WeekCommand
                 else
                   choose_command_class(command_name)
                 end
