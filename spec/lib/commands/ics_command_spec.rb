@@ -9,7 +9,7 @@ module Markdo
       
       out = StringIO.new
       err = StringIO.new
-      env = { 'MARKDO_ROOT' => 'test/fixtures/ics_command' }
+      env = { 'MARKDO_ROOT' => 'spec/fixtures/ics_command' }
 
       IcsCommand.new(out, err, env).run
 

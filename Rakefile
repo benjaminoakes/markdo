@@ -1,12 +1,6 @@
 require "bundler/gem_tasks"
-require 'rake/testtask'
 
-task default: %w(test spec spec:opal:phantomjs spec:opal:nodejs)
-
-Rake::TestTask.new('test') do |t|
-  t.libs = %w(lib test)
-  t.test_files = FileList.new("test/**/*_test.rb")
-end
+task default: %w(spec spec:opal:phantomjs spec:opal:nodejs)
 
 task :clean do
   require 'fileutils'

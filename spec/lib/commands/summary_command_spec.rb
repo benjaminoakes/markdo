@@ -10,7 +10,7 @@ module Markdo
       out = StringIO.new
       err = StringIO.new
       env = {
-        'MARKDO_ROOT' => 'test/fixtures/summary_command',
+        'MARKDO_ROOT' => 'spec/fixtures/summary_command',
         'MARKDO_INBOX' => 'inbox.md'
       }
 
