@@ -10,8 +10,10 @@ module Markdo
 
     it 'appends to the inbox' do
       clear_inbox
-      markdo_add 'Example Task'
-      expect(read_inbox).to eq("- [ ] Example Task\n")
+      markdo_add 'Example task'
+      expect(read_inbox).to eq("- [ ] Example task\n")
+      markdo_add 'Another example task'
+      expect(read_inbox).to eq("- [ ] Example task\n- [ ] Another example task\n")
     end
 
     describe 'given a nil' do
