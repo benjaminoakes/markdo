@@ -1,17 +1,19 @@
-require 'test_helper'
+require 'spec_helper'
 require 'stringio'
 require 'markdo/commands/ics_command'
 
 module Markdo
   describe IcsCommand do
     it 'outputs an iCalendar feed from the input Markdown, skipping invalid dates' do
+      skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
+      
       out = StringIO.new
       err = StringIO.new
       env = { 'MARKDO_ROOT' => 'test/fixtures/ics_command' }
 
       IcsCommand.new(out, err, env).run
 
-      out.string.must_equal <<-ICS
+      expect(out.string).to eq(<<-ICS)
 BEGIN:VCALENDAR
 VERSION:2.0
 CALSCALE:GREGORIAN
