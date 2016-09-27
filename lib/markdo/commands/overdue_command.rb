@@ -5,9 +5,9 @@ module Markdo
   # TODO: More testing of this logic.  As of 2016-01-23, I was building this
   # project as a proof of concept.
   class OverdueCommand < Command
-    def initialize(*)
-      @date = Date.today
-      super
+    def initialize(out, err, env, reference_date)
+      @date = reference_date
+      super(out, err, env, reference_date)
     end
 
     def run
