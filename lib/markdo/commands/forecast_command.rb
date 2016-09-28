@@ -3,8 +3,6 @@ require 'markdo/commands/query_command'
 require 'markdo/commands/week_command'
 
 module Markdo
-  # TODO: More testing of this logic.  As of 2016-01-23, I was building this
-  # project as a proof of concept.
   class ForecastCommand < Command
     attr_reader :date
 
@@ -14,18 +12,9 @@ module Markdo
     end
 
     def run
-      # This is pretty ugly, but works.  Just testing out how useful the concept is.
-      dates = dates_over_the_next_week
-      dates.shift
-      dates.shift
-
-      dates.each do |query|
-        stringio = StringIO.new
-        query_command = QueryCommand.new(stringio, @stderr, @env)
-        query_command.run(query)
-
-        abbreviation = weekday_abbreviation(query)
-        count = stringio.string.split("\n").length
+      dates_over_the_next_week.each do |date|
+        abbreviation = weekday_abbreviation(date)
+        count = task_collection.due_on(date).length
 
         @stdout.puts("#{abbreviation}: #{count}")
       end
@@ -53,18 +42,14 @@ module Markdo
       abbrevs[wday]
     end
 
-    def weekday_abbreviation(iso8601_date)
-      wday = Date.strptime(iso8601_date, '%Y-%m-%d').wday
-      abbreviations_by_wday(wday)
+    def weekday_abbreviation(date)
+      abbreviations_by_wday(date.wday)
     end
 
     private
 
     def dates_over_the_next_week
-      (0..7).to_a.map { |offset|
-        adjusted_date = @date + offset
-        "#{adjusted_date.year}-#{justify(adjusted_date.month)}-#{justify(adjusted_date.day)}"
-      }
+      (2..7).to_a.map { |offset| @date + offset }
     end
 
     def justify(less_than_100)
