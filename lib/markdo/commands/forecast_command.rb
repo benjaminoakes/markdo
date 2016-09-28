@@ -5,13 +5,14 @@ module Markdo
   class ForecastCommand < Command
     def run
       dates_over_the_next_week.each do |date|
-        abbreviation = weekday_abbreviation(date)
+        abbreviation = abbreviations_by_wday(date.wday)
         count = task_collection.due_on(date).length
 
         @stdout.puts("#{abbreviation}: #{count}")
       end
 
-      due_next_week = task_collection.due_between(@reference_date + 7, @reference_date + 14)
+      due_next_week = task_collection.due_between(@reference_date + 7,
+                                                  @reference_date + 14)
       @stdout.puts("Next: #{due_next_week.length}")
     end
 
@@ -29,10 +30,6 @@ module Markdo
       }
 
       abbrevs[wday]
-    end
-
-    def weekday_abbreviation(date)
-      abbreviations_by_wday(date.wday)
     end
 
     private
