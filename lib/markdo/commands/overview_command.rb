@@ -10,7 +10,7 @@ module Markdo
       commands = [OverdueCommand, StarCommand, TodayCommand, TomorrowCommand]
       
       commands.each do |command|
-        command.new(@stdout, @stderr, @env).run
+        command.new(@stdout, @stderr, @env, @reference_date).run
       end
     end
   end
