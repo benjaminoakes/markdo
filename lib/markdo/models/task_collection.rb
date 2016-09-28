@@ -20,6 +20,10 @@ module Markdo
       with_tag(tag)
     end
 
+    def with_match(matcher)
+      tasks.select { |task| task.line.match(matcher) }
+    end
+
     def starred
       with_tag('star')
     end

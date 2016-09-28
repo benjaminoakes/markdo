@@ -17,6 +17,30 @@ module Markdo
       end
     end
 
+    describe '#with_match' do
+      it 'returns tasks matching a regular expression' do
+        task_collection = TaskCollection.new([
+          '- [ ] Foo',
+          '- [ ] Bar',
+        ])
+
+        expect(task_collection.with_match(/foo/i)).to eq([
+          Task.new('- [ ] Foo'),
+        ])
+      end
+
+      it 'returns tasks matching a string' do
+        task_collection = TaskCollection.new([
+          '- [ ] Foo',
+          '- [ ] Bar',
+        ])
+
+        expect(task_collection.with_match(/Bar/)).to eq([
+          Task.new('- [ ] Bar'),
+        ])
+      end
+    end
+
     describe '#with_tag' do
       it 'returns tasks with the given tag' do
         expect(build_task_collection.with_tag('tag')).to eq([
