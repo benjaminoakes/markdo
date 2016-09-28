@@ -8,9 +8,9 @@ module Markdo
   class ForecastCommand < Command
     attr_reader :date
 
-    def initialize(*)
-      @date = Date.today
-      super
+    def initialize(out, err, env, date)
+      @date = date
+      super(out, err, env, date)
     end
 
     def run
