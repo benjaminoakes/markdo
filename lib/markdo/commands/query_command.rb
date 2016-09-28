@@ -4,21 +4,11 @@ module Markdo
   class QueryCommand < Command
     def run(string)
       regexp = Regexp.new(string, Regexp::IGNORECASE)
+      tasks = task_collection.with_match(regexp).reject(&:complete?)
 
-      matches = Dir.
-        glob(markdown_glob).
-        map { |path| File.readlines(path, encoding: 'UTF-8') }.
-        flatten.
-        grep(regexp).
-        reject { |line| line.match(/[-*] \[x\]/) }
-
-      @stdout.puts(matches)
-    end
-
-    protected
-
-    def markdown_glob
-      "#{@env['MARKDO_ROOT']}/*.md"
+      tasks.each do |task|
+        @stdout.puts(task.line)
+      end
     end
   end
 end

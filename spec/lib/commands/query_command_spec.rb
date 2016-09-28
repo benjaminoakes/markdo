@@ -12,10 +12,10 @@ module Markdo
       QueryCommand.new(out, err, env).run('asdf')
 
       expect(out.string).to eq(<<-EOF)
-- [ ] ASDF
-- [ ] asdf
 - [ ] ASDF in inbox
 - [ ] asdf in inbox
+- [ ] ASDF
+- [ ] asdf
       EOF
     end
   end
