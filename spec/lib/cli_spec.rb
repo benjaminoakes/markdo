@@ -34,6 +34,24 @@ module Markdo
       end
     end
 
+    describe 'given "starred"' do
+      it 'delegates to StarCommand' do
+        out, err, env = build_command_support
+        expect(StarCommand).to receive(:new).and_return(FakeCommand.new)
+
+        CLI.new(out, err, env).run('starred')
+      end
+    end
+
+    describe 'given "q"' do
+      it 'delegates to StarCommand' do
+        out, err, env = build_command_support
+        expect(QueryCommand).to receive(:new).and_return(FakeCommand.new)
+
+        CLI.new(out, err, env).run('q')
+      end
+    end
+
     describe 'given an unknown command' do
       it 'defaults to help text' do
         out, err, env = build_command_support
@@ -51,6 +69,11 @@ module Markdo
 
     def assert_help_printed(io)
       expect(io.string).to match(/^Markdown-based task manager\./)
+    end
+
+    class FakeCommand
+      def run
+      end
     end
   end
 end
