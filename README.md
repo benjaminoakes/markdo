@@ -69,4 +69,7 @@ See `markdo help` for more information.
 
 ### Development Environment
 
-A `Dockerfile` is provided.  Just run `run.sh` on a machine with Docker installed. (May require `sudo` depending on your setup.)
+```
+docker-compose build
+docker-compose run guard
+```

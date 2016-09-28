@@ -2,6 +2,6 @@ sudo: required
 services:
   - docker
 install:
-  - docker build -t markdo .
+  - docker-compose build
 script:
-  - docker run --rm -v $PWD:/src -i -t markdo rake
+  - docker-compose up
