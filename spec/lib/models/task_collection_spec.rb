@@ -51,6 +51,20 @@ module Markdo
       end
     end
 
+    describe '#due_between' do
+      it 'returns tasks due between the given begin date and end date' do
+        begin_date = Date.new(2016, 3, 3)
+        end_date = Date.new(2016, 3, 5)
+        tasks = build_task_collection.due_between(begin_date, end_date)
+
+        expect(tasks).to eq([
+          Task.new('- [ ] Example @due(2016-03-03)'),
+          Task.new('- [ ] Example @due(2016-03-04)'),
+          Task.new('- [ ] Example @due(2016-03-05)'),
+        ])
+      end
+    end
+
     describe '#overdue' do
       it 'returns tasks due before the reference date' do
         expect(build_task_collection.overdue).to eq([

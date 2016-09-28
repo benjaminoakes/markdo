@@ -28,6 +28,10 @@ module Markdo
       with_date('due') { |date| date == given_date }
     end
 
+    def due_between(begin_date, end_date)
+      with_date('due') { |date| date >= begin_date && date <= end_date }
+    end
+
     def overdue
       with_date('due') { |date| date < @reference_date }
     end
