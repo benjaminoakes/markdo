@@ -24,6 +24,10 @@ module Markdo
       with_tag('star')
     end
 
+    def due_on(given_date)
+      with_date('due') { |date| date == given_date }
+    end
+
     def overdue
       with_date('due') { |date| date < @reference_date }
     end

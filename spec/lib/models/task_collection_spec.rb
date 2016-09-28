@@ -43,6 +43,14 @@ module Markdo
       end
     end
 
+    describe '#due_on' do
+      it 'returns tasks due on the given date' do
+        expect(build_task_collection.due_on(Date.new(2016, 3, 3))).to eq([
+          Task.new('- [ ] Example @due(2016-03-03)'),
+        ])
+      end
+    end
+
     describe '#overdue' do
       it 'returns tasks due before the reference date' do
         expect(build_task_collection.overdue).to eq([
