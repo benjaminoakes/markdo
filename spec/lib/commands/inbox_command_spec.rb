@@ -9,7 +9,7 @@ module Markdo
       out, err = build_command_support
       env = {
         'MARKDO_ROOT' => 'spec/fixtures/inbox_command',
-        'MARKDO_INBOX' => 'inbox.md'
+        'MARKDO_INBOX' => 'Inbox.md'
       }
 
       InboxCommand.new(out, err, env).run

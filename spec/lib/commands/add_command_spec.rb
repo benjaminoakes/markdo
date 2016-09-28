@@ -45,12 +45,12 @@ module Markdo
     end
 
     def clear_inbox
-      File.write('spec/fixtures/add_command/inbox.md', '')
+      File.write('spec/fixtures/add_command/Inbox.md', '')
     end
 
     def read_inbox
       File.
-        readlines('spec/fixtures/add_command/inbox.md').
+        readlines('spec/fixtures/add_command/Inbox.md').
         map { |line| line.chomp }
     end
 
@@ -58,7 +58,7 @@ module Markdo
       out, err = build_command_support
       env = {
         'MARKDO_ROOT' => 'spec/fixtures/add_command',
-        'MARKDO_INBOX' => 'inbox.md',
+        'MARKDO_INBOX' => 'Inbox.md',
       }
 
       AddCommand.new(out, err, env).run(task_body)
