@@ -12,8 +12,8 @@ module Markdo
       TagCommand.new(out, err, env).run('foo')
 
       expect(out.string).to eq(<<-EOF)
-- [ ] Tagged @foo
 - [ ] Tagged @foo in inbox
+- [ ] Tagged @foo
       EOF
     end
   end
