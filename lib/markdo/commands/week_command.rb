@@ -7,8 +7,8 @@ module Markdo
   class WeekCommand < Command
     attr_accessor :date
 
-    def initialize(*)
-      @date = Date.today
+    def initialize(out, err, env, date)
+      @date = date
       super
     end
 
