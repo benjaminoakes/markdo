@@ -1,16 +1,8 @@
 require 'date'
-require 'markdo/commands/query_command'
-require 'markdo/commands/week_command'
+require 'markdo/commands/command'
 
 module Markdo
   class ForecastCommand < Command
-    attr_reader :date
-
-    def initialize(out, err, env, date)
-      @date = date
-      super(out, err, env, date)
-    end
-
     def run
       dates_over_the_next_week.each do |date|
         abbreviation = weekday_abbreviation(date)
@@ -19,7 +11,7 @@ module Markdo
         @stdout.puts("#{abbreviation}: #{count}")
       end
 
-      due_next_week = task_collection.due_between(@date + 7, @date + 14)
+      due_next_week = task_collection.due_between(@reference_date + 7, @reference_date + 14)
       @stdout.puts("Next: #{due_next_week.length}")
     end
 
@@ -46,7 +38,7 @@ module Markdo
     private
 
     def dates_over_the_next_week
-      (2..7).to_a.map { |offset| @date + offset }
+      (2..7).to_a.map { |offset| @reference_date + offset }
     end
   end
 end
