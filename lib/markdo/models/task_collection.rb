@@ -37,15 +37,15 @@ module Markdo
     end
 
     def due_today
-      with_date('due') { |date| date == @reference_date }
+      due_on(@reference_date)
     end
 
     def due_tomorrow
-      with_date('due') { |date| date == @reference_date + 1 }
+      due_on(@reference_date + 1)
     end
 
     def due_soon
-      with_date('due') { |date| date > @reference_date + 1 && date < @reference_date + 8 }
+      due_between(@reference_date + 2, @reference_date + 7)
     end
 
     def deferred_until_today
