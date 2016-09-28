@@ -6,13 +6,9 @@ module Markdo
     it 'outputs summary counts' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
-      out, err = build_command_support
-      env = {
-        'MARKDO_ROOT' => 'spec/fixtures/date_commands',
-        'MARKDO_INBOX' => 'inbox.md'
-      }
+      out, *rest = build_date_commands_support
 
-      SummaryCommand.new(out, err, env, Date.new(2016, 2, 28)).run
+      SummaryCommand.new(out, *rest).run
 
       expect(out.string).to eq(<<-XML)
 Overdue: 2
