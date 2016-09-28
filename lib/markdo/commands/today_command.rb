@@ -1,5 +1,5 @@
 require 'date'
-require 'markdo/commands/date_command'
+require 'markdo/commands/command'
 
 module Markdo
   class TodayCommand < Command
