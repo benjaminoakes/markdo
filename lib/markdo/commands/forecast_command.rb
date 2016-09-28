@@ -5,7 +5,9 @@ require 'markdo/commands/week_command'
 module Markdo
   # TODO: More testing of this logic.  As of 2016-01-23, I was building this
   # project as a proof of concept.
-  class ForecastCommand < WeekCommand
+  class ForecastCommand < Command
+    attr_reader :date
+
     def initialize(*)
       @date = Date.today
       super
@@ -29,8 +31,7 @@ module Markdo
       end
 
       stringio = StringIO.new
-      next_week_command = WeekCommand.new(stringio, @stderr, @env)
-      next_week_command.date = @date + 7
+      next_week_command = WeekCommand.new(stringio, @stderr, @env, @date + 7)
       next_week_command.run
       next_week_count = stringio.string.split("\n").length
       @stdout.puts("Next: #{next_week_count}")
@@ -55,6 +56,19 @@ module Markdo
     def weekday_abbreviation(iso8601_date)
       wday = Date.strptime(iso8601_date, '%Y-%m-%d').wday
       abbreviations_by_wday(wday)
+    end
+
+    private
+
+    def dates_over_the_next_week
+      (0..7).to_a.map { |offset|
+        adjusted_date = @date + offset
+        "#{adjusted_date.year}-#{justify(adjusted_date.month)}-#{justify(adjusted_date.day)}"
+      }
+    end
+
+    def justify(less_than_100)
+      less_than_100.to_s.rjust(2, '0')
     end
   end
 end

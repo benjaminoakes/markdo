@@ -11,12 +11,12 @@ module Markdo
       WeekCommand.new(out, *rest).run
 
       expect(out.string).to eq(<<-EOF)
-- [ ] @due(2016-02-28) Due today
 - [ ] @due(2016-02-28) Due today in inbox
-- [ ] @due(2016-02-29) Due tomorrow
+- [ ] @due(2016-02-28) Due today
 - [ ] @due(2016-02-29) Due tomorrow in inbox
-- [ ] @due(2016-03-06) Due soon
+- [ ] @due(2016-02-29) Due tomorrow
 - [ ] @due(2016-03-06) Due soon in inbox
+- [ ] @due(2016-03-06) Due soon
       EOF
     end
   end
