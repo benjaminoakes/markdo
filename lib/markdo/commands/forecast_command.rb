@@ -19,11 +19,8 @@ module Markdo
         @stdout.puts("#{abbreviation}: #{count}")
       end
 
-      stringio = StringIO.new
-      next_week_command = WeekCommand.new(stringio, @stderr, @env, @date + 7)
-      next_week_command.run
-      next_week_count = stringio.string.split("\n").length
-      @stdout.puts("Next: #{next_week_count}")
+      due_next_week = task_collection.due_between(@date + 7, @date + 14)
+      @stdout.puts("Next: #{due_next_week.length}")
     end
 
     private
@@ -50,10 +47,6 @@ module Markdo
 
     def dates_over_the_next_week
       (2..7).to_a.map { |offset| @date + offset }
-    end
-
-    def justify(less_than_100)
-      less_than_100.to_s.rjust(2, '0')
     end
   end
 end
