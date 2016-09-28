@@ -1,9 +1,11 @@
-require 'markdo/commands/tag_command'
+require 'markdo/commands/command'
 
 module Markdo
-  class StarCommand < TagCommand
+  class StarCommand < Command
     def run
-      super('star')
+      task_collection.starred.each do |task|
+        @stdout.puts(task.line)
+      end
     end
   end
 end

@@ -11,8 +11,8 @@ module Markdo
       StarCommand.new(out, *rest).run
 
       expect(out.string).to eq(<<-EOF)
-- [ ] @star Starred
 - [ ] @star Starred in inbox
+- [ ] @star Starred
       EOF
     end
   end
