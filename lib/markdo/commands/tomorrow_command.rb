@@ -1,10 +1,12 @@
 require 'date'
-require 'markdo/commands/date_command'
+require 'markdo/commands/command'
 
 module Markdo
-  class TomorrowCommand < DateCommand
+  class TomorrowCommand < Command
     def run
-      super(@reference_date + 1)
+      task_collection.due_tomorrow.each do |task|
+        @stdout.puts(task.line)
+      end
     end
   end
 end

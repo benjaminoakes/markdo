@@ -11,8 +11,8 @@ module Markdo
       TomorrowCommand.new(out, *rest).run
 
       expect(out.string).to eq(<<-EOF)
-- [ ] @due(2016-02-29) Due tomorrow
 - [ ] @due(2016-02-29) Due tomorrow in inbox
+- [ ] @due(2016-02-29) Due tomorrow
       EOF
     end
   end
