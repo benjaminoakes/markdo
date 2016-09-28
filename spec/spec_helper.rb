@@ -1,3 +1,8 @@
+unless RUBY_ENGINE == 'opal'
+  require 'simplecov'
+  SimpleCov.start
+end
+
 require 'stringio'
 
 def build_command_support(env = {})
