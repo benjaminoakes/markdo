@@ -1,8 +1,4 @@
-version: '2'
-
-services:
-  guard:
-    build:
-      context: .
-    volumes:
-      - .:/src
+guard:
+  build: .
+  volumes:
+    - .:/src
