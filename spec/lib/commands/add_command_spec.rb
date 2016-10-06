@@ -55,13 +55,12 @@ module Markdo
     end
 
     def markdo_add(task_body)
-      out, err = build_command_support
-      env = {
+      command_support = build_command_support_object({
         'MARKDO_ROOT' => 'spec/fixtures/add_command',
         'MARKDO_INBOX' => 'Inbox.md',
-      }
+      })
 
-      AddCommand.new(out, err, env).run(task_body)
+      AddCommand.new(command_support).run(task_body)
     end
 
     def assert_inbox_empty
