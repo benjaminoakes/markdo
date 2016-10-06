@@ -6,12 +6,13 @@ module Markdo
     it 'outputs an iCalendar feed from the input Markdown, skipping invalid dates' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
       
-      out, err = build_command_support
-      env = { 'MARKDO_ROOT' => 'spec/fixtures/ics_command' }
+      command_support = build_command_support_object({
+        'MARKDO_ROOT' => 'spec/fixtures/ics_command'
+      })
 
-      IcsCommand.new(out, err, env).run
+      IcsCommand.new(command_support).run
 
-      expect(out.string).to eq(<<-ICS)
+      expect(command_support.stdout.string).to eq(<<-ICS)
 BEGIN:VCALENDAR
 VERSION:2.0
 CALSCALE:GREGORIAN

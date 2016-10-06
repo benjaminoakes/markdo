@@ -6,15 +6,14 @@ module Markdo
     it 'outputs inbox' do
       skip 'File.readlines not supported' unless File.respond_to?(:readlines)
 
-      out, err = build_command_support
-      env = {
+      command_support = build_command_support_object({
         'MARKDO_ROOT' => 'spec/fixtures/inbox_command',
         'MARKDO_INBOX' => 'Inbox.md'
-      }
+      })
 
-      InboxCommand.new(out, err, env).run
+      InboxCommand.new(command_support).run
 
-      expect(out.string).to eq(<<-XML)
+      expect(command_support.stdout.string).to eq(<<-XML)
 - [ ] Example 1 in inbox
 - [ ] Example 2 in inbox
       XML

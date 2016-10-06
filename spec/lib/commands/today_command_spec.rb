@@ -6,11 +6,11 @@ module Markdo
     it 'outputs tasks due today' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
-      out, *rest = build_date_commands_support
+      command_support = build_command_support_for_date_commands
 
-      TodayCommand.new(out, *rest).run
+      TodayCommand.new(command_support).run
 
-      expect(out.string).to eq(<<-EOF)
+      expect(command_support.stdout.string).to eq(<<-EOF)
 - [ ] @due(2016-02-28) Due today in inbox
 - [ ] @due(2016-02-28) Due today
       EOF

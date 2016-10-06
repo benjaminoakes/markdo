@@ -6,12 +6,13 @@ module Markdo
     it 'outputs tasks that match the given string, case insensitive' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
-      out, err = build_command_support
-      env = { 'MARKDO_ROOT' => 'spec/fixtures/query_command' }
+      command_support = build_command_support_object({
+        'MARKDO_ROOT' => 'spec/fixtures/query_command'
+      })
 
-      QueryCommand.new(out, err, env).run('asdf')
+      QueryCommand.new(command_support).run('asdf')
 
-      expect(out.string).to eq(<<-EOF)
+      expect(command_support.stdout.string).to eq(<<-EOF)
 - [ ] ASDF in inbox
 - [ ] asdf in inbox
 - [ ] ASDF

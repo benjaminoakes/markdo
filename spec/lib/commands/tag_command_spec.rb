@@ -6,12 +6,13 @@ module Markdo
     it 'outputs tasks with the given tag' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
-      out, err = build_command_support
-      env = { 'MARKDO_ROOT' => 'spec/fixtures/tag_command' }
+      command_support = build_command_support_object({
+        'MARKDO_ROOT' => 'spec/fixtures/tag_command'
+      })
 
-      TagCommand.new(out, err, env).run('foo')
+      TagCommand.new(command_support).run('foo')
 
-      expect(out.string).to eq(<<-EOF)
+      expect(command_support.stdout.string).to eq(<<-EOF)
 - [ ] Tagged @foo in inbox
 - [ ] Tagged @foo
       EOF

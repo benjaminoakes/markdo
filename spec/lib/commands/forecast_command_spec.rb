@@ -6,11 +6,11 @@ module Markdo
     it 'outputs forecast counts' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
-      out, *rest = build_date_commands_support
+      command_support = build_command_support_for_date_commands
 
-      ForecastCommand.new(out, *rest).run
+      ForecastCommand.new(command_support).run
 
-      expect(out.string).to eq(<<-XML)
+      expect(command_support.stdout.string).to eq(<<-XML)
 Tu: 0
 We: 0
 Th: 0

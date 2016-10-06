@@ -6,11 +6,11 @@ module Markdo
     it 'outputs tasks with the @star tag' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
-      out, *rest = build_date_commands_support
+      command_support = build_command_support_for_date_commands
 
-      StarCommand.new(out, *rest).run
+      StarCommand.new(command_support).run
 
-      expect(out.string).to eq(<<-EOF)
+      expect(command_support.stdout.string).to eq(<<-EOF)
 - [ ] @star Starred in inbox
 - [ ] @star Starred
       EOF
