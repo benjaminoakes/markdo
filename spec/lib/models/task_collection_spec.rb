@@ -90,7 +90,7 @@ module Markdo
     end
 
     describe '#overdue' do
-      it 'returns tasks due before the reference date' do
+      it 'returns tasks due before today' do
         expect(build_task_collection.overdue).to eq([
           Task.new('- [ ] Example @due(2016-02-27)'),
         ])
@@ -98,7 +98,7 @@ module Markdo
     end
 
     describe '#due_today' do
-      it 'returns tasks due on the reference date' do
+      it 'returns tasks due today' do
         expect(build_task_collection.due_today).to eq([
           Task.new('- [ ] Example @due(2016-02-28)'),
         ])
@@ -106,7 +106,7 @@ module Markdo
     end
 
     describe '#due_tomorrow' do
-      it 'returns tasks due the day after the reference date' do
+      it 'returns tasks due the day after today' do
         expect(build_task_collection.due_tomorrow).to eq([
           Task.new('- [ ] Example @due(2016-02-29)'),
         ])
@@ -114,7 +114,7 @@ module Markdo
     end
 
     describe '#due_soon' do
-      it 'returns tasks due within a week of the day after the reference date' do
+      it 'returns tasks due within a week of the day after today' do
         expect(build_task_collection.due_soon).to eq([
           Task.new('- [ ] Example @due(2016-03-01)'),
           Task.new('- [ ] Example @due(2016-03-02)'),
@@ -127,7 +127,7 @@ module Markdo
     end
 
     describe '#deferred_until_today' do
-      it 'returns tasks deferred up until and including the reference date' do
+      it 'returns tasks deferred up until and including today' do
         expect(build_task_collection.deferred_until_today).to eq([
           Task.new('- [ ] Example @defer(1996-01-01)'),
           Task.new('- [ ] Example @defer(2016-02-27)'),
@@ -137,7 +137,7 @@ module Markdo
     end
 
     def build_task_collection
-      reference_date = Date.new(2016, 2, 28)
+      today = Date.new(2016, 2, 28)
 
       lines = [
         '- [ ] No tags',
@@ -162,7 +162,7 @@ module Markdo
         '- [ ] Example @defer(2016-02-29)',
       ]
 
-      TaskCollection.new(lines, reference_date)
+      TaskCollection.new(lines, today)
     end
   end
 end

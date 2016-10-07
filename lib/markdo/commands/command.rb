@@ -8,7 +8,7 @@ module Markdo
       @stdout = command_support.stdout
       @stderr = command_support.stderr
       @env = command_support.env
-      @reference_date = command_support.today
+      @today = command_support.today
     end
 
     def run
@@ -21,11 +21,11 @@ module Markdo
     end
 
     def task_collection
-      TaskCollection.new(data_source.lines_from_all, @reference_date)
+      TaskCollection.new(data_source.lines_from_all, @today)
     end
 
     def inbox_task_collection
-      TaskCollection.new(data_source.lines_from_inbox, @reference_date)
+      TaskCollection.new(data_source.lines_from_inbox, @today)
     end
   end
 end

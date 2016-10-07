@@ -3,9 +3,9 @@ require 'markdo/models/task'
 
 module Markdo
   class TaskCollection
-    def initialize(lines, reference_date = Date.today)
+    def initialize(lines, today = Date.today)
       @lines = lines
-      @reference_date = reference_date
+      @today = today
     end
 
     def all
@@ -37,23 +37,23 @@ module Markdo
     end
 
     def overdue
-      with_date('due') { |date| date < @reference_date }
+      with_date('due') { |date| date < @today }
     end
 
     def due_today
-      due_on(@reference_date)
+      due_on(@today)
     end
 
     def due_tomorrow
-      due_on(@reference_date + 1)
+      due_on(@today + 1)
     end
 
     def due_soon
-      due_between(@reference_date + 2, @reference_date + 7)
+      due_between(@today + 2, @today + 7)
     end
 
     def deferred_until_today
-      with_date('defer') { |date| date <= @reference_date }
+      with_date('defer') { |date| date <= @today }
     end
 
     private

@@ -11,8 +11,8 @@ module Markdo
         @stdout.puts("#{abbreviation}: #{count}")
       end
 
-      due_next_week = task_collection.due_between(@reference_date + 7,
-                                                  @reference_date + 14)
+      due_next_week = task_collection.due_between(@today + 7,
+                                                  @today + 14)
       @stdout.puts("Next: #{due_next_week.length}")
     end
 
@@ -35,7 +35,7 @@ module Markdo
     private
 
     def dates_over_the_next_week
-      (2..7).to_a.map { |offset| @reference_date + offset }
+      (2..7).to_a.map { |offset| @today + offset }
     end
   end
 end
