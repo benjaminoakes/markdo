@@ -40,6 +40,38 @@ File [hisbma]?
         expect(read_inbox).to eq(original_content)
       end
     end
+    
+    describe 'given the "i" subcommand' do
+      it 'keeps the task in the inbox' do
+        original_content = ['- [ ] Example']
+        write_inbox(original_content)
+
+        stdout = markdo_process(%w(i))
+
+        expect(stdout.string).to eq(<<-EOF)
+- [ ] Example
+File [hisbma]? 
+        EOF
+        
+        expect(read_inbox).to eq(original_content)
+      end
+    end
+
+    describe 'given the "a" subcommand' do
+      it 'makes no changes' do
+        original_content = ['- [ ] Example']
+        write_inbox(original_content)
+
+        stdout = markdo_process(%w(a))
+
+        expect(stdout.string).to eq(<<-EOF)
+- [ ] Example
+File [hisbma]? 
+        EOF
+        
+        expect(read_inbox).to eq(original_content)
+      end
+    end
 
     def write_inbox(content)
       File.write('spec/fixtures/process_command/Inbox.md', content.join("\n"))
