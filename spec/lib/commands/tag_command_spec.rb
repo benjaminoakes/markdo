@@ -6,7 +6,7 @@ module Markdo
     it 'outputs tasks with the given tag' do
       skip 'Dir.glob not supported' unless Dir.respond_to?(:glob)
 
-      command_support = build_command_support_object({
+      command_support = build_command_support({
         'MARKDO_ROOT' => 'spec/fixtures/tag_command'
       })
 

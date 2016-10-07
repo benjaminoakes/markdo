@@ -5,7 +5,7 @@ end
 
 require 'stringio'
 
-def build_command_support_object(env = {})
+def build_command_support(env = {})
   out = StringIO.new
   err = StringIO.new
   Markdo::CommandSupport.new(stdout: out, stderr: err, env: env)

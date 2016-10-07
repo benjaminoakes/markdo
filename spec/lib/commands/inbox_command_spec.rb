@@ -6,7 +6,7 @@ module Markdo
     it 'outputs inbox' do
       skip 'File.readlines not supported' unless File.respond_to?(:readlines)
 
-      command_support = build_command_support_object({
+      command_support = build_command_support({
         'MARKDO_ROOT' => 'spec/fixtures/inbox_command',
         'MARKDO_INBOX' => 'Inbox.md'
       })

@@ -55,7 +55,7 @@ module Markdo
     end
 
     def markdo_add(task_body)
-      command_support = build_command_support_object({
+      command_support = build_command_support({
         'MARKDO_ROOT' => 'spec/fixtures/add_command',
         'MARKDO_INBOX' => 'Inbox.md',
       })

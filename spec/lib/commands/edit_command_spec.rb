@@ -6,7 +6,7 @@ module Markdo
     it 'edits the Markdo root in your preferred editor' do
       skip 'Shellwords not supported' unless defined?(Shellwords)
 
-      command_support = build_command_support_object({
+      command_support = build_command_support({
         'EDITOR' => 'aneditor',
         'MARKDO_ROOT' => 'spec/fixtures/'
       })
@@ -19,7 +19,7 @@ module Markdo
     it 'does not allow unsafe values for MARKDO_ROOT' do
       skip 'Shellwords not supported' unless defined?(Shellwords)
 
-      command_support = build_command_support_object({
+      command_support = build_command_support({
         'EDITOR' => 'aneditor',
         'MARKDO_ROOT' => '`ruin everything`'
       })
