@@ -5,7 +5,7 @@ module Markdo
   class ProcessCommand < Command
     # Built as a prototype/proof of concept to see how much I like this idea...
     def run
-      lines = File.readlines(inbox_path)
+      lines = File.readlines(data_source.inbox_path)
       lines_by_filename = Hash.new { [] }
 
       index = 0
@@ -52,7 +52,7 @@ module Markdo
 
         date = Date.today.iso8601
         inbox_lines = lines_by_filename.delete('Inbox.md')
-        File.write(inbox_path, inbox_lines ? inbox_lines.join : '')
+        File.write(data_source.inbox_path, inbox_lines ? inbox_lines.join : '')
 
         lines_by_filename.each do |filename, lines|
           path = file_path(filename)
@@ -69,10 +69,6 @@ module Markdo
 
     def file_path(filename)
       File.join(@env['MARKDO_ROOT'], filename)
-    end
-
-    def inbox_path
-      File.join(@env['MARKDO_ROOT'], @env['MARKDO_INBOX'])
     end
   end
 end
