@@ -20,7 +20,7 @@ module Markdo
                   choose_command_class(command_name)
                 end
 
-      command.new(@stdout, @stderr, env).run(*args)
+      command.new(@stdout, @stderr, merged_env).run(*args)
     end
 
     private
@@ -39,7 +39,7 @@ module Markdo
       }
     end
 
-    def env
+    def merged_env
       default_env.merge(@full_env)
     end
   end
