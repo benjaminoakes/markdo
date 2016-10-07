@@ -6,14 +6,9 @@ end
 require 'stringio'
 
 def build_command_support_object(env = {})
-  out, err, env = build_command_support(env)
-  Markdo::CommandSupport.new(stdout: out, stderr: err, env: env)
-end
-
-def build_command_support(env = {})
   out = StringIO.new
   err = StringIO.new
-  [out, err, env]
+  Markdo::CommandSupport.new(stdout: out, stderr: err, env: env)
 end
 
 def build_command_support_for_date_commands
