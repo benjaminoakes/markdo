@@ -5,61 +5,61 @@ module Markdo
   describe CLI do
     describe 'given "version"' do
       it 'prints the version' do
-        out, err, env = build_command_support
+        command_support = build_command_support_object
 
-        CLI.new(out, err, env).run('version')
+        CLI.new(command_support).run('version')
 
-        assert_version_printed out
+        assert_version_printed command_support.stdout
       end
     end
 
     describe 'given "--version"' do
       it 'prints the version' do
-        out, err, env = build_command_support
+        command_support = build_command_support_object
 
-        CLI.new(out, err, env).run('--version')
+        CLI.new(command_support).run('--version')
 
-        assert_version_printed out
+        assert_version_printed command_support.stdout
       end
     end
 
     describe 'given "--help"' do
       it 'prints help text' do
-        out, err, env = build_command_support
+        command_support = build_command_support_object
         expect(Kernel).to receive(:exit).with(1)
 
-        CLI.new(out, err, env).run('--help')
+        CLI.new(command_support).run('--help')
 
-        assert_help_printed err
+        assert_help_printed command_support.stderr
       end
     end
 
     describe 'given "starred"' do
       it 'delegates to StarCommand' do
-        out, err, env = build_command_support
+        command_support = build_command_support_object
         expect(StarCommand).to receive(:new).and_return(FakeCommand.new)
 
-        CLI.new(out, err, env).run('starred')
+        CLI.new(command_support).run('starred')
       end
     end
 
     describe 'given "q"' do
       it 'delegates to StarCommand' do
-        out, err, env = build_command_support
+        command_support = build_command_support_object
         expect(QueryCommand).to receive(:new).and_return(FakeCommand.new)
 
-        CLI.new(out, err, env).run('q')
+        CLI.new(command_support).run('q')
       end
     end
 
     describe 'given an unknown command' do
       it 'defaults to help text' do
-        out, err, env = build_command_support
+        command_support = build_command_support_object
         expect(Kernel).to receive(:exit).with(1)
 
-        CLI.new(out, err, env).run('asdf')
+        CLI.new(command_support).run('asdf')
 
-        assert_help_printed err
+        assert_help_printed command_support.stderr
       end
     end
 

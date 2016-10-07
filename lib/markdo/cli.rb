@@ -2,10 +2,10 @@ require 'markdo/commands'
 
 module Markdo
   class CLI
-    def initialize(stdout, stderr, full_env)
-      @stdout = stdout
-      @stderr = stderr
-      @full_env = full_env
+    def initialize(command_support = CommandSupport.new)
+      @stdout = command_support.stdout
+      @stderr = command_support.stderr
+      @full_env = command_support.env
     end
 
     def run(command_name = 'help', *args)

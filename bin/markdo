@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require 'markdo'
 
-Markdo::CLI.new(STDOUT, STDERR, ENV).run(*ARGV)
+Markdo::CLI.new.run(*ARGV)
