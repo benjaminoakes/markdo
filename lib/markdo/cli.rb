@@ -20,7 +20,10 @@ module Markdo
                   choose_command_class(command_name)
                 end
 
-      command.new(@stdout, @stderr, merged_env).run(*args)
+      command_support = CommandSupport.new(stdout: @stdout,
+                                           stderr: @stderr,
+                                           env: merged_env)
+      command.new(command_support).run(*args)
     end
 
     private
