@@ -14,7 +14,7 @@ module Markdo
         line = lines[index]
         @stdout.puts line
         @stdout.print 'File [hisbma]? '
-        choice = $stdin.gets.chomp.downcase
+        choice = @stdin.gets.chomp.downcase
 
         case choice
         when 'h'
@@ -65,4 +65,3 @@ module Markdo
     end
   end
 end
-

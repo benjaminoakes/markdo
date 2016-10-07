@@ -3,6 +3,7 @@ require 'markdo/commands'
 module Markdo
   class CLI
     def initialize(command_support = CommandSupport.new)
+      @stdin = command_support.stdin
       @stdout = command_support.stdout
       @stderr = command_support.stderr
       @full_env = command_support.env
@@ -20,7 +21,8 @@ module Markdo
                   choose_command_class(command_name)
                 end
 
-      command_support = CommandSupport.new(stdout: @stdout,
+      command_support = CommandSupport.new(stdin: @stdin,
+                                           stdout: @stdout,
                                            stderr: @stderr,
                                            env: merged_env)
       command.new(command_support).run(*args)

@@ -1,8 +1,9 @@
 module Markdo
   class CommandSupport
-    attr_reader :stdout, :stderr, :env, :today
+    attr_reader :stdin, :stdout, :stderr, :env, :today
     
-    def initialize(stdout: STDOUT, stderr: STDERR, env: ENV, today: Date.today)
+    def initialize(stdin: STDIN, stdout: STDOUT, stderr: STDERR, env: ENV, today: Date.today)
+      @stdin = stdin
       @stdout = stdout
       @stderr = stderr
       @env = env

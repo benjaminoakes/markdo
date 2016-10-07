@@ -6,21 +6,23 @@ end
 require 'stringio'
 
 def build_command_support(env = {})
-  out = StringIO.new
-  err = StringIO.new
-  Markdo::CommandSupport.new(stdout: out, stderr: err, env: env)
+  stdin = StringIO.new
+  stdout = StringIO.new
+  stderr = StringIO.new
+  Markdo::CommandSupport.new(stdin: stdin, stdout: stdout, stderr: stderr, env: env)
 end
 
 def build_command_support_for_date_commands
-  out = StringIO.new
-  err = StringIO.new
+  stdin = StringIO.new
+  stdout = StringIO.new
+  stderr = StringIO.new
   env = {
     'MARKDO_ROOT' => 'spec/fixtures/date_commands',
     'MARKDO_INBOX' => 'Inbox.md'
   }
   today = Date.new(2016, 2, 28)
 
-  Markdo::CommandSupport.new(stdout: out, stderr: err, env: env, today: today)
+  Markdo::CommandSupport.new(stdin: stdin, stdout: stdout, stderr: stderr, env: env, today: today)
 end
 
 def build_date_commands_support

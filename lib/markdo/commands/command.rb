@@ -5,6 +5,7 @@ require 'markdo/models/task_collection'
 module Markdo
   class Command
     def initialize(command_support)
+      @stdin = command_support.stdin
       @stdout = command_support.stdout
       @stderr = command_support.stderr
       @env = command_support.env
