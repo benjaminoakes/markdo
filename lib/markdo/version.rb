@@ -1,3 +1,3 @@
 module Markdo
-  VERSION = "0.1.12.alpha"
+  VERSION = '0.2.0'
 end
