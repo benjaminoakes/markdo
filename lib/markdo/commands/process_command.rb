@@ -13,7 +13,7 @@ module Markdo
     def run
       catch :abort do
         while has_lines?
-          line = @lines[@line_index]
+          line = current_line
           choice = prompt(line)
 
           case choice
@@ -40,6 +40,10 @@ module Markdo
 
     def has_lines?
       @line_index < @lines.length
+    end
+
+    def current_line
+      @lines[@line_index]
     end
 
     def prompt(line)
