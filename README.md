@@ -75,5 +75,6 @@ See `markdo help` for more information.
 
 ```
 docker-compose build
-docker-compose run guard
+docker-compose run guard # run tests interactively
+docker-compose run build # build the gem
 ```
