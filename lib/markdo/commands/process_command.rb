@@ -50,7 +50,7 @@ module Markdo
           end
         end
 
-        date = Date.today.iso8601
+        date = @today.iso8601
         inbox_lines = lines_by_filename.delete('Inbox.md')
         File.write(data_source.inbox_path, inbox_lines ? inbox_lines.join : '')
 

@@ -8,7 +8,7 @@ module Markdo
     end
 
     after do
-      write_inbox([])
+      clear_all
     end
 
     describe 'given the "h" subcommand' do
@@ -37,7 +37,10 @@ a - abort; make no changes
 File [hisbma]? 
         EOF
         
-        expect(read_inbox).to eq(original_content)
+        expect(read_lines('Inbox')).to eq(original_content)
+        expect(read_lines('Sprint')).to eq([])
+        expect(read_lines('Backlog')).to eq([])
+        expect(read_lines('Maybe')).to eq([])
       end
     end
     
@@ -48,12 +51,11 @@ File [hisbma]?
 
         stdout = markdo_process(%w(i))
 
-        expect(stdout.string).to eq(<<-EOF)
-- [ ] Example
-File [hisbma]? 
-        EOF
-        
-        expect(read_inbox).to eq(original_content)
+        assert_prompt_shown(stdout)
+        expect(read_lines('Inbox')).to eq(original_content)
+        expect(read_lines('Sprint')).to eq([])
+        expect(read_lines('Backlog')).to eq([])
+        expect(read_lines('Maybe')).to eq([])
       end
     end
 
@@ -64,12 +66,74 @@ File [hisbma]?
 
         stdout = markdo_process(%w(a))
 
-        expect(stdout.string).to eq(<<-EOF)
-- [ ] Example
-File [hisbma]? 
-        EOF
-        
-        expect(read_inbox).to eq(original_content)
+        assert_prompt_shown(stdout)
+        expect(read_lines('Inbox')).to eq(original_content)
+        expect(read_lines('Sprint')).to eq([])
+        expect(read_lines('Backlog')).to eq([])
+        expect(read_lines('Maybe')).to eq([])
+      end
+    end
+
+    describe 'given the "s" subcommand' do
+      it 'moves the line to "Sprint.md"' do
+        write_inbox(['- [ ] Example'])
+
+        stdout = markdo_process(%w(s))
+
+        assert_prompt_shown(stdout)
+        expect(read_lines('Inbox')).to eq([])
+        expect(read_lines('Sprint')).to eq([
+          '',
+          '## Processed on 2016-06-01',
+          '',
+          '- [ ] Example'
+        ])
+        expect(read_lines('Backlog')).to eq([])
+        expect(read_lines('Maybe')).to eq([])
+      end
+    end
+
+    describe 'given the "b" subcommand' do
+      it 'moves the line to "Backlog.md"' do
+        write_inbox(['- [ ] Example'])
+
+        stdout = markdo_process(%w(b))
+
+        assert_prompt_shown(stdout)
+        expect(read_lines('Inbox')).to eq([])
+        expect(read_lines('Sprint')).to eq([])
+        expect(read_lines('Backlog')).to eq([
+          '',
+          '## Processed on 2016-06-01',
+          '',
+          '- [ ] Example'
+        ])
+        expect(read_lines('Maybe')).to eq([])
+      end
+    end
+
+    describe 'given the "m" subcommand' do
+      it 'moves the line to "Maybe.md"' do
+        write_inbox(['- [ ] Example'])
+
+        stdout = markdo_process(%w(m))
+
+        assert_prompt_shown(stdout)
+        expect(read_lines('Inbox')).to eq([])
+        expect(read_lines('Sprint')).to eq([])
+        expect(read_lines('Backlog')).to eq([])
+        expect(read_lines('Maybe')).to eq([
+          '',
+          '## Processed on 2016-06-01',
+          '',
+          '- [ ] Example'
+        ])
+      end
+    end
+
+    def clear_all
+      %w(Backlog Inbox Maybe Sprint).each do |filename|
+        File.write("spec/fixtures/process_command/#{filename}.md", '')
       end
     end
 
@@ -78,22 +142,37 @@ File [hisbma]?
     end
 
     def markdo_process(subcommands)
-      command_support = build_command_support({
+      raw_input = subcommands.map { |s| "#{s}\n" }.join
+      stdin = StringIO.new(raw_input)
+      stdout = StringIO.new
+      stderr = StringIO.new
+      today = Date.new(2016, 6, 1)
+      env = {
         'MARKDO_ROOT' => 'spec/fixtures/process_command',
         'MARKDO_INBOX' => 'Inbox.md',
-      })
-      raw_input = subcommands.map { |s| "#{s}\n" }.join
-      command_support.stdin = StringIO.new(raw_input)
+      }
+      command_support = CommandSupport.new(stdin: stdin,
+                                           stdout: stdout,
+                                           stderr: stderr,
+                                           today: today,
+                                           env: env)
 
       ProcessCommand.new(command_support).run
 
       command_support.stdout
     end
 
-    def read_inbox
+    def read_lines(filename)
       File.
-        readlines('spec/fixtures/process_command/Inbox.md').
+        readlines("spec/fixtures/process_command/#{filename}.md").
         map { |line| line.chomp }
+    end
+
+    def assert_prompt_shown(io)
+      expect(io.string).to eq(<<-EOF)
+- [ ] Example
+File [hisbma]? 
+      EOF
     end
   end
 end
