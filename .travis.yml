@@ -5,3 +5,11 @@ install:
 - docker-compose build
 script:
 - docker-compose up
+deploy:
+  provider: rubygems
+  api_key:
+    secure: BS7n3GjoKC+K3i0ce0rbUwnJThcEiJ5+4+LPr1Oeb1CueCQ2wQkGJSyyZjUOCPywHtkLXpG+7VUkiRFIADm7ecvQ936VuOklzQfEbmsXVRjr9iZw1pG6sTzS0ua+YQJG8Ejl9SNYqtUGAGxAahWlZAiY375EdqoVE2aoqK4lmwERy3D1gwWt/vkv/0y7XRARaWui35XvozKQ9wUaZ423z2xMDCX8O4Ah9s/zEJujjKi+FeVhuaQOC6KXZV9I7CyR2F1ENG9OxT/IJ2Cejv6L0T88fRMwvejsph9PSQIlcDHVmV39P1PTWz51hzYd76Zh+8oK6WZFx+aEkusQ+RSUyq4LF6hWX8YLGZS4XsJk0z7wBEVMZdEQSW2oC+cECFv9tjWbljym6ZeX4E8lvCREsljtxdNTkmoZTBI+iXZpuQyYi27zUdM+EyHGNRVJ3mdA0nFRtNjPVegmi7lHzDCtFielI0PeXQKAUzZwtKFKaTxA87hkibJzMddwzWu51zJJXXqnop7aM1jJa4EDTFzagCy6p36KHvyLj0e1eCF4O/i6ucBp3ls70nApBupoK+zs2X+ZN+O1k5KUHYXGJdS4+ttxr58Qb+RhVj/3Uu0FLSfXzo8fFBhAn88k8slfYM9yfIPlvTKplCNpd50011CeWkgiqVT22QOThyeWi5g/Wpk=
+  gem: markdo
+  on:
+    tags: true
+    repo: benjaminoakes/markdo
