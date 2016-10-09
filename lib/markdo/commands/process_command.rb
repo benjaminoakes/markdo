@@ -3,7 +3,6 @@ require 'markdo/commands/command'
 
 module Markdo
   class ProcessCommand < Command
-    # Built as a prototype/proof of concept to see how much I like this idea...
     def run
       lines = File.readlines(data_source.inbox_path)
       lines_by_filename = Hash.new { [] }
