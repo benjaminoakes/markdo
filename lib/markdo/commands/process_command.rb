@@ -4,18 +4,16 @@ require 'markdo/commands/command'
 module Markdo
   class ProcessCommand < Command
     def initialize(*)
-      @lines_by_filename = Hash.new { [] }
       super
+      @lines_by_filename = Hash.new { [] }
+      @lines = File.readlines(data_source.inbox_path)
+      @line_index = 0
     end
 
     def run
-      lines = File.readlines(data_source.inbox_path)
-
-      index = 0
-
       catch :abort do
-        while index < lines.length
-          line = lines[index]
+        while @line_index < @lines.length
+          line = @lines[@line_index]
           choice = prompt(line)
 
           case choice
@@ -23,16 +21,16 @@ module Markdo
             HelpSubcommand.new(@command_support).run
           when 'i'
             @lines_by_filename['Inbox.md'] <<= line
-            index += 1
+            @line_index += 1
           when 's'
             @lines_by_filename['Sprint.md'] <<= line
-            index += 1
+            @line_index += 1
           when 'b'
             @lines_by_filename['Backlog.md'] <<= line
-            index += 1
+            @line_index += 1
           when 'm'
             @lines_by_filename['Maybe.md'] <<= line
-            index += 1
+            @line_index += 1
           when 'a'
             throw :abort
           end
