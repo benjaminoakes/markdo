@@ -13,19 +13,20 @@ module Markdo
     def run
       catch :abort do
         while has_lines?
-          choice = prompt(current_line)
+          line = @lines[@line_index]
+          choice = prompt(line)
 
           case choice
           when 'h'
             show_help
           when 'i'
-            move_line_to('Inbox.md')
+            move_line_to('Inbox.md', line)
           when 's'
-            move_line_to('Sprint.md')
+            move_line_to('Sprint.md', line)
           when 'b'
-            move_line_to('Backlog.md')
+            move_line_to('Backlog.md', line)
           when 'm'
-            move_line_to('Maybe.md')
+            move_line_to('Maybe.md', line)
           when 'a'
             throw :abort
           end
@@ -45,10 +46,6 @@ module Markdo
       @line_index < @lines.length
     end
 
-    def current_line
-      @lines[@line_index]
-    end
-
     def prompt(line)
       @stdout.puts line
       @stdout.print 'File [hisbma]? '
@@ -64,8 +61,8 @@ module Markdo
       end
     end
 
-    def move_line_to(filename)
-      @lines_by_filename[filename] <<= current_line
+    def move_line_to(filename, line)
+      @lines_by_filename[filename] <<= line
       @line_index += 1
     end
 
