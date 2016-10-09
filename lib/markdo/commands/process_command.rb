@@ -12,8 +12,7 @@ module Markdo
 
     def run
       catch :abort do
-        while @line_index < @lines.length
-          line = @lines[@line_index]
+        while has_lines?
           choice = prompt(line)
 
           case choice
@@ -44,6 +43,14 @@ module Markdo
 
     def file_path(filename)
       File.join(@env['MARKDO_ROOT'], filename)
+    end
+
+    def has_lines?
+      @line_index < @lines.length
+    end
+
+    def line
+      @lines[@line_index]
     end
 
     def prompt(line)
