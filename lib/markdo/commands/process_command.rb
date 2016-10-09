@@ -13,22 +13,22 @@ module Markdo
     def run
       catch :abort do
         while has_lines?
-          choice = prompt(line)
+          choice = prompt(current_line)
 
           case choice
           when 'h'
             HelpSubcommand.new(@command_support).run
           when 'i'
-            @lines_by_filename['Inbox.md'] <<= line
+            @lines_by_filename['Inbox.md'] <<= current_line
             @line_index += 1
           when 's'
-            @lines_by_filename['Sprint.md'] <<= line
+            @lines_by_filename['Sprint.md'] <<= current_line
             @line_index += 1
           when 'b'
-            @lines_by_filename['Backlog.md'] <<= line
+            @lines_by_filename['Backlog.md'] <<= current_line
             @line_index += 1
           when 'm'
-            @lines_by_filename['Maybe.md'] <<= line
+            @lines_by_filename['Maybe.md'] <<= current_line
             @line_index += 1
           when 'a'
             throw :abort
@@ -49,7 +49,7 @@ module Markdo
       @line_index < @lines.length
     end
 
-    def line
+    def current_line
       @lines[@line_index]
     end
 
