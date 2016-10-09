@@ -2,3 +2,8 @@ guard:
   build: .
   volumes:
     - .:/src
+build:
+  build: .
+  volumes:
+    - .:/src
+  command: script/build
