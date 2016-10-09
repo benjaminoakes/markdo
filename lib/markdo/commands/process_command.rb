@@ -60,13 +60,12 @@ module Markdo
     end
 
     def write_files
-      date = @today.iso8601
       inbox_lines = @lines_by_filename.delete('Inbox.md')
       File.write(data_source.inbox_path, inbox_lines ? inbox_lines.join : '')
 
       @lines_by_filename.each do |filename, lines|
         path = file_path(filename)
-        new_content = ["\n## Processed on #{date}\n\n"] << lines
+        new_content = ["\n## Processed on #{@today.iso8601}\n\n"] << lines
 
         File.open(path, 'a') do |file|
           file.puts(new_content.join)
