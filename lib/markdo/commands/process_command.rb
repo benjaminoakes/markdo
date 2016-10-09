@@ -19,17 +19,13 @@ module Markdo
           when 'h'
             show_help
           when 'i'
-            @lines_by_filename['Inbox.md'] <<= current_line
-            @line_index += 1
+            move_line_to('Inbox.md')
           when 's'
-            @lines_by_filename['Sprint.md'] <<= current_line
-            @line_index += 1
+            move_line_to('Sprint.md')
           when 'b'
-            @lines_by_filename['Backlog.md'] <<= current_line
-            @line_index += 1
+            move_line_to('Backlog.md')
           when 'm'
-            @lines_by_filename['Maybe.md'] <<= current_line
-            @line_index += 1
+            move_line_to('Maybe.md')
           when 'a'
             throw :abort
           end
@@ -66,6 +62,11 @@ module Markdo
       else
         input_line.chomp.downcase
       end
+    end
+
+    def move_line_to(filename)
+      @lines_by_filename[filename] <<= current_line
+      @line_index += 1
     end
 
     def write_files
