@@ -20,7 +20,7 @@ module Markdo
           when 'h'
             show_help
           when 'i'
-            move_line_to('Inbox.md', line)
+            move_line_to(@env['MARKDO_INBOX'], line)
           when 's'
             move_line_to('Sprint.md', line)
           when 'b'
@@ -63,7 +63,7 @@ module Markdo
     end
 
     def write_files
-      inbox_lines = @lines_by_filename.delete('Inbox.md')
+      inbox_lines = @lines_by_filename.delete(@env['MARKDO_INBOX'])
       File.write(data_source.inbox_path, inbox_lines ? inbox_lines.join : '')
 
       @lines_by_filename.each do |filename, lines|
