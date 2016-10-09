@@ -49,18 +49,7 @@ module Markdo
           end
         end
 
-        date = @today.iso8601
-        inbox_lines = @lines_by_filename.delete('Inbox.md')
-        File.write(data_source.inbox_path, inbox_lines ? inbox_lines.join : '')
-
-        @lines_by_filename.each do |filename, lines|
-          path = file_path(filename)
-          new_content = ["\n## Processed on #{date}\n\n"] << lines
-
-          File.open(path, 'a') do |file|
-            file.puts(new_content.join)
-          end
-        end
+        write_files
       end
     end
 
@@ -68,6 +57,21 @@ module Markdo
 
     def file_path(filename)
       File.join(@env['MARKDO_ROOT'], filename)
+    end
+
+    def write_files
+      date = @today.iso8601
+      inbox_lines = @lines_by_filename.delete('Inbox.md')
+      File.write(data_source.inbox_path, inbox_lines ? inbox_lines.join : '')
+
+      @lines_by_filename.each do |filename, lines|
+        path = file_path(filename)
+        new_content = ["\n## Processed on #{date}\n\n"] << lines
+
+        File.open(path, 'a') do |file|
+          file.puts(new_content.join)
+        end
+      end
     end
 
     class HelpSubcommand < Command
