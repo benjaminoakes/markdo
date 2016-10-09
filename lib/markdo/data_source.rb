@@ -17,7 +17,11 @@ module Markdo
     end
 
     def inbox_path
-      "#{@env['MARKDO_ROOT']}/#{@env['MARKDO_INBOX']}"
+      file_path(@env['MARKDO_INBOX'])
+    end
+
+    def file_path(filename)
+      File.join(@env['MARKDO_ROOT'], filename)
     end
   end
 end

@@ -38,10 +38,6 @@ module Markdo
 
     private
 
-    def file_path(filename)
-      File.join(@env['MARKDO_ROOT'], filename)
-    end
-
     def has_lines?
       @line_index < @lines.length
     end
@@ -71,7 +67,7 @@ module Markdo
       File.write(data_source.inbox_path, inbox_lines ? inbox_lines.join : '')
 
       @lines_by_filename.each do |filename, lines|
-        path = file_path(filename)
+        path = data_source.file_path(filename)
         new_content = ["\n## Processed on #{@today.iso8601}\n\n"] << lines
 
         File.open(path, 'a') do |file|
