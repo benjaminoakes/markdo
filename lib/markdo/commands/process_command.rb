@@ -16,18 +16,7 @@ module Markdo
       catch :abort do
         while index < lines.length
           line = lines[index]
-          @stdout.puts line
-          @stdout.print 'File [hisbma]? '
-
-          input_line = @stdin.gets
-
-          @stdout.puts
-
-          if input_line.nil?
-            throw :abort
-          else
-            choice = input_line.chomp.downcase
-          end
+          choice = prompt(line)
 
           case choice
           when 'h'
@@ -57,6 +46,21 @@ module Markdo
 
     def file_path(filename)
       File.join(@env['MARKDO_ROOT'], filename)
+    end
+
+    def prompt(line)
+      @stdout.puts line
+      @stdout.print 'File [hisbma]? '
+
+      input_line = @stdin.gets
+
+      @stdout.puts
+
+      if input_line.nil?
+        throw :abort
+      else
+        input_line.chomp.downcase
+      end
     end
 
     def write_files
