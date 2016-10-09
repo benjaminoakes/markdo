@@ -17,7 +17,7 @@ module Markdo
 
           case choice
           when 'h'
-            HelpSubcommand.new(@command_support).run
+            show_help
           when 'i'
             @lines_by_filename['Inbox.md'] <<= current_line
             @line_index += 1
@@ -82,14 +82,12 @@ module Markdo
       end
     end
 
-    class HelpSubcommand < Command
-      def run
-        @stdout.puts 'i - inbox (keep in inbox)'
-        @stdout.puts 's - sprint'
-        @stdout.puts 'b - backlog'
-        @stdout.puts 'm - maybe'
-        @stdout.puts 'a - abort; make no changes'
-      end
+    def show_help
+      @stdout.puts 'i - inbox (keep in inbox)'
+      @stdout.puts 's - sprint'
+      @stdout.puts 'b - backlog'
+      @stdout.puts 'm - maybe'
+      @stdout.puts 'a - abort; make no changes'
     end
   end
 end
