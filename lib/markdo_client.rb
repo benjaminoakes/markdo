@@ -48,6 +48,8 @@ module Markdo
         Element['#rb-back-button'].remove_class('hidden-xs')
         Element['#rb-filter-nav'].add_class('hidden-xs')
 
+        Element['#rb-filter-heading'].html = target.html
+
         render_tasks(tasks)
       end
     end
