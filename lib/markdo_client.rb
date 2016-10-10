@@ -11,32 +11,55 @@ module Markdo
       lines = fetch_lines
       task_collection = TaskCollection.new(lines)
 
-      Element['#rb-overdue-count'].html = task_collection.due_today.count
-      Element['#rb-due-today-count'].html = task_collection.due_today.count
-      Element['#rb-wip-count'].html = task_collection.with_tag('wip').count
-      Element['#rb-starred-count'].html = task_collection.starred.count
+      attach_filter('#rb-overdue-count', task_collection.due_today)
+      attach_filter('#rb-due-today-count', task_collection.due_today)
+      attach_filter('#rb-wip-count', task_collection.with_tag('wip'))
+      attach_filter('#rb-starred-count', task_collection.starred)
 
-      Element['#rb-due-tomorrow-count'].html = task_collection.due_tomorrow.count
-      Element['#rb-due-soon-count'].html = task_collection.due_soon.count
-      Element['#rb-deferred-until-today-count'].html = task_collection.deferred_until_today.count
-      Element['#rb-next-count'].html = task_collection.with_tag('next').count
-
-      Element['#rb-starred-count'].closest('a').on(:click) do
-        Element['#rb-markdown-document'].html = render_markdown
-      end
+      attach_filter('#rb-due-tomorrow-count', task_collection.due_tomorrow)
+      attach_filter('#rb-due-soon-count', task_collection.due_soon)
+      attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
+      attach_filter('#rb-next-count', task_collection.with_tag('next'))
     end
 
     private
 
+    def attach_filter(selector, tasks)
+      count_element = Element[selector]
+      count_element.html = tasks.count
+      
+      count_element.closest('a').on(:click) do |event|
+        target = event.current_target
+
+        Element['.rb-filter-nav li'].remove_class('active')
+        target.closest('li').add_class('active')
+
+        render_tasks(tasks)
+      end
+    end
+
     def fetch_lines
       [
-        '- [x] Example 1 @star',
-        '- [ ] Example 2 @star',
+        '- [x] Example @star',
+        '- [ ] Example @star',
+        '- [ ] Example @wip',
+        '- [ ] Example @defer(2016-10-01)',
+        '- [ ] Example @due(2016-10-09)',
+        '- [ ] Example @due(2016-10-10)',
+        '- [ ] Example @due(2016-10-11)',
+        '- [ ] Example @due(2016-10-12)',
+        '- [ ] Example @next',
       ]
     end
 
-    def render_markdown
-      MarkdownRenderer.new(fetch_lines.join("\n")).to_html
+    def render_tasks(tasks)
+      lines = tasks.map { |task| task.line }
+      render_markdown(lines)
+    end
+
+    def render_markdown(lines)
+      html = MarkdownRenderer.new(lines.join("\n")).to_html
+      Element['#rb-markdown-document'].html = html
     end
   end
 end
