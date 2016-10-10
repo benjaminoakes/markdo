@@ -22,6 +22,7 @@ require 'uglifier'
 require 'opal'
 desc 'Compile to docs/js/markdo_client.js'
 task :compile_opal do
+  Opal.use_gem 'opal-jquery'
   Opal.append_path 'lib'
   Opal.append_path 'vendor'
   FileUtils.mkdir_p 'docs/js'
