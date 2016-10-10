@@ -38616,7 +38616,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_9, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$attach_filter', '$all', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$private', '$count', '$current_target', '$closest', '$render_tasks', '$map', '$line', '$render_markdown', '$to_html', '$join', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$attach_filter', '$all', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$map', '$line', '$render_markdown', '$to_html', '$join', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38664,7 +38664,7 @@ if (line == null) line = nil;
 
         count_element = $scope.get('Element')['$[]'](selector);
         (($a = [tasks.$count()]), $b = count_element, $b['$html='].apply($b, $a), $a[$a.length-1]);
-        return ($a = ($b = count_element.$closest("a")).$on, $a.$$p = (TMP_3 = function(event){var self = TMP_3.$$s || this, target = nil;
+        return ($a = ($b = count_element.$closest("a")).$on, $a.$$p = (TMP_3 = function(event){var self = TMP_3.$$s || this, $c, $d, target = nil;
 if (event == null) event = nil;
         target = event.$current_target();
           $scope.get('Element')['$[]']("#rb-filter-nav li").$remove_class("active");
@@ -38672,6 +38672,7 @@ if (event == null) event = nil;
           $scope.get('Element')['$[]']("#rb-markdown-document").$remove_class("hidden-xs");
           $scope.get('Element')['$[]']("#rb-back-button").$remove_class("hidden-xs");
           $scope.get('Element')['$[]']("#rb-filter-nav").$add_class("hidden-xs");
+          (($c = [target.$html()]), $d = $scope.get('Element')['$[]']("#rb-filter-heading"), $d['$html='].apply($d, $c), $c[$c.length-1]);
           return self.$render_tasks(tasks);}, TMP_3.$$s = self, TMP_3.$$arity = 1, TMP_3), $a).call($b, "click");
       }, TMP_4.$$arity = 2);
 
