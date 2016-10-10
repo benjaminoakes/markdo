@@ -36016,7 +36016,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_3, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$html=', '$count', '$due_today', '$[]', '$starred', '$due_tomorrow', '$private', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$html=', '$count', '$due_today', '$[]', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$private', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -36038,9 +36038,14 @@ if (line == null) line = nil;
 
         lines = self.$fetch_lines();
         task_collection = $scope.get('TaskCollection').$new(lines);
+        (($a = [task_collection.$due_today().$count()]), $b = $scope.get('Element')['$[]']("#rb-overdue-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
         (($a = [task_collection.$due_today().$count()]), $b = $scope.get('Element')['$[]']("#rb-due-today-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
+        (($a = [task_collection.$with_tag("wip").$count()]), $b = $scope.get('Element')['$[]']("#rb-wip-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
         (($a = [task_collection.$starred().$count()]), $b = $scope.get('Element')['$[]']("#rb-starred-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
-        return (($a = [task_collection.$due_tomorrow().$count()]), $b = $scope.get('Element')['$[]']("#rb-due-tomorrow-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
+        (($a = [task_collection.$due_tomorrow().$count()]), $b = $scope.get('Element')['$[]']("#rb-due-tomorrow-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
+        (($a = [task_collection.$due_soon().$count()]), $b = $scope.get('Element')['$[]']("#rb-due-soon-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
+        (($a = [task_collection.$deferred_until_today().$count()]), $b = $scope.get('Element')['$[]']("#rb-deferred-until-today-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
+        return (($a = [task_collection.$with_tag("next").$count()]), $b = $scope.get('Element')['$[]']("#rb-next-count"), $b['$html='].apply($b, $a), $a[$a.length-1]);
       }, TMP_1.$$arity = 0);
 
       self.$private();
