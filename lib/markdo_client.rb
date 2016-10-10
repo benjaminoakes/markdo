@@ -33,7 +33,7 @@ module Markdo
       count_element.closest('a').on(:click) do |event|
         target = event.current_target
 
-        Element['.rb-filter-nav li'].remove_class('active')
+        Element['#rb-filter-nav li'].remove_class('active')
         target.closest('li').add_class('active')
 
         render_tasks(tasks)
