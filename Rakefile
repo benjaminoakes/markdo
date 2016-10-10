@@ -16,3 +16,14 @@ require 'opal/rspec/rake_task'
 Opal::RSpec::RakeTask.new('spec:opal:phantomjs') do |server, task|
   server.append_path 'lib'
 end
+
+require 'fileutils'
+require 'uglifier'
+require 'opal'
+desc 'Compile to docs/js/markdo_client.js'
+task :compile_opal do
+  Opal.append_path 'lib'
+  FileUtils.mkdir_p 'docs/js'
+  File.binwrite 'docs/js/markdo_client.js', Opal::Builder.build('markdo_client').to_s
+  File.binwrite 'docs/js/markdo_client.min.js', Uglifier.compile(File.read('docs/js/markdo_client.js', encoding: 'UTF-8'))
+end
