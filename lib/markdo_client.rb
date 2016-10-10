@@ -27,12 +27,13 @@ module Markdo
 
     def fetch_lines
       [
-        '- [ ] Example @star'
+        '- [x] Example 1 @star',
+        '- [ ] Example 2 @star',
       ]
     end
 
     def render_markdown
-      '<p><input disabled="" type="checkbox"> Example @star<br></p>'
+      '<p><input checked disabled="" type="checkbox"> Example 1 @star<br><input disabled="" type="checkbox"> Example 2 @star<br></p>'
     end
   end
 end

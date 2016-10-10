@@ -36054,13 +36054,13 @@ if (line == null) line = nil;
       Opal.defn(self, '$fetch_lines', TMP_2 = function ːfetch_lines() {
         var self = this;
 
-        return ["- [ ] Example @star"];
+        return ["- [x] Example 1 @star", "- [ ] Example 2 @star"];
       }, TMP_2.$$arity = 0);
 
       return (Opal.defn(self, '$render_markdown', TMP_3 = function ːrender_markdown() {
         var self = this;
 
-        return "<p><input disabled=\"\" type=\"checkbox\"> Example @star<br></p>";
+        return "<p><input checked disabled=\"\" type=\"checkbox\"> Example 1 @star<br><input disabled=\"\" type=\"checkbox\"> Example 2 @star<br></p>";
       }, TMP_3.$$arity = 0), nil) && 'render_markdown';
     })($scope.base, null)
   })($scope.base);
