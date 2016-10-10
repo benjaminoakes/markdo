@@ -19,6 +19,8 @@ module Markdo
       Element['#rb-due-soon-count'].html = task_collection.due_soon.count
       Element['#rb-deferred-until-today-count'].html = task_collection.deferred_until_today.count
       Element['#rb-next-count'].html = task_collection.with_tag('next').count
+
+      Element['#rb-markdown-document'].html = render_markdown
     end
 
     private
@@ -27,6 +29,10 @@ module Markdo
       [
         '- [ ] Example @star'
       ]
+    end
+
+    def render_markdown
+      '<p><input disabled="" type="checkbox"> Example @star<br></p>'
     end
   end
 end
