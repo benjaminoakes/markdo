@@ -26,6 +26,8 @@ module Markdo
       Element['#rb-back-button'].on(:click) do
         Element['#rb-back-button'].add_class('hidden-xs')
         Element['#rb-markdown-document'].add_class('hidden-xs')
+        Element['#rb-markdown-document'].html = ''
+        Element['#rb-filter-nav li'].remove_class('active')
         Element['#rb-filter-nav'].remove_class('hidden-xs')
       end
     end

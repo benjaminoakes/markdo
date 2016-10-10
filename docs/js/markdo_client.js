@@ -38616,7 +38616,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_9, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$attach_filter', '$all', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$remove_class', '$private', '$html=', '$count', '$current_target', '$closest', '$render_tasks', '$map', '$line', '$render_markdown', '$to_html', '$join', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$attach_filter', '$all', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$private', '$count', '$current_target', '$closest', '$render_tasks', '$map', '$line', '$render_markdown', '$to_html', '$join', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38648,10 +38648,12 @@ if (line == null) line = nil;
         self.$attach_filter("#rb-due-soon-count", task_collection.$due_soon());
         self.$attach_filter("#rb-deferred-until-today-count", task_collection.$deferred_until_today());
         self.$attach_filter("#rb-next-count", task_collection.$with_tag("next"));
-        return ($a = ($b = $scope.get('Element')['$[]']("#rb-back-button")).$on, $a.$$p = (TMP_1 = function(){var self = TMP_1.$$s || this;
+        return ($a = ($b = $scope.get('Element')['$[]']("#rb-back-button")).$on, $a.$$p = (TMP_1 = function(){var self = TMP_1.$$s || this, $c, $d;
 
         $scope.get('Element')['$[]']("#rb-back-button").$add_class("hidden-xs");
           $scope.get('Element')['$[]']("#rb-markdown-document").$add_class("hidden-xs");
+          (($c = [""]), $d = $scope.get('Element')['$[]']("#rb-markdown-document"), $d['$html='].apply($d, $c), $c[$c.length-1]);
+          $scope.get('Element')['$[]']("#rb-filter-nav li").$remove_class("active");
           return $scope.get('Element')['$[]']("#rb-filter-nav").$remove_class("hidden-xs");}, TMP_1.$$s = self, TMP_1.$$arity = 0, TMP_1), $a).call($b, "click");
       }, TMP_2.$$arity = 0);
 
