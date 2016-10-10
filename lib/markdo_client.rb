@@ -2,6 +2,7 @@ require 'opal'
 require 'jquery'
 require 'opal-jquery'
 require 'bootstrap'
+require 'markdo/markdown_renderer'
 require 'markdo/models/task_collection'
 
 module Markdo
@@ -33,7 +34,7 @@ module Markdo
     end
 
     def render_markdown
-      '<p><input checked disabled="" type="checkbox"> Example 1 @star<br><input disabled="" type="checkbox"> Example 2 @star<br></p>'
+      MarkdownRenderer.new(fetch_lines.join("\n")).to_html
     end
   end
 end
