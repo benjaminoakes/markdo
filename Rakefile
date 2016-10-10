@@ -15,6 +15,7 @@ RSpec::Core::RakeTask.new('spec')
 require 'opal/rspec/rake_task'
 Opal::RSpec::RakeTask.new('spec:opal:phantomjs') do |server, task|
   server.append_path 'lib'
+  server.append_path 'vendor'
 end
 
 require 'fileutils'
