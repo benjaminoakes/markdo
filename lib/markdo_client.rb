@@ -11,6 +11,8 @@ module Markdo
       lines = fetch_lines
       task_collection = TaskCollection.new(lines)
 
+      attach_filter('#rb-all-count', task_collection.all)
+
       attach_filter('#rb-overdue-count', task_collection.due_today)
       attach_filter('#rb-due-today-count', task_collection.due_today)
       attach_filter('#rb-wip-count', task_collection.with_tag('wip'))

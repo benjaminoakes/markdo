@@ -38616,7 +38616,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_8, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$attach_filter', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$private', '$[]', '$html=', '$count', '$on', '$current_target', '$remove_class', '$add_class', '$closest', '$render_tasks', '$map', '$line', '$render_markdown', '$to_html', '$join', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$attach_filter', '$all', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$private', '$[]', '$html=', '$count', '$on', '$current_target', '$remove_class', '$add_class', '$closest', '$render_tasks', '$map', '$line', '$render_markdown', '$to_html', '$join', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38639,6 +38639,7 @@ if (line == null) line = nil;
 
         lines = self.$fetch_lines();
         task_collection = $scope.get('TaskCollection').$new(lines);
+        self.$attach_filter("#rb-all-count", task_collection.$all());
         self.$attach_filter("#rb-overdue-count", task_collection.$due_today());
         self.$attach_filter("#rb-due-today-count", task_collection.$due_today());
         self.$attach_filter("#rb-wip-count", task_collection.$with_tag("wip"));
