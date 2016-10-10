@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard"
   spec.add_development_dependency "guard-rake"
   spec.add_development_dependency "opal"
+  spec.add_development_dependency "opal-jquery"
   spec.add_development_dependency "opal-rspec"
   spec.add_development_dependency "uglifier"
 end
