@@ -38660,7 +38660,7 @@ if (line == null) line = nil;
         return ($a = ($b = count_element.$closest("a")).$on, $a.$$p = (TMP_2 = function(event){var self = TMP_2.$$s || this, target = nil;
 if (event == null) event = nil;
         target = event.$current_target();
-          $scope.get('Element')['$[]'](".rb-filter-nav li").$remove_class("active");
+          $scope.get('Element')['$[]']("#rb-filter-nav li").$remove_class("active");
           target.$closest("li").$add_class("active");
           return self.$render_tasks(tasks);}, TMP_2.$$s = self, TMP_2.$$arity = 1, TMP_2), $a).call($b, "click");
       }, TMP_3.$$arity = 2);
