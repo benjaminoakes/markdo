@@ -21,7 +21,9 @@ module Markdo
       Element['#rb-deferred-until-today-count'].html = task_collection.deferred_until_today.count
       Element['#rb-next-count'].html = task_collection.with_tag('next').count
 
-      Element['#rb-markdown-document'].html = render_markdown
+      Element['#rb-starred-count'].closest('a').on(:click) do
+        Element['#rb-markdown-document'].html = render_markdown
+      end
     end
 
     private
