@@ -8,6 +8,10 @@ require 'markdo/models/task_collection'
 module Markdo
   class Client
     def run
+      Element['#rb-filter-nav'].on(:click) do |event|
+        event.prevent_default
+      end
+
       fetch_lines.then do |lines|
         task_collection = TaskCollection.new(lines)
 
@@ -23,7 +27,9 @@ module Markdo
         attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
         attach_filter('#rb-next-count', task_collection.with_tag('next'))
 
-        Element['#rb-back-button'].on(:click) do
+        Element['#rb-back-button'].on(:click) do |event|
+          event.prevent_default
+
           Element['#rb-back-button'].add_class('hidden-xs')
           Element['#rb-markdown-document'].add_class('hidden-xs')
           Element['#rb-markdown-document'].html = ''
