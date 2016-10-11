@@ -96,6 +96,8 @@ module Markdo
     def render_markdown(markdown)
       html = MarkdownRenderer.new(markdown).to_html
       Element['#rb-markdown-document'].html = html
+
+      Element['#rb-markdown-document a'].attr('target', '_blank')
     end
   end
 end

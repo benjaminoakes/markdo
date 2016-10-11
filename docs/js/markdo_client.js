@@ -38616,7 +38616,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_12, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$then', '$new', '$attach_filter', '$all', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$fetch_lines', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$to_i', '$now', '$get', '$body', '$==', '$status_code', '$split', '$resolve', '$example_lines', '$map', '$line', '$render_markdown', '$join', '$to_html', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$then', '$new', '$attach_filter', '$all', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$fetch_lines', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$to_i', '$now', '$get', '$body', '$==', '$status_code', '$split', '$resolve', '$example_lines', '$map', '$line', '$render_markdown', '$join', '$to_html', '$attr', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38713,7 +38713,8 @@ if (task == null) task = nil;
         var $a, $b, self = this, html = nil;
 
         html = $scope.get('MarkdownRenderer').$new(markdown).$to_html();
-        return (($a = [html]), $b = $scope.get('Element')['$[]']("#rb-markdown-document"), $b['$html='].apply($b, $a), $a[$a.length-1]);
+        (($a = [html]), $b = $scope.get('Element')['$[]']("#rb-markdown-document"), $b['$html='].apply($b, $a), $a[$a.length-1]);
+        return $scope.get('Element')['$[]']("#rb-markdown-document a").$attr("target", "_blank");
       }, TMP_11.$$arity = 1), nil) && 'render_markdown';
     })($scope.base, null)
   })($scope.base);
