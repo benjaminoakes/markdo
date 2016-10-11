@@ -38616,7 +38616,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_12, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$then', '$new', '$attach_filter', '$all', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$fetch_lines', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$to_i', '$now', '$get', '$body', '$nil?', '$resolve', '$example_lines', '$split', '$map', '$line', '$render_markdown', '$join', '$to_html', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$then', '$new', '$attach_filter', '$all', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$fetch_lines', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$to_i', '$now', '$get', '$body', '$==', '$status_code', '$split', '$resolve', '$example_lines', '$map', '$line', '$render_markdown', '$join', '$to_html', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38682,14 +38682,14 @@ if (event == null) event = nil;
 
         cache_breaker = $scope.get('Time').$now().$to_i();
         promise = $scope.get('Promise').$new();
-        ($a = ($b = $scope.get('HTTP')).$get, $a.$$p = (TMP_6 = function(response){var self = TMP_6.$$s || this, $c, markdown = nil, lines = nil;
+        ($a = ($b = $scope.get('HTTP')).$get, $a.$$p = (TMP_6 = function(response){var self = TMP_6.$$s || this, markdown = nil, lines = nil;
 if (response == null) response = nil;
         markdown = response.$body();
-          if ((($c = markdown['$nil?']()) !== nil && $c != null && (!$c.$$is_boolean || $c == true))) {
-            return promise.$resolve(self.$example_lines())
-            } else {
+          if ((200)['$=='](response.$status_code())) {
             lines = markdown.$split("\n");
             return promise.$resolve(lines);
+            } else {
+            return promise.$resolve(self.$example_lines())
           };}, TMP_6.$$s = self, TMP_6.$$arity = 1, TMP_6), $a).call($b, "data/__all__.md?" + (cache_breaker));
         return promise;
       }, TMP_7.$$arity = 0);

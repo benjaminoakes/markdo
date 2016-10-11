@@ -62,11 +62,11 @@ module Markdo
       HTTP.get("data/__all__.md?#{cache_breaker}") do |response|
         markdown = response.body
 
-        if markdown.nil?
-          promise.resolve(example_lines)
-        else
+        if 200 == response.status_code
           lines = markdown.split("\n")
           promise.resolve(lines)
+        else
+          promise.resolve(example_lines)
         end
       end
 
