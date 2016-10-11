@@ -38616,7 +38616,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_9, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$attach_filter', '$all', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$map', '$line', '$render_markdown', '$to_html', '$join', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$fetch_lines', '$new', '$attach_filter', '$all', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$on', '$add_class', '$[]', '$html=', '$remove_class', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$map', '$line', '$render_markdown', '$to_html', '$join', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38640,7 +38640,7 @@ if (line == null) line = nil;
         lines = self.$fetch_lines();
         task_collection = $scope.get('TaskCollection').$new(lines);
         self.$attach_filter("#rb-all-count", task_collection.$all());
-        self.$attach_filter("#rb-overdue-count", task_collection.$due_today());
+        self.$attach_filter("#rb-overdue-count", task_collection.$overdue());
         self.$attach_filter("#rb-due-today-count", task_collection.$due_today());
         self.$attach_filter("#rb-wip-count", task_collection.$with_tag("wip"));
         self.$attach_filter("#rb-starred-count", task_collection.$starred());
@@ -38679,7 +38679,7 @@ if (event == null) event = nil;
       Opal.defn(self, '$fetch_lines', TMP_5 = function ːfetch_lines() {
         var self = this;
 
-        return ["- [x] Example @star", "- [ ] Example @star", "- [ ] Example @wip", "- [ ] Example @defer(2016-10-01)", "- [ ] Example @due(2016-10-09)", "- [ ] Example @due(2016-10-10)", "- [ ] Example @due(2016-10-11)", "- [ ] Example @due(2016-10-12)", "- [ ] Example @next"];
+        return ["- [x] Example @star", "- [ ] Example @star", "- [ ] Example @wip", "- [ ] Example @defer(2016-10-01)", "- [ ] Example @due(2016-01-01)", "- [ ] Example @due(2016-10-09)", "- [ ] Example @due(2016-10-10)", "- [ ] Example @due(2016-10-11)", "- [ ] Example @due(2016-10-12)", "- [ ] Example @next"];
       }, TMP_5.$$arity = 0);
 
       Opal.defn(self, '$render_tasks', TMP_7 = function ːrender_tasks(tasks) {

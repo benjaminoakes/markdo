@@ -13,7 +13,7 @@ module Markdo
 
       attach_filter('#rb-all-count', task_collection.all)
 
-      attach_filter('#rb-overdue-count', task_collection.due_today)
+      attach_filter('#rb-overdue-count', task_collection.overdue)
       attach_filter('#rb-due-today-count', task_collection.due_today)
       attach_filter('#rb-wip-count', task_collection.with_tag('wip'))
       attach_filter('#rb-starred-count', task_collection.starred)
@@ -60,6 +60,7 @@ module Markdo
         '- [ ] Example @star',
         '- [ ] Example @wip',
         '- [ ] Example @defer(2016-10-01)',
+        '- [ ] Example @due(2016-01-01)',
         '- [ ] Example @due(2016-10-09)',
         '- [ ] Example @due(2016-10-10)',
         '- [ ] Example @due(2016-10-11)',
