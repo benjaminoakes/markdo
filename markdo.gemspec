@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_development_dependency "capybara"
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "rake"
@@ -29,5 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "opal"
   spec.add_development_dependency "opal-jquery"
   spec.add_development_dependency "opal-rspec"
+  spec.add_development_dependency "poltergeist"
   spec.add_development_dependency "uglifier"
 end

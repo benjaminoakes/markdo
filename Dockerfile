@@ -21,6 +21,8 @@ RUN pkg-deb ruby2.3-dev
 
 RUN pkg-deb libffi-dev=3.2.1-4
 RUN pkg-gem ffi:1.9.14
+RUN pkg-gem nokogiri:1.6.8.1
+RUN pkg-gem redcarpet:3.3.4
 
 RUN pkg-gem bundler:1.12.5
 COPY Gemfile $HOME/
