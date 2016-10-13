@@ -17,6 +17,19 @@ module Markdo
       end
     end
 
+    describe '#complete' do
+      it 'returns checked tasks' do
+        task_collection = TaskCollection.new([
+          '- [x] Example 1',
+          '- [ ] Example 2',
+        ])
+
+        expect(task_collection.complete).to eq([
+          Task.new('- [x] Example 1'),
+        ])
+      end
+    end
+
     describe '#with_match' do
       it 'returns tasks matching a regular expression' do
         task_collection = TaskCollection.new([

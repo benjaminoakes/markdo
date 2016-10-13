@@ -38471,7 +38471,7 @@ Opal.modules["markdo/models/task_collection"] = function(Opal) {
   }
   var self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$today', '$tasks', '$select', '$[]', '$attributes', '$downcase', '$with_tag', '$match', '$line', '$with_date', '$==', '$>=', '$<=', '$<', '$due_on', '$+', '$due_between', '$private', '$sort_by', '$date_value', '$call', '$with_attribute', '$parse', '$map', '$new']);
+  Opal.add_stubs(['$require', '$today', '$tasks', '$select', '$complete?', '$[]', '$attributes', '$downcase', '$with_tag', '$match', '$line', '$with_date', '$==', '$>=', '$<=', '$<', '$due_on', '$+', '$due_between', '$private', '$sort_by', '$date_value', '$call', '$with_attribute', '$parse', '$map', '$new']);
   self.$require("date");
   self.$require("markdo/models/task");
   return (function($base) {
@@ -38483,7 +38483,7 @@ Opal.modules["markdo/models/task_collection"] = function(Opal) {
       function $TaskCollection(){};
       var self = $TaskCollection = $klass($base, $super, 'TaskCollection', $TaskCollection);
 
-      var def = self.$$proto, $scope = self.$$scope, TMP_1, TMP_2, TMP_4, TMP_5, TMP_7, TMP_8, TMP_10, TMP_12, TMP_14, TMP_15, TMP_16, TMP_17, TMP_19, TMP_20, TMP_23, TMP_25;
+      var def = self.$$proto, $scope = self.$$scope, TMP_1, TMP_2, TMP_4, TMP_6, TMP_7, TMP_9, TMP_10, TMP_12, TMP_14, TMP_16, TMP_17, TMP_18, TMP_19, TMP_21, TMP_22, TMP_25, TMP_27;
 
       def.today = def.tasks = def.lines = nil;
       Opal.defn(self, '$initialize', TMP_1 = function ːinitialize(lines, today) {
@@ -38502,112 +38502,120 @@ Opal.modules["markdo/models/task_collection"] = function(Opal) {
         return self.$tasks();
       }, TMP_2.$$arity = 0);
 
-      Opal.defn(self, '$with_tag', TMP_4 = function ːwith_tag(tag) {
+      Opal.defn(self, '$complete', TMP_4 = function ːcomplete() {
         var $a, $b, TMP_3, self = this;
 
         return ($a = ($b = self.$tasks()).$select, $a.$$p = (TMP_3 = function(task){var self = TMP_3.$$s || this;
 if (task == null) task = nil;
-        return task.$attributes()['$[]'](tag.$downcase())}, TMP_3.$$s = self, TMP_3.$$arity = 1, TMP_3), $a).call($b);
-      }, TMP_4.$$arity = 1);
+        return task['$complete?']()}, TMP_3.$$s = self, TMP_3.$$arity = 1, TMP_3), $a).call($b);
+      }, TMP_4.$$arity = 0);
 
-      Opal.defn(self, '$with_attribute', TMP_5 = function ːwith_attribute(tag) {
+      Opal.defn(self, '$with_tag', TMP_6 = function ːwith_tag(tag) {
+        var $a, $b, TMP_5, self = this;
+
+        return ($a = ($b = self.$tasks()).$select, $a.$$p = (TMP_5 = function(task){var self = TMP_5.$$s || this;
+if (task == null) task = nil;
+        return task.$attributes()['$[]'](tag.$downcase())}, TMP_5.$$s = self, TMP_5.$$arity = 1, TMP_5), $a).call($b);
+      }, TMP_6.$$arity = 1);
+
+      Opal.defn(self, '$with_attribute', TMP_7 = function ːwith_attribute(tag) {
         var self = this;
 
         return self.$with_tag(tag);
-      }, TMP_5.$$arity = 1);
-
-      Opal.defn(self, '$with_match', TMP_7 = function ːwith_match(matcher) {
-        var $a, $b, TMP_6, self = this;
-
-        return ($a = ($b = self.$tasks()).$select, $a.$$p = (TMP_6 = function(task){var self = TMP_6.$$s || this;
-if (task == null) task = nil;
-        return task.$line().$match(matcher)}, TMP_6.$$s = self, TMP_6.$$arity = 1, TMP_6), $a).call($b);
       }, TMP_7.$$arity = 1);
 
-      Opal.defn(self, '$starred', TMP_8 = function ːstarred() {
+      Opal.defn(self, '$with_match', TMP_9 = function ːwith_match(matcher) {
+        var $a, $b, TMP_8, self = this;
+
+        return ($a = ($b = self.$tasks()).$select, $a.$$p = (TMP_8 = function(task){var self = TMP_8.$$s || this;
+if (task == null) task = nil;
+        return task.$line().$match(matcher)}, TMP_8.$$s = self, TMP_8.$$arity = 1, TMP_8), $a).call($b);
+      }, TMP_9.$$arity = 1);
+
+      Opal.defn(self, '$starred', TMP_10 = function ːstarred() {
         var self = this;
 
         return self.$with_tag("star");
-      }, TMP_8.$$arity = 0);
+      }, TMP_10.$$arity = 0);
 
-      Opal.defn(self, '$due_on', TMP_10 = function ːdue_on(given_date) {
-        var $a, $b, TMP_9, self = this;
-
-        return ($a = ($b = self).$with_date, $a.$$p = (TMP_9 = function(date){var self = TMP_9.$$s || this;
-if (date == null) date = nil;
-        return date['$=='](given_date)}, TMP_9.$$s = self, TMP_9.$$arity = 1, TMP_9), $a).call($b, "due");
-      }, TMP_10.$$arity = 1);
-
-      Opal.defn(self, '$due_between', TMP_12 = function ːdue_between(begin_date, end_date) {
+      Opal.defn(self, '$due_on', TMP_12 = function ːdue_on(given_date) {
         var $a, $b, TMP_11, self = this;
 
-        return ($a = ($b = self).$with_date, $a.$$p = (TMP_11 = function(date){var self = TMP_11.$$s || this, $c;
+        return ($a = ($b = self).$with_date, $a.$$p = (TMP_11 = function(date){var self = TMP_11.$$s || this;
 if (date == null) date = nil;
-        return ($c = $rb_ge(date, begin_date), $c !== false && $c !== nil && $c != null ?$rb_le(date, end_date) : $c)}, TMP_11.$$s = self, TMP_11.$$arity = 1, TMP_11), $a).call($b, "due");
-      }, TMP_12.$$arity = 2);
+        return date['$=='](given_date)}, TMP_11.$$s = self, TMP_11.$$arity = 1, TMP_11), $a).call($b, "due");
+      }, TMP_12.$$arity = 1);
 
-      Opal.defn(self, '$overdue', TMP_14 = function ːoverdue() {
+      Opal.defn(self, '$due_between', TMP_14 = function ːdue_between(begin_date, end_date) {
         var $a, $b, TMP_13, self = this;
 
-        return ($a = ($b = self).$with_date, $a.$$p = (TMP_13 = function(date){var self = TMP_13.$$s || this;
+        return ($a = ($b = self).$with_date, $a.$$p = (TMP_13 = function(date){var self = TMP_13.$$s || this, $c;
+if (date == null) date = nil;
+        return ($c = $rb_ge(date, begin_date), $c !== false && $c !== nil && $c != null ?$rb_le(date, end_date) : $c)}, TMP_13.$$s = self, TMP_13.$$arity = 1, TMP_13), $a).call($b, "due");
+      }, TMP_14.$$arity = 2);
+
+      Opal.defn(self, '$overdue', TMP_16 = function ːoverdue() {
+        var $a, $b, TMP_15, self = this;
+
+        return ($a = ($b = self).$with_date, $a.$$p = (TMP_15 = function(date){var self = TMP_15.$$s || this;
           if (self.today == null) self.today = nil;
 if (date == null) date = nil;
-        return $rb_lt(date, self.today)}, TMP_13.$$s = self, TMP_13.$$arity = 1, TMP_13), $a).call($b, "due");
-      }, TMP_14.$$arity = 0);
+        return $rb_lt(date, self.today)}, TMP_15.$$s = self, TMP_15.$$arity = 1, TMP_15), $a).call($b, "due");
+      }, TMP_16.$$arity = 0);
 
-      Opal.defn(self, '$due_today', TMP_15 = function ːdue_today() {
+      Opal.defn(self, '$due_today', TMP_17 = function ːdue_today() {
         var self = this;
 
         return self.$due_on(self.today);
-      }, TMP_15.$$arity = 0);
+      }, TMP_17.$$arity = 0);
 
-      Opal.defn(self, '$due_tomorrow', TMP_16 = function ːdue_tomorrow() {
+      Opal.defn(self, '$due_tomorrow', TMP_18 = function ːdue_tomorrow() {
         var self = this;
 
         return self.$due_on($rb_plus(self.today, 1));
-      }, TMP_16.$$arity = 0);
+      }, TMP_18.$$arity = 0);
 
-      Opal.defn(self, '$due_soon', TMP_17 = function ːdue_soon() {
+      Opal.defn(self, '$due_soon', TMP_19 = function ːdue_soon() {
         var self = this;
 
         return self.$due_between($rb_plus(self.today, 2), $rb_plus(self.today, 7));
-      }, TMP_17.$$arity = 0);
+      }, TMP_19.$$arity = 0);
 
-      Opal.defn(self, '$deferred_until_today', TMP_19 = function ːdeferred_until_today() {
-        var $a, $b, TMP_18, self = this;
+      Opal.defn(self, '$deferred_until_today', TMP_21 = function ːdeferred_until_today() {
+        var $a, $b, TMP_20, self = this;
 
-        return ($a = ($b = self).$with_date, $a.$$p = (TMP_18 = function(date){var self = TMP_18.$$s || this;
+        return ($a = ($b = self).$with_date, $a.$$p = (TMP_20 = function(date){var self = TMP_20.$$s || this;
           if (self.today == null) self.today = nil;
 if (date == null) date = nil;
-        return $rb_le(date, self.today)}, TMP_18.$$s = self, TMP_18.$$arity = 1, TMP_18), $a).call($b, "defer");
-      }, TMP_19.$$arity = 0);
+        return $rb_le(date, self.today)}, TMP_20.$$s = self, TMP_20.$$arity = 1, TMP_20), $a).call($b, "defer");
+      }, TMP_21.$$arity = 0);
 
       self.$private();
 
-      Opal.defn(self, '$with_date', TMP_20 = function ːwith_date(attribute) {
-        var $a, $b, TMP_21, $c, $d, TMP_22, self = this, $iter = TMP_20.$$p, block = $iter || nil;
+      Opal.defn(self, '$with_date', TMP_22 = function ːwith_date(attribute) {
+        var $a, $b, TMP_23, $c, $d, TMP_24, self = this, $iter = TMP_22.$$p, block = $iter || nil;
 
-        TMP_20.$$p = null;
-        return ($a = ($b = ($c = ($d = self.$with_attribute(attribute)).$select, $c.$$p = (TMP_22 = function(task){var self = TMP_22.$$s || this;
+        TMP_22.$$p = null;
+        return ($a = ($b = ($c = ($d = self.$with_attribute(attribute)).$select, $c.$$p = (TMP_24 = function(task){var self = TMP_24.$$s || this;
 if (task == null) task = nil;
-        return block.$call(task.$attributes()['$[]'](attribute).$date_value())}, TMP_22.$$s = self, TMP_22.$$arity = 1, TMP_22), $c).call($d)).$sort_by, $a.$$p = (TMP_21 = function(task){var self = TMP_21.$$s || this;
+        return block.$call(task.$attributes()['$[]'](attribute).$date_value())}, TMP_24.$$s = self, TMP_24.$$arity = 1, TMP_24), $c).call($d)).$sort_by, $a.$$p = (TMP_23 = function(task){var self = TMP_23.$$s || this;
 if (task == null) task = nil;
-        return task.$attributes()['$[]'](attribute).$date_value()}, TMP_21.$$s = self, TMP_21.$$arity = 1, TMP_21), $a).call($b);
-      }, TMP_20.$$arity = 1);
+        return task.$attributes()['$[]'](attribute).$date_value()}, TMP_23.$$s = self, TMP_23.$$arity = 1, TMP_23), $a).call($b);
+      }, TMP_22.$$arity = 1);
 
-      Opal.defn(self, '$tasks', TMP_23 = function ːtasks() {
+      Opal.defn(self, '$tasks', TMP_25 = function ːtasks() {
         var $a, self = this;
 
         return ((($a = self.tasks) !== false && $a !== nil && $a != null) ? $a : self.tasks = self.$parse());
-      }, TMP_23.$$arity = 0);
+      }, TMP_25.$$arity = 0);
 
-      return (Opal.defn(self, '$parse', TMP_25 = function ːparse() {
-        var $a, $b, TMP_24, self = this;
+      return (Opal.defn(self, '$parse', TMP_27 = function ːparse() {
+        var $a, $b, TMP_26, self = this;
 
-        return ($a = ($b = self.lines).$map, $a.$$p = (TMP_24 = function(line){var self = TMP_24.$$s || this;
+        return ($a = ($b = self.lines).$map, $a.$$p = (TMP_26 = function(line){var self = TMP_26.$$s || this;
 if (line == null) line = nil;
-        return $scope.get('Task').$new(line)}, TMP_24.$$s = self, TMP_24.$$arity = 1, TMP_24), $a).call($b);
-      }, TMP_25.$$arity = 0), nil) && 'parse';
+        return $scope.get('Task').$new(line)}, TMP_26.$$s = self, TMP_26.$$arity = 1, TMP_26), $a).call($b);
+      }, TMP_27.$$arity = 0), nil) && 'parse';
     })($scope.base, null)
   })($scope.base);
 };
@@ -38616,7 +38624,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_13, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$on', '$prevent_default', '$[]', '$then', '$new', '$attach_filter', '$all', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$add_class', '$html=', '$remove_class', '$fetch_lines', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$to_i', '$now', '$get', '$body', '$==', '$status_code', '$split', '$resolve', '$example_lines', '$map', '$line', '$render_markdown', '$join', '$to_html', '$attr', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$on', '$prevent_default', '$[]', '$then', '$new', '$attach_filter', '$all', '$complete', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$add_class', '$html=', '$remove_class', '$fetch_lines', '$private', '$count', '$current_target', '$closest', '$html', '$render_tasks', '$to_i', '$now', '$get', '$body', '$==', '$status_code', '$split', '$resolve', '$example_lines', '$map', '$line', '$render_markdown', '$join', '$to_html', '$attr', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38644,6 +38652,7 @@ if (event == null) event = nil;
 if (lines == null) lines = nil;
         task_collection = $scope.get('TaskCollection').$new(lines);
           self.$attach_filter("#rb-all-count", task_collection.$all());
+          self.$attach_filter("#rb-complete-count", task_collection.$complete());
           self.$attach_filter("#rb-overdue-count", task_collection.$overdue());
           self.$attach_filter("#rb-due-today-count", task_collection.$due_today());
           self.$attach_filter("#rb-wip-count", task_collection.$with_tag("wip"));

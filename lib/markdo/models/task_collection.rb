@@ -12,6 +12,10 @@ module Markdo
       tasks
     end
 
+    def complete
+      tasks.select { |task| task.complete? }
+    end
+
     def with_tag(tag)
       tasks.select { |task| task.attributes[tag.downcase] }
     end
