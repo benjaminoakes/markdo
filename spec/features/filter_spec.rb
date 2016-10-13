@@ -25,6 +25,7 @@ describe 'the task filters', type: :feature do
       '- [ ] Deferred @defer(2016-10-01)',
       '- [ ] Clearly overdue @due(2016-01-01)',
       '- [ ] Want to do soon @next',
+      '- [ ] @waiting Receive something from @someone',
     ]
 
     example_tasks << [-1, 0, 1, 2].map { |date_offset|

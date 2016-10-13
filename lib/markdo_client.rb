@@ -22,6 +22,7 @@ module Markdo
         attach_filter('#rb-wip-count', task_collection.with_tag('wip'))
         attach_filter('#rb-starred-count', task_collection.starred)
 
+        attach_filter('#rb-waiting-count', task_collection.with_tag('waiting'))
         attach_filter('#rb-due-tomorrow-count', task_collection.due_tomorrow)
         attach_filter('#rb-due-soon-count', task_collection.due_soon)
         attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
