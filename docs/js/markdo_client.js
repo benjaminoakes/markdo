@@ -38711,7 +38711,7 @@ if (response == null) response = nil;
       Opal.defn(self, '$example_lines', TMP_9 = function ːexample_lines() {
         var self = this;
 
-        return ["- [x] Example @star", "- [ ] Example @star", "- [ ] Example @wip", "- [ ] Example @defer(2016-10-01)", "- [ ] Example @due(2016-01-01)", "- [ ] Example @due(2016-10-09)", "- [ ] Example @due(2016-10-10)", "- [ ] Example @due(2016-10-11)", "- [ ] Example @due(2016-10-12)", "- [ ] Example @next"];
+        return ["# Example", "", "Any Markdown you want", "", "## Like headings", "", "### And subheadings", "", "> Quoted text.", "", "And of course:", "", "- [x] A completed task", "- [ ] An incomplete task", "  - [ ] A subtask", "- [ ] @due(2016-01-01) A task with a due date", "- [ ] A task with a @tag", "- [ ] A starred task @star", "- [ ] A work-in-progress task @wip", "- [ ] A deferred task @defer(2016-10-01)", "- [ ] A task I want to do soon @next"];
       }, TMP_9.$$arity = 0);
 
       Opal.defn(self, '$render_tasks', TMP_11 = function ːrender_tasks(tasks) {
