@@ -27,7 +27,7 @@ Any Markdown you want
 
 ## Like headings
 
-## And subheadings
+### And subheadings
 
 > Quoted text.
 
@@ -38,6 +38,10 @@ And of course:
   - [ ] A subtask
 - [ ] @due(2016-01-01) A task with a due date
 - [ ] A task with a @tag
+- [ ] A starred task @star
+- [ ] A work-in-progress task @wip
+- [ ] A deferred task @defer(2016-10-01)
+- [ ] A task I want to do soon @next
 ```
 
 Then you can use `markdo` to interact with your files.
