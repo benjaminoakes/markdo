@@ -20,6 +20,8 @@ describe 'the task filters', type: :feature do
       '- [ ] Clearly overdue @due(2016-01-01)',
       '- [ ] Want to do soon @next',
       '- [ ] @waiting Receive something from @someone',
+      '- [ ] Pick up something @downtown',
+      '- [ ] Buy something @shopping',
     ]
 
     example_tasks << [-1, 0, 1, 2].map { |date_offset|
@@ -36,7 +38,17 @@ describe 'the task filters', type: :feature do
 
     expect(filter_links.count).not_to be_zero
 
+    click_on('Overview')
+
     all('#rb-filter-nav a').each do |filter_link|
+      expect(filter_link.find('.badge').text).to match(/^\d+$/)
+      click_on(filter_link.text)
+      expect(find('#rb-markdown-document').text).not_to be_empty
+    end
+
+    click_on('Tags')
+
+    all('#rb-tag-nav a').each do |filter_link|
       expect(filter_link.find('.badge').text).to match(/^\d+$/)
       click_on(filter_link.text)
       expect(find('#rb-markdown-document').text).not_to be_empty

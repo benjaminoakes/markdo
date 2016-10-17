@@ -8,9 +8,11 @@ require 'markdo/models/task_collection'
 module Markdo
   class Client
     def run
-      Element['#rb-filter-nav'].on(:click) do |event|
+      Element['#rb-nav'].on(:click) do |event|
         event.prevent_default
       end
+
+      attach_nav_selector
 
       fetch_lines.then do |lines|
         task_collection = TaskCollection.new(lines)
@@ -29,11 +31,28 @@ module Markdo
         attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
         attach_filter('#rb-next-count', task_collection.with_tag('next'))
 
+        attach_filter('#rb-downtown-count', task_collection.with_tag('downtown'))
+        attach_filter('#rb-shopping-count', task_collection.with_tag('shopping'))
+
         attach_back_button
       end
     end
 
     private
+
+    def attach_nav_selector
+      Element['#rb-nav-selector a'].on(:click) do |event|
+        target = event.target.closest('a')
+        show_selector = target.attr('data-show-selector')
+        hide_selector = target.attr('data-hide-selector')
+
+        Element['#rb-nav-selector a'].remove_class('active')
+        target.add_class('active')
+
+        Element[show_selector].remove_class('hidden')
+        Element[hide_selector].add_class('hidden')
+      end
+    end
 
     def attach_filter(selector, tasks)
       count_element = Element[selector]
@@ -42,14 +61,14 @@ module Markdo
       count_element.closest('a').on(:click) do |event|
         target = event.current_target
 
-        Element['#rb-filter-nav li'].remove_class('active')
+        Element['#rb-nav li'].remove_class('active')
         target.closest('li').add_class('active')
 
         Element['#rb-markdown-document'].remove_class('hidden-xs')
         Element['#rb-back-button'].remove_class('hidden-xs')
-        Element['#rb-filter-nav'].add_class('hidden-xs')
+        Element['#rb-nav'].add_class('hidden-xs')
 
-        Element['#rb-filter-heading'].html = target.html
+        Element['#rb-document-heading'].html = target.html
 
         render_tasks(tasks)
       end
@@ -62,8 +81,8 @@ module Markdo
         Element['#rb-back-button'].add_class('hidden-xs')
         Element['#rb-markdown-document'].add_class('hidden-xs')
         Element['#rb-markdown-document'].html = ''
-        Element['#rb-filter-nav li'].remove_class('active')
-        Element['#rb-filter-nav'].remove_class('hidden-xs')
+        Element['#rb-nav li'].remove_class('active')
+        Element['#rb-nav'].remove_class('hidden-xs')
       end
     end
 
@@ -102,7 +121,7 @@ module Markdo
         '- [x] A completed task',
         '- [ ] An incomplete task',
         '- [ ] @due(2016-01-01) A task with a due date',
-        '- [ ] A task with a @tag',
+        '- [ ] A task with a tag @downtown',
         '- [ ] A starred task @star',
         '- [ ] A work-in-progress task @wip',
         '- [ ] A deferred task @defer(2016-10-01)',
