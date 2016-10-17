@@ -31,8 +31,9 @@ module Markdo
         attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
         attach_filter('#rb-next-count', task_collection.with_tag('next'))
 
-        attach_filter('#rb-downtown-count', task_collection.with_tag('downtown'))
-        attach_filter('#rb-shopping-count', task_collection.with_tag('shopping'))
+        %w[downtown shopping].each do |tag|
+          append_and_attach_tag_filter(tag, task_collection)
+        end
 
         attach_back_button
       end
@@ -84,6 +85,13 @@ module Markdo
         Element['#rb-nav li'].remove_class('active')
         Element['#rb-nav'].remove_class('hidden-xs')
       end
+    end
+
+    def append_and_attach_tag_filter(tag, task_collection)
+      id = "rb-#{tag}-count"
+      new_filter = %Q(<li role="presentation"><a href="#"><span class="badge" id="#{id}"></span> #{tag}</a></li>)
+      Element['#rb-tag-nav ul'].append(new_filter)
+      attach_filter("##{id}", task_collection.with_tag(tag))
     end
 
     def fetch_lines
