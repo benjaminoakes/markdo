@@ -6,6 +6,10 @@ require 'markdo/markdown_renderer'
 require 'markdo/models/task_collection'
 
 module Markdo
+  class Config
+    attr_accessor :tags
+  end
+
   class Client
     def run
       Element['#rb-nav'].on(:click) do |event|
@@ -16,6 +20,12 @@ module Markdo
 
       fetch_markdown_lines.then do |lines|
         task_collection = TaskCollection.new(lines)
+
+        fetch_config.then do |config|
+          config.tags.each do |tag|
+            append_and_attach_tag_filter(tag, task_collection)
+          end
+        end
 
         attach_filter('#rb-all-count', task_collection.all)
         attach_filter('#rb-complete-count', task_collection.complete)
@@ -30,10 +40,6 @@ module Markdo
         attach_filter('#rb-due-soon-count', task_collection.due_soon)
         attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
         attach_filter('#rb-next-count', task_collection.with_tag('next'))
-
-        %w[downtown shopping].each do |tag|
-          append_and_attach_tag_filter(tag, task_collection)
-        end
 
         attach_back_button
       end
@@ -94,6 +100,25 @@ module Markdo
       attach_filter("##{id}", task_collection.with_tag(tag))
     end
 
+    def fetch_config
+      cache_breaker = Time.now.to_i
+      promise = Promise.new
+
+      HTTP.get("data/config.json?#{cache_breaker}") do |response|
+        config = Config.new
+
+        if 200 == response.status_code
+          config.tags = response.json['tags']
+          promise.resolve(config)
+        else
+          config.tags = example_tags
+          promise.resolve(config)
+        end
+      end
+
+      promise
+    end
+
     def fetch_markdown_lines
       cache_breaker = Time.now.to_i
       promise = Promise.new
@@ -110,6 +135,10 @@ module Markdo
       end
 
       promise
+    end
+
+    def example_tags
+      %w[downtown shopping]
     end
 
     def example_lines
