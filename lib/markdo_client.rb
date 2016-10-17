@@ -122,7 +122,7 @@ module Markdo
     end
 
     def example_tags
-      %w[downtown shopping]
+      %w[Downtown Shopping]
     end
 
     def example_lines

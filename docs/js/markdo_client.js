@@ -38779,7 +38779,7 @@ if (response == null) response = nil;
       Opal.defn(self, '$example_tags', TMP_15 = function ːexample_tags() {
         var self = this;
 
-        return ["downtown", "shopping"];
+        return ["Downtown", "Shopping"];
       }, TMP_15.$$arity = 0);
 
       Opal.defn(self, '$example_lines', TMP_16 = function ːexample_lines() {
