@@ -8,6 +8,10 @@ require 'markdo/models/task_collection'
 
 module Markdo
   class Client
+    def initialize
+      @markdown_view = MarkdownView.new(Element['#rb-markdown-document'])
+    end
+
     def run
       Element['#rb-nav'].on(:click) do |event|
         event.prevent_default
@@ -68,7 +72,7 @@ module Markdo
         Element['#rb-nav li'].remove_class('active')
         target.closest('li').add_class('active')
 
-        Element['#rb-markdown-document'].remove_class('hidden-xs')
+        @markdown_view.show
         Element['#rb-back-button'].remove_class('hidden-xs')
         Element['#rb-nav'].add_class('hidden-xs')
 
@@ -83,8 +87,7 @@ module Markdo
         event.prevent_default
 
         Element['#rb-back-button'].add_class('hidden-xs')
-        Element['#rb-markdown-document'].add_class('hidden-xs')
-        Element['#rb-markdown-document'].html = ''
+        @markdown_view.hide
         Element['#rb-nav li'].remove_class('active')
         Element['#rb-nav'].remove_class('hidden-xs')
       end
@@ -165,14 +168,29 @@ module Markdo
 
     def render_tasks(tasks)
       lines = tasks.map { |task| task.line }
-      render_markdown(lines.join("\n"))
+      @markdown_view.render(lines.join("\n"))
+    end
+  end
+
+  class MarkdownView
+    def initialize(element)
+      @element = element
     end
 
-    def render_markdown(markdown)
+    def render(markdown)
       html = MarkdownRenderer.new(markdown).to_html
-      Element['#rb-markdown-document'].html = html
 
-      Element['#rb-markdown-document a'].attr('target', '_blank')
+      @element.html = html
+      @element.find('a').attr('target', '_blank')
+    end
+
+    def show
+      @element.remove_class('hidden-xs')
+    end
+
+    def hide
+      @element.add_class('hidden-xs')
+      @element.html = ''
     end
   end
 end
