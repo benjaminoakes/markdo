@@ -2,14 +2,11 @@ require 'opal'
 require 'jquery'
 require 'opal-jquery'
 require 'bootstrap'
+require 'markdo/config'
 require 'markdo/markdown_renderer'
 require 'markdo/models/task_collection'
 
 module Markdo
-  class Config
-    attr_accessor :tags
-  end
-
   class Client
     def run
       Element['#rb-nav'].on(:click) do |event|
