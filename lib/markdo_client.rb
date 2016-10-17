@@ -14,7 +14,7 @@ module Markdo
 
       attach_nav_selector
 
-      fetch_lines.then do |lines|
+      fetch_markdown_lines.then do |lines|
         task_collection = TaskCollection.new(lines)
 
         attach_filter('#rb-all-count', task_collection.all)
@@ -94,7 +94,7 @@ module Markdo
       attach_filter("##{id}", task_collection.with_tag(tag))
     end
 
-    def fetch_lines
+    def fetch_markdown_lines
       cache_breaker = Time.now.to_i
       promise = Promise.new
 

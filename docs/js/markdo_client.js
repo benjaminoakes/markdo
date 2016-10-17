@@ -38624,7 +38624,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_18, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$on', '$prevent_default', '$[]', '$attach_nav_selector', '$then', '$new', '$attach_filter', '$all', '$complete', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$each', '$append_and_attach_tag_filter', '$attach_back_button', '$fetch_lines', '$private', '$closest', '$target', '$attr', '$remove_class', '$add_class', '$html=', '$count', '$current_target', '$html', '$render_tasks', '$append', '$to_i', '$now', '$get', '$body', '$==', '$status_code', '$split', '$resolve', '$example_lines', '$map', '$line', '$render_markdown', '$join', '$to_html', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$on', '$prevent_default', '$[]', '$attach_nav_selector', '$then', '$new', '$attach_filter', '$all', '$complete', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$each', '$append_and_attach_tag_filter', '$attach_back_button', '$fetch_markdown_lines', '$private', '$closest', '$target', '$attr', '$remove_class', '$add_class', '$html=', '$count', '$current_target', '$html', '$render_tasks', '$append', '$to_i', '$now', '$get', '$body', '$==', '$status_code', '$split', '$resolve', '$example_lines', '$map', '$line', '$render_markdown', '$join', '$to_html', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38649,7 +38649,7 @@ if (line == null) line = nil;
 if (event == null) event = nil;
         return event.$prevent_default()}, TMP_1.$$s = self, TMP_1.$$arity = 1, TMP_1), $a).call($b, "click");
         self.$attach_nav_selector();
-        return ($a = ($c = self.$fetch_lines()).$then, $a.$$p = (TMP_2 = function(lines){var self = TMP_2.$$s || this, $d, $e, TMP_3, task_collection = nil;
+        return ($a = ($c = self.$fetch_markdown_lines()).$then, $a.$$p = (TMP_2 = function(lines){var self = TMP_2.$$s || this, $d, $e, TMP_3, task_collection = nil;
 if (lines == null) lines = nil;
         task_collection = $scope.get('TaskCollection').$new(lines);
           self.$attach_filter("#rb-all-count", task_collection.$all());
@@ -38724,7 +38724,7 @@ if (event == null) event = nil;
         return self.$attach_filter("#" + (id), task_collection.$with_tag(tag));
       }, TMP_11.$$arity = 2);
 
-      Opal.defn(self, '$fetch_lines', TMP_13 = function ːfetch_lines() {
+      Opal.defn(self, '$fetch_markdown_lines', TMP_13 = function ːfetch_markdown_lines() {
         var $a, $b, TMP_12, self = this, cache_breaker = nil, promise = nil;
 
         cache_breaker = $scope.get('Time').$now().$to_i();
