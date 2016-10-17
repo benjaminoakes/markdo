@@ -29,15 +29,7 @@ module Markdo
         attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
         attach_filter('#rb-next-count', task_collection.with_tag('next'))
 
-        Element['#rb-back-button'].on(:click) do |event|
-          event.prevent_default
-
-          Element['#rb-back-button'].add_class('hidden-xs')
-          Element['#rb-markdown-document'].add_class('hidden-xs')
-          Element['#rb-markdown-document'].html = ''
-          Element['#rb-filter-nav li'].remove_class('active')
-          Element['#rb-filter-nav'].remove_class('hidden-xs')
-        end
+        attach_back_button
       end
     end
 
@@ -60,6 +52,18 @@ module Markdo
         Element['#rb-filter-heading'].html = target.html
 
         render_tasks(tasks)
+      end
+    end
+
+    def attach_back_button
+      Element['#rb-back-button'].on(:click) do |event|
+        event.prevent_default
+
+        Element['#rb-back-button'].add_class('hidden-xs')
+        Element['#rb-markdown-document'].add_class('hidden-xs')
+        Element['#rb-markdown-document'].html = ''
+        Element['#rb-filter-nav li'].remove_class('active')
+        Element['#rb-filter-nav'].remove_class('hidden-xs')
       end
     end
 
