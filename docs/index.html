@@ -19,7 +19,12 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" id="rb-nav">
+          <div class="btn-group btn-group-justified" role="group" id="rb-nav-selector">
+            <a href="#" class="btn btn-default col-xs-6 active" data-show-selector="#rb-filter-nav" data-hide-selector="#rb-tag-nav"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Overview</a>
+            <a href="#" class="btn btn-default col-xs-6" data-show-selector="#rb-tag-nav" data-hide-selector="#rb-filter-nav"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Tags</a>
+          </div>
+
           <div id="rb-filter-nav">
             <ul class="nav nav-pills nav-stacked" role="tablist">
               <li role="presentation"><a href="#"><span class="badge" id="rb-all-count"></span> All</a></li>
@@ -45,11 +50,18 @@
               <li role="presentation"><a href="#"><span class="badge" id="rb-next-count"></span> Next</a></li>
             </ul>
           </div>
+
+          <div id="rb-tag-nav" class="hidden">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+              <li role="presentation"><a href="#"><span class="badge" id="rb-downtown-count"></span> Downtown</a></li>
+              <li role="presentation"><a href="#"><span class="badge" id="rb-shopping-count"></span> Shopping</a></li>
+            </ul>
+          </div>
         </div>
         <div class="col-md-9">
           <div id="rb-back-button" class="hidden-xs hidden-sm hidden-md hidden-lg">
             <div class="clearfix">
-              <h4 id="rb-filter-heading" class="pull-right"></h4>
+              <h4 id="rb-document-heading" class="pull-right"></h4>
 
               <ul class="nav nav-pills nav-stacked pull-left" role="tablist">
                 <li role="presentation"><a href="#">&laquo; Back</a></li>
