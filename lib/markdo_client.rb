@@ -11,10 +11,12 @@ module Markdo
     def initialize
       @markdown_view = MarkdownView.new(Element['#rb-markdown-document'])
       @navigation_view = NavigationView.new(Element['#rb-nav'])
+      @back_button_mediator = BackButtonMediator.new(Element['#rb-back-button'], @navigation_view, @markdown_view)
     end
 
     def run
       @navigation_view.render
+      @back_button_mediator.render
 
       attach_nav_selector
 
@@ -40,8 +42,6 @@ module Markdo
         attach_filter('#rb-due-soon-count', task_collection.due_soon)
         attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
         attach_filter('#rb-next-count', task_collection.with_tag('next'))
-
-        attach_back_button
       end
     end
 
@@ -69,24 +69,11 @@ module Markdo
         target = event.current_target
 
         @navigation_view.activate(target)
-
-        @markdown_view.show
-        Element['#rb-back-button'].remove_class('hidden-xs')
-        @navigation_view.hide
+        @back_button_mediator.show
 
         Element['#rb-document-heading'].html = target.html
 
         render_tasks(tasks)
-      end
-    end
-
-    def attach_back_button
-      Element['#rb-back-button'].on(:click) do |event|
-        event.prevent_default
-
-        Element['#rb-back-button'].add_class('hidden-xs')
-        @markdown_view.hide
-        @navigation_view.show
       end
     end
 
@@ -220,6 +207,33 @@ module Markdo
 
     def deactivate_all
       @element.find('li').remove_class('active')
+    end
+  end
+
+  class BackButtonMediator
+    def initialize(element, navigation_view, markdown_view)
+      @element = element
+      @navigation_view = navigation_view
+      @markdown_view = markdown_view
+    end
+
+    def render
+      @element.on(:click) do |event|
+        event.prevent_default
+        hide
+      end
+    end
+
+    def show
+      @markdown_view.show
+      @element.remove_class('hidden-xs')
+      @navigation_view.hide
+    end
+
+    def hide
+      @element.add_class('hidden-xs')
+      @markdown_view.hide
+      @navigation_view.show
     end
   end
 end
