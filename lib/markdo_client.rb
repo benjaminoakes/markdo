@@ -10,12 +10,11 @@ module Markdo
   class Client
     def initialize
       @markdown_view = MarkdownView.new(Element['#rb-markdown-document'])
+      @navigation_view = NavigationView.new(Element['#rb-nav'])
     end
 
     def run
-      Element['#rb-nav'].on(:click) do |event|
-        event.prevent_default
-      end
+      @navigation_view.render
 
       attach_nav_selector
 
@@ -69,12 +68,11 @@ module Markdo
       count_element.closest('a').on(:click) do |event|
         target = event.current_target
 
-        Element['#rb-nav li'].remove_class('active')
-        target.closest('li').add_class('active')
+        @navigation_view.activate(target)
 
         @markdown_view.show
         Element['#rb-back-button'].remove_class('hidden-xs')
-        Element['#rb-nav'].add_class('hidden-xs')
+        @navigation_view.hide
 
         Element['#rb-document-heading'].html = target.html
 
@@ -88,8 +86,7 @@ module Markdo
 
         Element['#rb-back-button'].add_class('hidden-xs')
         @markdown_view.hide
-        Element['#rb-nav li'].remove_class('active')
-        Element['#rb-nav'].remove_class('hidden-xs')
+        @navigation_view.show
       end
     end
 
@@ -191,6 +188,38 @@ module Markdo
     def hide
       @element.add_class('hidden-xs')
       @element.html = ''
+    end
+  end
+
+  class NavigationView
+    def initialize(element)
+      @element = element
+    end
+
+    def render
+      @element.on(:click) do |event|
+        event.prevent_default
+      end
+    end
+
+    def show
+      deactivate_all
+      @element.remove_class('hidden-xs')
+    end
+
+    def hide
+      @element.add_class('hidden-xs')
+    end
+
+    def activate(target)
+      deactivate_all
+      target.closest('li').add_class('active')
+    end
+
+    private
+
+    def deactivate_all
+      @element.find('li').remove_class('active')
     end
   end
 end
