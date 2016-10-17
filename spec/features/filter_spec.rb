@@ -1,13 +1,8 @@
+require 'feature_spec_helper'
+
 describe 'the task filters', type: :feature do
   before do
-    if RUBY_ENGINE == 'opal'
-      skip 'Capybara is not supported in Opal'
-    else
-      require 'capybara/rspec'
-      require 'capybara/poltergeist'
-      Capybara.default_driver = :poltergeist
-      Capybara.app = Rack::Directory.new('./docs')
-    end
+    skip 'Capybara is not supported' if !defined?(Capybara)
   end
 
   it 'shows help text on first load' do
