@@ -9,7 +9,7 @@ require 'markdo/models/task_collection'
 module Markdo
   class Client
     def initialize
-      @markdown_view = MarkdownView.new(Element['#rb-markdown-document'])
+      @markdown_view = MarkdownView.new(Element['#rb-markdown-document'], Element['#rb-document-heading'])
       @navigation_view = NavigationView.new(Element['#rb-nav'])
       @back_button_mediator = BackButtonMediator.new(Element['#rb-back-button'], @navigation_view, @markdown_view)
     end
@@ -55,9 +55,7 @@ module Markdo
         @navigation_view.activate(target)
         @back_button_mediator.show
 
-        Element['#rb-document-heading'].html = target.html
-
-        render_tasks(tasks)
+        render_tasks(tasks, target.html)
       end
     end
 
@@ -68,9 +66,9 @@ module Markdo
       attach_filter("##{id}", task_collection.with_tag(tag))
     end
 
-    def render_tasks(tasks)
+    def render_tasks(tasks, heading_html)
       lines = tasks.map { |task| task.line }
-      @markdown_view.render(lines.join("\n"))
+      @markdown_view.render(lines.join("\n"), heading_html)
     end
   end
 
@@ -151,15 +149,17 @@ module Markdo
   end
 
   class MarkdownView
-    def initialize(element)
+    def initialize(element, heading_element)
       @element = element
+      @heading_element = heading_element
     end
 
-    def render(markdown)
+    def render(markdown, heading_html)
       html = MarkdownRenderer.new(markdown).to_html
 
       @element.html = html
       @element.find('a').attr('target', '_blank')
+      @heading_element.html = heading_html
     end
 
     def show

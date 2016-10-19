@@ -38645,7 +38645,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_42, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$new', '$[]', '$render', '$then', '$each', '$append_and_attach_tag_filter', '$tags', '$fetch_config', '$attach_filter', '$all', '$complete', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$fetch_lines_from_all', '$private', '$html=', '$count', '$on', '$current_target', '$activate', '$show', '$html', '$render_tasks', '$closest', '$append', '$map', '$line', '$join', '$tap', '$fail', '$resolve', '$example_lines', '$body', '$split', '$get', '$tags=', '$example_tags', '$json', '$to_i', '$now', '$==', '$status_code', '$reject', '$to_html', '$attr', '$find', '$remove_class', '$add_class', '$prevent_default', '$toggle_selector', '$target', '$deactivate_all', '$hide', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$new', '$[]', '$render', '$then', '$each', '$append_and_attach_tag_filter', '$tags', '$fetch_config', '$attach_filter', '$all', '$complete', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$fetch_lines_from_all', '$private', '$html=', '$count', '$on', '$current_target', '$activate', '$show', '$render_tasks', '$html', '$closest', '$append', '$map', '$line', '$join', '$tap', '$fail', '$resolve', '$example_lines', '$body', '$split', '$get', '$tags=', '$example_tags', '$json', '$to_i', '$now', '$==', '$status_code', '$reject', '$to_html', '$attr', '$find', '$remove_class', '$add_class', '$prevent_default', '$toggle_selector', '$target', '$deactivate_all', '$hide', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38668,7 +38668,7 @@ if (line == null) line = nil;
       Opal.defn(self, '$initialize', TMP_1 = function ːinitialize() {
         var self = this;
 
-        self.markdown_view = $scope.get('MarkdownView').$new($scope.get('Element')['$[]']("#rb-markdown-document"));
+        self.markdown_view = $scope.get('MarkdownView').$new($scope.get('Element')['$[]']("#rb-markdown-document"), $scope.get('Element')['$[]']("#rb-document-heading"));
         self.navigation_view = $scope.get('NavigationView').$new($scope.get('Element')['$[]']("#rb-nav"));
         return self.back_button_mediator = $scope.get('BackButtonMediator').$new($scope.get('Element')['$[]']("#rb-back-button"), self.navigation_view, self.markdown_view);
       }, TMP_1.$$arity = 0);
@@ -38706,15 +38706,14 @@ if (tag == null) tag = nil;
 
         count_element = $scope.get('Element')['$[]'](selector);
         (($a = [tasks.$count()]), $b = count_element, $b['$html='].apply($b, $a), $a[$a.length-1]);
-        return ($a = ($b = count_element.$closest("a")).$on, $a.$$p = (TMP_6 = function(event){var self = TMP_6.$$s || this, $c, $d, target = nil;
+        return ($a = ($b = count_element.$closest("a")).$on, $a.$$p = (TMP_6 = function(event){var self = TMP_6.$$s || this, target = nil;
           if (self.navigation_view == null) self.navigation_view = nil;
           if (self.back_button_mediator == null) self.back_button_mediator = nil;
 if (event == null) event = nil;
         target = event.$current_target();
           self.navigation_view.$activate(target);
           self.back_button_mediator.$show();
-          (($c = [target.$html()]), $d = $scope.get('Element')['$[]']("#rb-document-heading"), $d['$html='].apply($d, $c), $c[$c.length-1]);
-          return self.$render_tasks(tasks);}, TMP_6.$$s = self, TMP_6.$$arity = 1, TMP_6), $a).call($b, "click");
+          return self.$render_tasks(tasks, target.$html());}, TMP_6.$$s = self, TMP_6.$$arity = 1, TMP_6), $a).call($b, "click");
       }, TMP_7.$$arity = 2);
 
       Opal.defn(self, '$append_and_attach_tag_filter', TMP_8 = function ːappend_and_attach_tag_filter(tag, task_collection) {
@@ -38726,14 +38725,14 @@ if (event == null) event = nil;
         return self.$attach_filter("#" + (id), task_collection.$with_tag(tag));
       }, TMP_8.$$arity = 2);
 
-      return (Opal.defn(self, '$render_tasks', TMP_10 = function ːrender_tasks(tasks) {
+      return (Opal.defn(self, '$render_tasks', TMP_10 = function ːrender_tasks(tasks, heading_html) {
         var $a, $b, TMP_9, self = this, lines = nil;
 
         lines = ($a = ($b = tasks).$map, $a.$$p = (TMP_9 = function(task){var self = TMP_9.$$s || this;
 if (task == null) task = nil;
         return task.$line()}, TMP_9.$$s = self, TMP_9.$$arity = 1, TMP_9), $a).call($b);
-        return self.markdown_view.$render(lines.$join("\n"));
-      }, TMP_10.$$arity = 1), nil) && 'render_tasks';
+        return self.markdown_view.$render(lines.$join("\n"), heading_html);
+      }, TMP_10.$$arity = 2), nil) && 'render_tasks';
     })($scope.base, null);
 
     (function($base) {
@@ -38806,20 +38805,22 @@ if (response == null) response = nil;
 
       var def = self.$$proto, $scope = self.$$scope, TMP_24, TMP_25, TMP_26, TMP_27;
 
-      def.element = nil;
-      Opal.defn(self, '$initialize', TMP_24 = function ːinitialize(element) {
+      def.element = def.heading_element = nil;
+      Opal.defn(self, '$initialize', TMP_24 = function ːinitialize(element, heading_element) {
         var self = this;
 
-        return self.element = element;
-      }, TMP_24.$$arity = 1);
+        self.element = element;
+        return self.heading_element = heading_element;
+      }, TMP_24.$$arity = 2);
 
-      Opal.defn(self, '$render', TMP_25 = function ːrender(markdown) {
+      Opal.defn(self, '$render', TMP_25 = function ːrender(markdown, heading_html) {
         var $a, $b, self = this, html = nil;
 
         html = $scope.get('MarkdownRenderer').$new(markdown).$to_html();
         (($a = [html]), $b = self.element, $b['$html='].apply($b, $a), $a[$a.length-1]);
-        return self.element.$find("a").$attr("target", "_blank");
-      }, TMP_25.$$arity = 1);
+        self.element.$find("a").$attr("target", "_blank");
+        return (($a = [heading_html]), $b = self.heading_element, $b['$html='].apply($b, $a), $a[$a.length-1]);
+      }, TMP_25.$$arity = 2);
 
       Opal.defn(self, '$show', TMP_26 = function ːshow() {
         var self = this;
