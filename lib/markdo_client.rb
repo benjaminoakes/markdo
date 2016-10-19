@@ -20,10 +20,10 @@ module Markdo
 
       attach_nav_selector
 
-      fetch_markdown_lines.then do |lines|
+      BrowserDataSource.fetch_lines_from_all.then do |lines|
         task_collection = TaskCollection.new(lines)
 
-        fetch_config.then do |config|
+        BrowserDataSource.fetch_config.then do |config|
           config.tags.each do |tag|
             append_and_attach_tag_filter(tag, task_collection)
           end
@@ -84,75 +84,85 @@ module Markdo
       attach_filter("##{id}", task_collection.with_tag(tag))
     end
 
-    def fetch_config
-      cache_breaker = Time.now.to_i
-      promise = Promise.new
-
-      HTTP.get("data/config.json?#{cache_breaker}") do |response|
-        config = Config.new
-
-        if 200 == response.status_code
-          config.tags = response.json['tags']
-          promise.resolve(config)
-        else
-          config.tags = example_tags
-          promise.resolve(config)
-        end
-      end
-
-      promise
-    end
-
-    def fetch_markdown_lines
-      cache_breaker = Time.now.to_i
-      promise = Promise.new
-
-      HTTP.get("data/__all__.md?#{cache_breaker}") do |response|
-        markdown = response.body
-
-        if 200 == response.status_code
-          lines = markdown.split("\n")
-          promise.resolve(lines)
-        else
-          promise.resolve(example_lines)
-        end
-      end
-
-      promise
-    end
-
-    def example_tags
-      %w[Downtown Shopping]
-    end
-
-    def example_lines
-      [
-        '# Example',
-        '',
-        'Any Markdown you want',
-        '',
-        '## Like headings',
-        '',
-        '### And subheadings',
-        '',
-        '> Quoted text.',
-        '',
-        'And of course:',
-        '',
-        '- [x] A completed task',
-        '- [ ] An incomplete task',
-        '- [ ] @due(2016-01-01) A task with a due date',
-        '- [ ] A task with a tag @downtown',
-        '- [ ] A starred task @star',
-        '- [ ] A work-in-progress task @wip',
-        '- [ ] A deferred task @defer(2016-10-01)',
-        '- [ ] A task I want to do soon @next',
-      ]
-    end
-
     def render_tasks(tasks)
       lines = tasks.map { |task| task.line }
       @markdown_view.render(lines.join("\n"))
+    end
+  end
+
+  module BrowserDataSource
+    class << self
+      def fetch_lines_from_all
+        Promise.new.tap do |promise|
+          get('data/__all__.md').then do |response|
+            markdown = response.body
+            lines = markdown.split("\n")
+            promise.resolve(lines)
+          end.fail do
+            promise.resolve(example_lines)
+          end
+        end
+      end
+
+      def fetch_config
+        config = Config.new
+
+        Promise.new.tap do |promise|
+          get('data/config.json').then do |response|
+            config.tags = response.json['tags']
+            promise.resolve(config)
+          end.fail do
+            config.tags = example_tags
+            promise.resolve(config)
+          end
+        end
+      end
+
+      private
+
+      def get(url)
+        Promise.new.tap do |promise|
+          cache_breaker = Time.now.to_i
+          url_with_cache_breaker = [url, cache_breaker].join('?')
+
+          HTTP.get(url_with_cache_breaker) do |response|
+            if 200 == response.status_code
+              promise.resolve(response)
+            else
+              promise.reject(response)
+            end
+          end
+        end
+      end
+
+      def example_tags
+        %w[Downtown Shopping]
+      end
+
+      def example_lines
+        [
+          '# Example',
+          '',
+          'Any Markdown you want',
+          '',
+          '## Like headings',
+          '',
+          '### And subheadings',
+          '',
+          '> Quoted text.',
+          '',
+          'And of course:',
+          '',
+          '- [x] A completed task',
+          '- [ ] An incomplete task',
+          '- [ ] @due(2016-01-01) A task with a due date',
+          '- [ ] A task with a tag @downtown',
+          '- [ ] A starred task @star',
+          '- [ ] A work-in-progress task @wip',
+          '- [ ] A deferred task @defer(2016-10-01)',
+          '- [ ] A task I want to do soon @next',
+        ]
+      end
     end
   end
 
