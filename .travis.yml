@@ -5,6 +5,8 @@ install:
 - docker-compose build
 script:
 - docker-compose up
+after_success:
+- script/deploy
 deploy:
   provider: rubygems
   api_key:

@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Prepare example instance and deploy to GitHub Pages.
+#
+# Based on [How to publish to Github Pages from Travis CI? - Stack Overflow][stack_overflow]
+#
+#   [stack_overflow]: https://stackoverflow.com/questions/23277391/how-to-publish-to-github-pages-from-travis-ci
+
+if [ -n "$GITHUB_API_KEY" ]; then
+  set -x
+  cd "$TRAVIS_BUILD_DIR"
+
+  rm -rf web
+  mkdir web
+  cd web
+  echo '<plaintext>' >> index.html
+  hostname >> index.html
+  date -Iseconds >> index.html
+
+  git init
+  git checkout -b gh-pages
+  git add .
+
+  git -c user.name="Deploy Bot" -c user.email="noreply" commit -m "Initial commit"
+  git log -n1
+
+  set +x
+  echo "[info] Force-pushing to 'gh-pages' branch"
+  # Never remove "--quiet" here:
+  2>/dev/null 1>/dev/null git push --force --quiet "https://${GITHUB_API_KEY}:@github.com/benjaminoakes/markdo" gh-pages
+  echo "[info] Push finished.  Exit status: $?"
+  set -x
+
+  cd "$TRAVIS_BUILD_DIR"
+fi
