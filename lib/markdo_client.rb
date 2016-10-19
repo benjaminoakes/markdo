@@ -18,8 +18,6 @@ module Markdo
       @navigation_view.render
       @back_button_mediator.render
 
-      attach_nav_selector
-
       BrowserDataSource.fetch_lines_from_all.then do |lines|
         task_collection = TaskCollection.new(lines)
 
@@ -46,20 +44,6 @@ module Markdo
     end
 
     private
-
-    def attach_nav_selector
-      Element['#rb-nav-selector a'].on(:click) do |event|
-        target = event.target.closest('a')
-        show_selector = target.attr('data-show-selector')
-        hide_selector = target.attr('data-hide-selector')
-
-        Element['#rb-nav-selector a'].remove_class('active')
-        target.add_class('active')
-
-        Element[show_selector].remove_class('hidden')
-        Element[hide_selector].add_class('hidden')
-      end
-    end
 
     def attach_filter(selector, tasks)
       count_element = Element[selector]
@@ -197,6 +181,10 @@ module Markdo
       @element.on(:click) do |event|
         event.prevent_default
       end
+
+      @element.find('a').on(:click) do |event|
+        toggle_selector(event)
+      end
     end
 
     def show
@@ -217,6 +205,18 @@ module Markdo
 
     def deactivate_all
       @element.find('li').remove_class('active')
+    end
+
+    def toggle_selector(event)
+      target = event.target.closest('a')
+      show_selector = target.attr('data-show-selector')
+      hide_selector = target.attr('data-hide-selector')
+
+      @element.find('a').remove_class('active')
+      target.add_class('active')
+
+      Element[show_selector].remove_class('hidden')
+      Element[hide_selector].add_class('hidden')
     end
   end
 
