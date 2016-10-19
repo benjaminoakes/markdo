@@ -2,6 +2,13 @@ guard:
   build: .
   volumes:
     - .:/src
+browser:
+  build: .
+  environment:
+    MARKDO_BUILD_SKIP_MIN: "true"
+  volumes:
+    - .:/src
+  command: guard --no-bundler-warning --group=browser
 build:
   build: .
   volumes:
