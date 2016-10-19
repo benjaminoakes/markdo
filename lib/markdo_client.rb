@@ -183,7 +183,7 @@ module Markdo
       end
 
       @element.find('a').on(:click) do |event|
-        toggle_selector(event)
+        toggle_selector(event.target)
       end
     end
 
@@ -207,13 +207,12 @@ module Markdo
       @element.find('li').remove_class('active')
     end
 
-    def toggle_selector(event)
-      target = event.target.closest('a')
-      show_selector = target.attr('data-show-selector')
-      hide_selector = target.attr('data-hide-selector')
+    def toggle_selector(target_a)
+      show_selector = target_a.attr('data-show-selector')
+      hide_selector = target_a.attr('data-hide-selector')
 
       @element.find('a').remove_class('active')
-      target.add_class('active')
+      target_a.add_class('active')
 
       Element[show_selector].remove_class('hidden')
       Element[hide_selector].add_class('hidden')

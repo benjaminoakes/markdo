@@ -38645,7 +38645,7 @@ if (line == null) line = nil;
 (function(Opal) {
   var $a, $b, TMP_42, self = Opal.top, $scope = Opal, nil = Opal.nil, $breaker = Opal.breaker, $slice = Opal.slice, $module = Opal.module, $klass = Opal.klass;
 
-  Opal.add_stubs(['$require', '$new', '$[]', '$render', '$then', '$each', '$append_and_attach_tag_filter', '$tags', '$fetch_config', '$attach_filter', '$all', '$complete', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$fetch_lines_from_all', '$private', '$html=', '$count', '$on', '$current_target', '$activate', '$show', '$html', '$render_tasks', '$closest', '$append', '$map', '$line', '$join', '$tap', '$fail', '$resolve', '$example_lines', '$body', '$split', '$get', '$tags=', '$example_tags', '$json', '$to_i', '$now', '$==', '$status_code', '$reject', '$to_html', '$attr', '$find', '$remove_class', '$add_class', '$prevent_default', '$toggle_selector', '$deactivate_all', '$target', '$hide', '$ready?', '$run']);
+  Opal.add_stubs(['$require', '$new', '$[]', '$render', '$then', '$each', '$append_and_attach_tag_filter', '$tags', '$fetch_config', '$attach_filter', '$all', '$complete', '$overdue', '$due_today', '$with_tag', '$starred', '$due_tomorrow', '$due_soon', '$deferred_until_today', '$fetch_lines_from_all', '$private', '$html=', '$count', '$on', '$current_target', '$activate', '$show', '$html', '$render_tasks', '$closest', '$append', '$map', '$line', '$join', '$tap', '$fail', '$resolve', '$example_lines', '$body', '$split', '$get', '$tags=', '$example_tags', '$json', '$to_i', '$now', '$==', '$status_code', '$reject', '$to_html', '$attr', '$find', '$remove_class', '$add_class', '$prevent_default', '$toggle_selector', '$target', '$deactivate_all', '$hide', '$ready?', '$run']);
   self.$require("opal");
   self.$require("jquery");
   self.$require("opal-jquery");
@@ -38856,7 +38856,7 @@ if (event == null) event = nil;
         return event.$prevent_default()}, TMP_29.$$s = self, TMP_29.$$arity = 1, TMP_29), $a).call($b, "click");
         return ($a = ($c = self.element.$find("a")).$on, $a.$$p = (TMP_30 = function(event){var self = TMP_30.$$s || this;
 if (event == null) event = nil;
-        return self.$toggle_selector(event)}, TMP_30.$$s = self, TMP_30.$$arity = 1, TMP_30), $a).call($c, "click");
+        return self.$toggle_selector(event.$target())}, TMP_30.$$s = self, TMP_30.$$arity = 1, TMP_30), $a).call($c, "click");
       }, TMP_31.$$arity = 0);
 
       Opal.defn(self, '$show', TMP_32 = function ːshow() {
@@ -38887,14 +38887,13 @@ if (event == null) event = nil;
         return self.element.$find("li").$remove_class("active");
       }, TMP_35.$$arity = 0);
 
-      return (Opal.defn(self, '$toggle_selector', TMP_36 = function ːtoggle_selector(event) {
-        var self = this, target = nil, show_selector = nil, hide_selector = nil;
+      return (Opal.defn(self, '$toggle_selector', TMP_36 = function ːtoggle_selector(target_a) {
+        var self = this, show_selector = nil, hide_selector = nil;
 
-        target = event.$target().$closest("a");
-        show_selector = target.$attr("data-show-selector");
-        hide_selector = target.$attr("data-hide-selector");
+        show_selector = target_a.$attr("data-show-selector");
+        hide_selector = target_a.$attr("data-hide-selector");
         self.element.$find("a").$remove_class("active");
-        target.$add_class("active");
+        target_a.$add_class("active");
         $scope.get('Element')['$[]'](show_selector).$remove_class("hidden");
         return $scope.get('Element')['$[]'](hide_selector).$add_class("hidden");
       }, TMP_36.$$arity = 1), nil) && 'toggle_selector';
