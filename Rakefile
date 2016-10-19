@@ -24,6 +24,12 @@ desc 'Compile to docs/js/markdo_client.js'
 task :compile_opal do
   Opal.append_path 'lib'
   FileUtils.mkdir_p 'docs/js'
-  File.binwrite 'docs/js/markdo_client.js', Opal::Builder.build('markdo_client').to_s
-  File.binwrite 'docs/js/markdo_client.min.js', Uglifier.compile(File.read('docs/js/markdo_client.js', encoding: 'UTF-8'))
+
+  if ENV['MARKDO_BUILD_SKIP_MIN']
+    STDERR.puts "[warn] Writing unminified JS to markdo_client.min.js"
+    File.binwrite 'docs/js/markdo_client.min.js', Opal::Builder.build('markdo_client').to_s
+  else
+    File.binwrite 'docs/js/markdo_client.js', Opal::Builder.build('markdo_client').to_s
+    File.binwrite 'docs/js/markdo_client.min.js', Uglifier.compile(File.read('docs/js/markdo_client.js', encoding: 'UTF-8'))
+  end
 end

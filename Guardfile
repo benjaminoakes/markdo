@@ -1,7 +1,9 @@
 # vim: set ft=ruby:
 
-guard 'rake', task: 'compile_opal' do
-  watch %r{^lib/.+\.rb$}
+group :browser do
+  guard 'rake', task: 'compile_opal' do
+    watch %r{^lib/.+\.rb$}
+  end
 end
 
 guard 'rake', task: 'spec:opal:phantomjs' do
