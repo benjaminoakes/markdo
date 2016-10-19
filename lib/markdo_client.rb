@@ -54,8 +54,7 @@ module Markdo
 
         @navigation_view.activate(target)
         @back_button_mediator.show
-
-        render_tasks(tasks, target.html)
+        @markdown_view.render(tasks, target.html)
       end
     end
 
@@ -64,11 +63,6 @@ module Markdo
       new_filter = %Q(<li role="presentation"><a href="#"><span class="badge" id="#{id}"></span> #{tag}</a></li>)
       Element['#rb-tag-nav ul'].append(new_filter)
       attach_filter("##{id}", task_collection.with_tag(tag))
-    end
-
-    def render_tasks(tasks, heading_html)
-      lines = tasks.map { |task| task.line }
-      @markdown_view.render(lines.join("\n"), heading_html)
     end
   end
 
@@ -154,7 +148,9 @@ module Markdo
       @heading_element = heading_element
     end
 
-    def render(markdown, heading_html)
+    def render(tasks, heading_html)
+      lines = tasks.map { |task| task.line }
+      markdown = lines.join("\n")
       html = MarkdownRenderer.new(markdown).to_html
 
       @element.html = html
