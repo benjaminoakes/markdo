@@ -4,7 +4,7 @@ services:
 install:
 - docker-compose build
 script:
-- docker-compose up
+- script/ci
 after_success:
 - script/deploy
 deploy:

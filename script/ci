@@ -1,0 +1,7 @@
+#!/bin/sh
+set -xe
+
+docker-compose run guard rake compile_opal
+docker-compose run guard rake spec
+docker-compose run guard rake spec:opal:phantomjs
+docker-compose run guard script/build
