@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'feature_spec_helper'
 
 describe 'the task filters', type: :feature do
@@ -29,6 +30,7 @@ describe 'the task filters', type: :feature do
     }
 
     example_markdown = example_tasks.flatten.join("\n")
+    FileUtils.mkdir_p('/src/docs/data/')
     File.write('/src/docs/data/__all__.md', example_markdown)
     File.write('/src/docs/data/config.json', '{"tags":["Downtown","Shopping","Someone"]}')
 
