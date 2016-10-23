@@ -9,6 +9,7 @@ _yardoc
 coverage
 doc/
 docs/data
+docs/js
 lib/bundler/man
 pkg
 rdoc
