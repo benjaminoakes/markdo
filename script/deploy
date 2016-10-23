@@ -10,8 +10,13 @@ if [ -n "$GITHUB_API_KEY" ]; then
   set -x
   cd "$TRAVIS_BUILD_DIR"
 
+  docker-compose run guard rake compile_opal
+
   rm -rf web
   mkdir web
+  cp -r docs/* web
+  rm -rf web/data
+
   cd web
   echo '<plaintext>' >> build_info.html
   hostname >> build_info.html

@@ -8,6 +8,7 @@ InstalledFiles
 _yardoc
 coverage
 doc/
+docs/data
 docs/js
 lib/bundler/man
 pkg
@@ -17,3 +18,5 @@ test/tmp
 test/version_tmp
 tmp
 coverage
+capybara-*.png
+web
