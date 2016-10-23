@@ -37,4 +37,13 @@ if [ -n "$GITHUB_API_KEY" ]; then
   set -x
 
   cd "$TRAVIS_BUILD_DIR"
+
+  set +x
+  echo "[info] Logging into Docker"
+  2>/dev/null 1>/dev/null docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  echo "[info] Login finished.  Exit status: $?"
+  set -x
+  docker push benjaminoakes/markdo
+
+  cd "$TRAVIS_BUILD_DIR"
 fi
