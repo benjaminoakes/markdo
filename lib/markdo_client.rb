@@ -15,7 +15,6 @@ module Markdo
     end
 
     def run
-      @navigation_view.render
       @back_button_mediator.render
 
       BrowserDataSource.fetch_lines_from_all.then do |lines|
@@ -50,11 +49,7 @@ module Markdo
       count_element.html = tasks.count
       
       count_element.closest('a').on(:click) do |event|
-        target = event.current_target
-
-        @navigation_view.activate(target)
-        @back_button_mediator.show
-        @markdown_view.render(tasks, target.html)
+        @back_button_mediator.show(event.current_target, tasks)
       end
     end
 
@@ -224,16 +219,20 @@ module Markdo
     end
 
     def render
+      @navigation_view.render
+
       @element.on(:click) do |event|
         event.prevent_default
         hide
       end
     end
 
-    def show
+    def show(target, tasks)
+      @navigation_view.activate(target)
       @markdown_view.show
       @element.remove_class('hidden-xs')
       @navigation_view.hide
+      @markdown_view.render(tasks, target.html)
     end
 
     def hide
