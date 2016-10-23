@@ -6,4 +6,3 @@ mkdir -p pkg
 rake build
 gem install --no-ri --no-rdoc pkg/*.gem
 markdo version
-markdo help
