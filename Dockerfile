@@ -23,12 +23,13 @@ RUN pkg-deb libffi-dev=3.2.1-4
 RUN pkg-gem ffi:1.9.14
 RUN pkg-gem nokogiri:1.6.8.1
 RUN pkg-gem redcarpet:3.3.4
-
 RUN pkg-gem bundler:1.12.5
-COPY Gemfile $HOME/
-COPY lib/markdo/fake_version.rb $HOME/lib/markdo/version.rb
-COPY markdo.gemspec $HOME/
+
+RUN mkdir -p /src/lib/markdo/
+ADD Gemfile /src/Gemfile
+ADD lib/markdo/fake_version.rb /src/lib/markdo/version.rb
+ADD markdo.gemspec /src/markdo.gemspec
+WORKDIR /src
 RUN bundle install
 
-WORKDIR /src
 CMD guard --no-bundler-warning
