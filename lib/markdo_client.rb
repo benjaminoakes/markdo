@@ -4,6 +4,7 @@ require 'opal-jquery'
 require 'bootstrap'
 require 'markdo/config'
 require 'markdo/markdown_renderer'
+require 'markdo/pencil_mustache'
 require 'markdo/models/task_collection'
 
 module Markdo
@@ -51,8 +52,11 @@ module Markdo
 
     def append_and_attach_tag_filter(tag, task_collection)
       id = "rb-#{tag}-count"
-      new_filter = %Q(<li role="presentation"><a href="#"><span class="badge" id="#{id}"></span> #{tag}</a></li>)
-      Element['#rb-tag-nav ul'].append(new_filter)
+      filter_template = Element['#rb-filter-template'].html
+
+      filter = PencilMustache.render(filter_template, id: id, label: tag)
+
+      Element['#rb-tag-nav ul'].append(filter)
       attach_filter("##{id}", task_collection.with_tag(tag))
     end
   end
