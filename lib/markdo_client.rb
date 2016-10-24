@@ -52,12 +52,16 @@ module Markdo
 
     def append_and_attach_tag_filter(tag, task_collection)
       id = "rb-#{tag}-count"
-      filter_template = Element['#rb-filter-template'].html
 
-      filter = PencilMustache.render(filter_template, id: id, label: tag)
+      new_filter_widget = NewFilterWidget.new(
+        id,
+        @back_button_mediator,
+        Element['#rb-filter-template'],
+        Element['#rb-tag-nav ul'],
+        task_collection.with_tag(tag)
+      )
 
-      Element['#rb-tag-nav ul'].append(filter)
-      attach_filter("##{id}", task_collection.with_tag(tag))
+      new_filter_widget.render(id, tag)
     end
   end
 
@@ -145,6 +149,29 @@ module Markdo
     end
 
     def render
+      @element.html = @tasks.count
+
+      @element.closest('a').on(:click) do |event|
+        @back_button_mediator.show(event.current_target, @tasks)
+      end
+    end
+  end
+
+  class NewFilterWidget
+    def initialize(id, back_button_mediator, template_element, container_element, tasks)
+      @id = id
+      @back_button_mediator = back_button_mediator
+      @template_element = template_element
+      @container_element = container_element
+      @tasks = tasks
+    end
+
+    def render(id, tag)
+      filter_template = @template_element.html
+      filter = PencilMustache.render(filter_template, id: id, label: tag)
+      @container_element.append(filter)
+
+      @element = Element["##{id}"]
       @element.html = @tasks.count
 
       @element.closest('a').on(:click) do |event|
