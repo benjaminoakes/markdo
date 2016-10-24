@@ -27,28 +27,31 @@ module Markdo
           end
         end
 
-        attach_filter('#rb-all-count', task_collection.all)
-        attach_filter('#rb-complete-count', task_collection.complete)
+        tasks_by_selector = {
+          '#rb-all-count' => task_collection.all,
+          '#rb-complete-count' => task_collection.complete,
 
-        attach_filter('#rb-overdue-count', task_collection.overdue)
-        attach_filter('#rb-due-today-count', task_collection.due_today)
-        attach_filter('#rb-wip-count', task_collection.with_tag('wip'))
-        attach_filter('#rb-starred-count', task_collection.starred)
+          '#rb-overdue-count' => task_collection.overdue,
+          '#rb-due-today-count' => task_collection.due_today,
+          '#rb-wip-count' => task_collection.with_tag('wip'),
+          '#rb-starred-count' => task_collection.starred,
 
-        attach_filter('#rb-waiting-count', task_collection.with_tag('waiting'))
-        attach_filter('#rb-due-tomorrow-count', task_collection.due_tomorrow)
-        attach_filter('#rb-due-soon-count', task_collection.due_soon)
-        attach_filter('#rb-deferred-until-today-count', task_collection.deferred_until_today)
-        attach_filter('#rb-next-count', task_collection.with_tag('next'))
+          '#rb-waiting-count' => task_collection.with_tag('waiting'),
+          '#rb-due-tomorrow-count' => task_collection.due_tomorrow,
+          '#rb-due-soon-count' => task_collection.due_soon,
+          '#rb-deferred-until-today-count' => task_collection.deferred_until_today,
+          '#rb-next-count' => task_collection.with_tag('next'),
+        }
+
+        filter_widgets = tasks_by_selector.map { |selector, tasks|
+          FilterWidget.new(Element[selector], @back_button_mediator, tasks)
+        }
+
+        filter_widgets.each(&:render)
       end
     end
 
     private
-
-    def attach_filter(selector, tasks)
-      filter_widget = FilterWidget.new(Element[selector], @back_button_mediator, tasks)
-      filter_widget.render
-    end
 
     def append_and_attach_tag_filter(tag, task_collection)
       new_filter_widget = NewFilterWidget.new(
