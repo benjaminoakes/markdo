@@ -163,8 +163,8 @@ module Markdo
       @tasks = tasks
     end
 
-    def render(tag)
-      @element = append_element(tag)
+    def render(label)
+      @element = append_element(label)
       @element.find('.badge').html = @tasks.count
 
       @element.find('a').on(:click) do |event|
@@ -174,9 +174,9 @@ module Markdo
 
     private
 
-    def append_element(tag)
+    def append_element(label)
       filter_template = @template_element.html
-      filter = PencilMustache.render(filter_template, label: tag)
+      filter = PencilMustache.render(filter_template, label: label)
       @container_element.append(filter).children.last
     end
   end
