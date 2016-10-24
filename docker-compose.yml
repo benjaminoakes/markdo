@@ -9,8 +9,3 @@ browser:
   volumes:
     - .:/src
   command: guard --no-bundler-warning --group=browser
-build:
-  build: .
-  volumes:
-    - .:/src
-  command: script/build
