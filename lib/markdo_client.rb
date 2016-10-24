@@ -23,7 +23,15 @@ module Markdo
 
         BrowserDataSource.fetch_config.then do |config|
           config.tags.each do |tag|
-            append_and_attach_tag_filter(tag, task_collection)
+            new_filter_widget = NewFilterWidget.new(
+              nil,
+              @back_button_mediator,
+              Element['#rb-filter-template'],
+              Element['#rb-tag-nav ul'],
+              task_collection.with_tag(tag)
+            )
+
+            new_filter_widget.render(tag)
           end
         end
 
@@ -49,20 +57,6 @@ module Markdo
 
         filter_widgets.each(&:render)
       end
-    end
-
-    private
-
-    def append_and_attach_tag_filter(tag, task_collection)
-      new_filter_widget = NewFilterWidget.new(
-        nil,
-        @back_button_mediator,
-        Element['#rb-filter-template'],
-        Element['#rb-tag-nav ul'],
-        task_collection.with_tag(tag)
-      )
-
-      new_filter_widget.render(tag)
     end
   end
 
