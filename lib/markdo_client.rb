@@ -26,9 +26,9 @@ module Markdo
             new_filter_widget = NewFilterWidget.new(
               nil,
               @back_button_mediator,
+              task_collection.with_tag(tag),
               Element['#rb-filter-template'],
-              Element['#rb-tag-nav ul'],
-              task_collection.with_tag(tag)
+              Element['#rb-tag-nav ul']
             )
 
             new_filter_widget.render(tag)
@@ -153,11 +153,12 @@ module Markdo
   end
 
   class NewFilterWidget
-    def initialize(_, back_button_mediator, template_element, container_element, tasks)
+    def initialize(element, back_button_mediator, tasks, template_element, container_element)
+      @element = element
       @back_button_mediator = back_button_mediator
+      @tasks = tasks
       @template_element = template_element
       @container_element = container_element
-      @tasks = tasks
     end
 
     def render(label)
