@@ -167,16 +167,21 @@ module Markdo
     end
 
     def render(id, tag)
-      filter_template = @template_element.html
-      filter = PencilMustache.render(filter_template, id: id, label: tag)
-      @container_element.append(filter)
-
+      append_element(id, tag)
       @element = Element["##{id}"]
       @element.html = @tasks.count
 
       @element.closest('a').on(:click) do |event|
         @back_button_mediator.show(event.current_target, @tasks)
       end
+    end
+
+    private
+
+    def append_element(id, tag)
+      filter_template = @template_element.html
+      filter = PencilMustache.render(filter_template, id: id, label: tag)
+      @container_element.append(filter)
     end
   end
 
