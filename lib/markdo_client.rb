@@ -45,12 +45,8 @@ module Markdo
     private
 
     def attach_filter(selector, tasks)
-      count_element = Element[selector]
-      count_element.html = tasks.count
-      
-      count_element.closest('a').on(:click) do |event|
-        @back_button_mediator.show(event.current_target, tasks)
-      end
+      filter_widget = FilterWidget.new(Element[selector], @back_button_mediator, tasks)
+      filter_widget.render
     end
 
     def append_and_attach_tag_filter(tag, task_collection)
@@ -133,6 +129,22 @@ module Markdo
           '- [ ] A deferred task @defer(2016-10-01)',
           '- [ ] A task I want to do soon @next',
         ]
+      end
+    end
+  end
+
+  class FilterWidget
+    def initialize(element, back_button_mediator, tasks)
+      @element = element
+      @back_button_mediator = back_button_mediator
+      @tasks = tasks
+    end
+
+    def render
+      @element.html = @tasks.count
+
+      @element.closest('a').on(:click) do |event|
+        @back_button_mediator.show(event.current_target, @tasks)
       end
     end
   end
