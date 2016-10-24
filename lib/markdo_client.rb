@@ -23,7 +23,7 @@ module Markdo
 
         BrowserDataSource.fetch_config.then do |config|
           config.tags.each do |tag|
-            new_filter_widget = NewFilterWidget.new(
+            new_filter_widget = FilterWidget.new(
               nil,
               @back_button_mediator,
               task_collection.with_tag(tag),
@@ -52,7 +52,8 @@ module Markdo
         }
 
         filter_widgets = tasks_by_selector.map { |selector, tasks|
-          FilterWidget.new(Element[selector], @back_button_mediator, tasks)
+          li_element = Element[selector].closest('li')
+          FilterWidget.new(li_element, @back_button_mediator, tasks)
         }
 
         filter_widgets.each(&:render)
@@ -137,22 +138,6 @@ module Markdo
   end
 
   class FilterWidget
-    def initialize(element, back_button_mediator, tasks)
-      @element = element
-      @back_button_mediator = back_button_mediator
-      @tasks = tasks
-    end
-
-    def render
-      @element.html = @tasks.count
-
-      @element.closest('a').on(:click) do |event|
-        @back_button_mediator.show(event.current_target, @tasks)
-      end
-    end
-  end
-
-  class NewFilterWidget
     def initialize(element, back_button_mediator, tasks, template_element, container_element)
       @element = element
       @back_button_mediator = back_button_mediator
@@ -162,7 +147,10 @@ module Markdo
     end
 
     def render(label)
-      @element = append_element(label)
+      if @element.nil?
+        @element = append_element(label)
+      end
+
       @element.find('.badge').html = @tasks.count
 
       @element.find('a').on(:click) do |event|
