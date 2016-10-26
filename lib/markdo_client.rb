@@ -25,7 +25,7 @@ module Markdo
     end
   end
 
-  class Template
+  class BrowserTemplate
     def initialize(element)
       @element = element
     end
@@ -57,7 +57,7 @@ module Markdo
     private
 
     def render_tag_filters(task_collection, config)
-      filter_template = Template.new(Element['#rb-filter-template'])
+      filter_template = BrowserTemplate.new(Element['#rb-filter-template'])
       container_element = Element['#rb-tag-nav ul']
 
       config.tags.each do |tag|
