@@ -67,7 +67,13 @@ module Markdo
 
     def render(config, task_collection)
       @back_button_mediator.render
+      render_tag_filters(task_collection, config)
+      render_static_filters(task_collection)
+    end
 
+    private
+
+    def render_tag_filters(task_collection, config)
       config.tags.each do |tag|
         new_filter_widget = FilterWidget.new(
           nil,
@@ -79,7 +85,9 @@ module Markdo
 
         new_filter_widget.render(tag)
       end
+    end
 
+    def render_static_filters(task_collection)
       Element['.rb-filter-widget'].each do |element|
         tag = element.attr('data-task-collection-with-tag')
         scope = element.attr('data-task-collection-scope')
