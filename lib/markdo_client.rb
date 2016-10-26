@@ -27,9 +27,7 @@ module Markdo
     def index
       @back_button_mediator.render
 
-      Promise.when(@data_source.fetch_config, @data_source.fetch_all).then do |config, lines|
-        task_collection = TaskCollection.new(lines)
-
+      Promise.when(@data_source.fetch_config, @data_source.fetch_all).then do |config, task_collection|
         config.tags.each do |tag|
           new_filter_widget = FilterWidget.new(
             nil,
@@ -61,9 +59,11 @@ module Markdo
           get('data/__all__.md').then do |response|
             markdown = response.body
             lines = markdown.split("\n")
-            promise.resolve(lines)
+            task_collection = TaskCollection.new(lines)
+            promise.resolve(task_collection)
           end.fail do
-            promise.resolve(example_lines)
+            task_collection = TaskCollection.new(example_lines)
+            promise.resolve(task_collection)
           end
         end
       end
