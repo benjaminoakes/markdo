@@ -19,7 +19,7 @@ module Markdo
     def run
       @back_button_mediator.render
 
-      BrowserDataSource.fetch_lines_from_all.then do |lines|
+      BrowserDataSource.fetch_all.then do |lines|
         task_collection = TaskCollection.new(lines)
 
         BrowserDataSource.fetch_config.then do |config|
@@ -50,7 +50,7 @@ module Markdo
 
   module BrowserDataSource
     class << self
-      def fetch_lines_from_all
+      def fetch_all
         Promise.new.tap do |promise|
           get('data/__all__.md').then do |response|
             markdown = response.body
