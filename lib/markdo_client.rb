@@ -10,6 +10,7 @@ require 'markdo/models/task_collection'
 module Markdo
   class Client
     def initialize
+      @data_source = BrowserDataSource
       @markdown_view = MarkdownView.new(Element['#rb-markdown-document'], Element['#rb-document-heading'])
       @navigation_view = NavigationView.new(Element['#rb-nav'])
       @back_button_mediator = BackButtonMediator.new(Element['#rb-back-button'], @navigation_view, @markdown_view)
@@ -19,21 +20,19 @@ module Markdo
     def run
       @back_button_mediator.render
 
-      BrowserDataSource.fetch_all.then do |lines|
+      Promise.when(@data_source.fetch_config, @data_source.fetch_all).then do |config, lines|
         task_collection = TaskCollection.new(lines)
 
-        BrowserDataSource.fetch_config.then do |config|
-          config.tags.each do |tag|
-            new_filter_widget = FilterWidget.new(
-              nil,
-              @back_button_mediator,
-              task_collection.with_tag(tag),
-              @filter_template,
-              Element['#rb-tag-nav ul']
-            )
+        config.tags.each do |tag|
+          new_filter_widget = FilterWidget.new(
+            nil,
+            @back_button_mediator,
+            task_collection.with_tag(tag),
+            @filter_template,
+            Element['#rb-tag-nav ul']
+          )
 
-            new_filter_widget.render(tag)
-          end
+          new_filter_widget.render(tag)
         end
 
         Element['.rb-filter-widget'].each do |element|
