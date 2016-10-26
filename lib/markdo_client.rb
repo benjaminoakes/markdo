@@ -9,6 +9,13 @@ require 'markdo/models/task_collection'
 
 module Markdo
   class Client
+    def run
+      controller = TasksController.new
+      controller.index
+    end
+  end
+
+  class TasksController
     def initialize
       @data_source = BrowserDataSource
       @markdown_view = MarkdownView.new(Element['#rb-markdown-document'], Element['#rb-document-heading'])
@@ -17,7 +24,7 @@ module Markdo
       @filter_template = Template.new('#rb-filter-template')
     end
 
-    def run
+    def index
       @back_button_mediator.render
 
       Promise.when(@data_source.fetch_config, @data_source.fetch_all).then do |config, lines|
