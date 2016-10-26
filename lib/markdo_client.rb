@@ -5,6 +5,7 @@ require 'bootstrap'
 require 'markdo/models/config'
 require 'markdo/models/task_collection'
 require 'markdo/browser/browser_template'
+require 'markdo/browser/filter_widget'
 require 'markdo/browser/markdown_view'
 
 module Markdo
@@ -63,27 +64,6 @@ module Markdo
         tasks = tag ? task_collection.with_tag(tag) : task_collection.send(scope)
 
         FilterWidget.new(element, tasks, @back_button_mediator).render
-      end
-    end
-  end
-
-  class FilterWidget
-    def initialize(element, tasks, back_button_mediator)
-      @element = element
-      @tasks = tasks
-      @back_button_mediator = back_button_mediator
-    end
-
-    def append_to(container_element)
-      @element = container_element.append(@element).children.last
-      render
-    end
-
-    def render
-      @element.find('.badge').html = @tasks.count
-
-      @element.find('a').on(:click) do |event|
-        @back_button_mediator.show(event.current_target, @tasks)
       end
     end
   end
