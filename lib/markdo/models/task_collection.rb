@@ -3,6 +3,17 @@ require 'markdo/models/task'
 
 module Markdo
   class TaskCollection
+    def self.fetch
+      Promise.new.tap do |promise|
+        BrowserDataSource.get('data/__all__.md').then do |response|
+          markdown = response.body
+          lines = markdown.split("\n")
+          task_collection = new(lines)
+          promise.resolve(task_collection)
+        end
+      end
+    end
+
     def initialize(lines, today = Date.today)
       @lines = lines
       @today = today

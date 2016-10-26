@@ -2,7 +2,7 @@ require 'opal'
 require 'jquery'
 require 'opal-jquery'
 require 'bootstrap'
-require 'markdo/config'
+require 'markdo/models/config'
 require 'markdo/markdown_renderer'
 require 'markdo/pencil_mustache'
 require 'markdo/models/task_collection'
@@ -17,7 +17,6 @@ module Markdo
 
   class TasksController
     def initialize
-      @data_source = BrowserDataSource
       @markdown_view = MarkdownView.new(Element['#rb-markdown-document'], Element['#rb-document-heading'])
       @navigation_view = NavigationView.new(Element['#rb-nav'])
       @back_button_mediator = BackButtonMediator.new(Element['#rb-back-button'], @navigation_view, @markdown_view)
@@ -27,7 +26,7 @@ module Markdo
     def index
       @back_button_mediator.render
 
-      Promise.when(@data_source.fetch_config, @data_source.fetch_all).then do |config, task_collection|
+      Promise.when(Config.fetch, TaskCollection.fetch).then do |config, task_collection|
         config.tags.each do |tag|
           new_filter_widget = FilterWidget.new(
             nil,
@@ -53,42 +52,16 @@ module Markdo
   end
 
   module BrowserDataSource
-    class << self
-      def fetch_all
-        Promise.new.tap do |promise|
-          get('data/__all__.md').then do |response|
-            markdown = response.body
-            lines = markdown.split("\n")
-            task_collection = TaskCollection.new(lines)
-            promise.resolve(task_collection)
-          end
-        end
-      end
+    def self.get(url)
+      Promise.new.tap do |promise|
+        cache_breaker = Time.now.to_i
+        url_with_cache_breaker = [url, cache_breaker].join('?')
 
-      def fetch_config
-        config = Config.new
-
-        Promise.new.tap do |promise|
-          get('data/config.json').then do |response|
-            config.tags = response.json['tags']
-            promise.resolve(config)
-          end
-        end
-      end
-
-      private
-
-      def get(url)
-        Promise.new.tap do |promise|
-          cache_breaker = Time.now.to_i
-          url_with_cache_breaker = [url, cache_breaker].join('?')
-
-          HTTP.get(url_with_cache_breaker) do |response|
-            if 200 == response.status_code
-              promise.resolve(response)
-            else
-              promise.reject(response)
-            end
+        HTTP.get(url_with_cache_breaker) do |response|
+          if 200 == response.status_code
+            promise.resolve(response)
+          else
+            promise.reject(response)
           end
         end
       end
