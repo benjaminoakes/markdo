@@ -67,7 +67,7 @@ module Markdo
           @back_button_mediator
         )
 
-        new_filter_widget.append(container_element)
+        new_filter_widget.append_to(container_element)
       end
     end
 
@@ -90,7 +90,7 @@ module Markdo
       @back_button_mediator = back_button_mediator
     end
 
-    def append(container_element)
+    def append_to(container_element)
       @element = container_element.append(@element).children.last
       render
     end
