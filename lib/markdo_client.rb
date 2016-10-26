@@ -25,23 +25,6 @@ module Markdo
     end
   end
 
-  module BrowserDataSource
-    def self.get(url)
-      Promise.new.tap do |promise|
-        cache_breaker = Time.now.to_i
-        url_with_cache_breaker = [url, cache_breaker].join('?')
-
-        HTTP.get(url_with_cache_breaker) do |response|
-          if 200 == response.status_code
-            promise.resolve(response)
-          else
-            promise.reject(response)
-          end
-        end
-      end
-    end
-  end
-
   class Template
     def initialize(element)
       @element = element

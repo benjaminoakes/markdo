@@ -1,11 +1,12 @@
 require 'date'
+require 'markdo/data_source'
 require 'markdo/models/task'
 
 module Markdo
   class TaskCollection
     def self.fetch
       Promise.new.tap do |promise|
-        BrowserDataSource.get('data/__all__.md').then do |response|
+        DataSource.http_get('data/__all__.md').then do |response|
           markdown = response.body
           lines = markdown.split("\n")
           task_collection = new(lines)
