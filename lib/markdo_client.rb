@@ -83,7 +83,7 @@ module Markdo
           Element['#rb-tag-nav ul']
         )
 
-        new_filter_widget.render(tag)
+        new_filter_widget.append(tag)
       end
     end
 
@@ -108,11 +108,12 @@ module Markdo
       @container_element = container_element
     end
 
-    def render(label)
-      if @element.nil?
-        @element = append_element(label)
-      end
+    def append(label)
+      @element = append_element(label)
+      render
+    end
 
+    def render
       @element.find('.badge').html = @tasks.count
 
       @element.find('a').on(:click) do |event|
