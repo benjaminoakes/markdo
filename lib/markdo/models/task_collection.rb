@@ -6,7 +6,7 @@ module Markdo
   class TaskCollection
     def self.fetch
       Promise.new.tap do |promise|
-        DataSource.http_get('data/__all__.md').then do |response|
+        DataSource.http_get('data/all.md').then do |response|
           markdown = response.body
           lines = markdown.split("\n")
           task_collection = new(lines)
