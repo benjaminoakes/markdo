@@ -10,6 +10,10 @@ Any Markdown you want
 
 And of course:
 
+- [ ] Make sure to try this on mobile (or just resize your browser window)
+
+### A Project
+
 - [x] A completed task
 - [ ] An incomplete task
 - [ ] @due(2016-01-01) A task with a due date
