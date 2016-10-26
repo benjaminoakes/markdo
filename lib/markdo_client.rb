@@ -13,6 +13,7 @@ module Markdo
       @markdown_view = MarkdownView.new(Element['#rb-markdown-document'], Element['#rb-document-heading'])
       @navigation_view = NavigationView.new(Element['#rb-nav'])
       @back_button_mediator = BackButtonMediator.new(Element['#rb-back-button'], @navigation_view, @markdown_view)
+      @filter_template = Template.new('#rb-filter-template')
     end
 
     def run
@@ -27,7 +28,7 @@ module Markdo
               nil,
               @back_button_mediator,
               task_collection.with_tag(tag),
-              Element['#rb-filter-template'],
+              @filter_template,
               Element['#rb-tag-nav ul']
             )
 
@@ -137,12 +138,28 @@ module Markdo
     end
   end
 
+  class Template
+    def initialize(id)
+      @id = id
+    end
+
+    def render(locals)
+      PencilMustache.render(raw_template, locals)
+    end
+
+    private
+
+    def raw_template
+      @raw_template ||= Element[@id].html
+    end
+  end
+
   class FilterWidget
-    def initialize(element, back_button_mediator, tasks, template_element, container_element)
+    def initialize(element, back_button_mediator, tasks, filter_template, container_element)
       @element = element
       @back_button_mediator = back_button_mediator
       @tasks = tasks
-      @template_element = template_element
+      @filter_template = filter_template
       @container_element = container_element
     end
 
@@ -161,8 +178,7 @@ module Markdo
     private
 
     def append_element(label)
-      filter_template = @template_element.html
-      filter = PencilMustache.render(filter_template, label: label)
+      filter = @filter_template.render(label: label)
       @container_element.append(filter).children.last
     end
   end
