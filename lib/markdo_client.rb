@@ -4,8 +4,8 @@ require 'opal-jquery'
 require 'bootstrap'
 require 'markdo/models/config'
 require 'markdo/markdown_renderer'
-require 'markdo/pencil_mustache'
 require 'markdo/models/task_collection'
+require 'markdo/browser/browser_template'
 
 module Markdo
   class Client
@@ -22,22 +22,6 @@ module Markdo
       Promise.when(Config.fetch, TaskCollection.fetch).then do |config, task_collection|
         view.render(config, task_collection)
       end
-    end
-  end
-
-  class BrowserTemplate
-    def initialize(element)
-      @element = element
-    end
-
-    def render(locals)
-      PencilMustache.render(raw_template, locals)
-    end
-
-    private
-
-    def raw_template
-      @raw_template ||= @element.html
     end
   end
 
