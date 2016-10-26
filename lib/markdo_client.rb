@@ -43,8 +43,8 @@ module Markdo
   end
 
   class Template
-    def initialize(id)
-      @id = id
+    def initialize(element)
+      @element = element
     end
 
     def render(locals)
@@ -54,7 +54,7 @@ module Markdo
     private
 
     def raw_template
-      @raw_template ||= Element[@id].html
+      @raw_template ||= @element.html
     end
   end
 
@@ -63,7 +63,6 @@ module Markdo
       @markdown_view = MarkdownView.new(Element['#rb-markdown-document'], Element['#rb-document-heading'])
       @navigation_view = NavigationView.new(Element['#rb-nav'])
       @back_button_mediator = BackButtonMediator.new(Element['#rb-back-button'], @navigation_view, @markdown_view)
-      @filter_template = Template.new('#rb-filter-template')
     end
 
     def render(config, task_collection)
@@ -75,17 +74,17 @@ module Markdo
     private
 
     def render_tag_filters(task_collection, config)
+      filter_template = Template.new(Element['#rb-filter-template'])
       container_element = Element['#rb-tag-nav ul']
 
       config.tags.each do |tag|
         new_filter_widget = FilterWidget.new(
-          nil,
+          filter_template.render(label: tag),
           task_collection.with_tag(tag),
-          @back_button_mediator,
-          @filter_template
+          @back_button_mediator
         )
 
-        new_filter_widget.append(container_element, tag)
+        new_filter_widget.append(container_element)
       end
     end
 
@@ -102,16 +101,14 @@ module Markdo
   end
 
   class FilterWidget
-    def initialize(element, tasks, back_button_mediator, filter_template)
+    def initialize(element, tasks, back_button_mediator)
       @element = element
       @tasks = tasks
       @back_button_mediator = back_button_mediator
-      @filter_template = filter_template
     end
 
-    def append(container_element, label)
-      filter = @filter_template.render(label: label)
-      @element = container_element.append(filter).children.last
+    def append(container_element)
+      @element = container_element.append(@element).children.last
       render
     end
 
