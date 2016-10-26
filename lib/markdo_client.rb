@@ -37,23 +37,23 @@ module Markdo
         end
 
         tasks_by_selector = {
-          '#rb-all-count' => task_collection.all,
-          '#rb-complete-count' => task_collection.complete,
+          '#rb-all' => task_collection.all,
+          '#rb-complete' => task_collection.complete,
 
-          '#rb-overdue-count' => task_collection.overdue,
-          '#rb-due-today-count' => task_collection.due_today,
-          '#rb-wip-count' => task_collection.with_tag('wip'),
-          '#rb-starred-count' => task_collection.starred,
+          '#rb-overdue' => task_collection.overdue,
+          '#rb-due-today' => task_collection.due_today,
+          '#rb-wip' => task_collection.with_tag('wip'),
+          '#rb-starred' => task_collection.starred,
 
-          '#rb-waiting-count' => task_collection.with_tag('waiting'),
-          '#rb-due-tomorrow-count' => task_collection.due_tomorrow,
-          '#rb-due-soon-count' => task_collection.due_soon,
-          '#rb-deferred-until-today-count' => task_collection.deferred_until_today,
-          '#rb-next-count' => task_collection.with_tag('next'),
+          '#rb-waiting' => task_collection.with_tag('waiting'),
+          '#rb-due-tomorrow' => task_collection.due_tomorrow,
+          '#rb-due-soon' => task_collection.due_soon,
+          '#rb-deferred-until-today' => task_collection.deferred_until_today,
+          '#rb-next' => task_collection.with_tag('next'),
         }
 
         filter_widgets = tasks_by_selector.map { |selector, tasks|
-          li_element = Element[selector].closest('li')
+          li_element = Element[selector]
           FilterWidget.new(li_element, @back_button_mediator, tasks)
         }
 
