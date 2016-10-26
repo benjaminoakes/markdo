@@ -16,37 +16,10 @@ module Markdo
   end
 
   class TasksController
-    def initialize
-      @markdown_view = MarkdownView.new(Element['#rb-markdown-document'], Element['#rb-document-heading'])
-      @navigation_view = NavigationView.new(Element['#rb-nav'])
-      @back_button_mediator = BackButtonMediator.new(Element['#rb-back-button'], @navigation_view, @markdown_view)
-      @filter_template = Template.new('#rb-filter-template')
-    end
-
     def index
-      @back_button_mediator.render
-
       Promise.when(Config.fetch, TaskCollection.fetch).then do |config, task_collection|
-        config.tags.each do |tag|
-          new_filter_widget = FilterWidget.new(
-            nil,
-            @back_button_mediator,
-            task_collection.with_tag(tag),
-            @filter_template,
-            Element['#rb-tag-nav ul']
-          )
-
-          new_filter_widget.render(tag)
-        end
-
-        Element['.rb-filter-widget'].each do |element|
-          tag = element.attr('data-task-collection-with-tag')
-          scope = element.attr('data-task-collection-scope')
-
-          tasks = tag ? task_collection.with_tag(tag) : task_collection.send(scope)
-
-          FilterWidget.new(element, @back_button_mediator, tasks).render
-        end
+        view = TasksView.new
+        view.render(config, task_collection)
       end
     end
   end
@@ -81,6 +54,40 @@ module Markdo
 
     def raw_template
       @raw_template ||= Element[@id].html
+    end
+  end
+
+  class TasksView
+    def initialize
+      @markdown_view = MarkdownView.new(Element['#rb-markdown-document'], Element['#rb-document-heading'])
+      @navigation_view = NavigationView.new(Element['#rb-nav'])
+      @back_button_mediator = BackButtonMediator.new(Element['#rb-back-button'], @navigation_view, @markdown_view)
+      @filter_template = Template.new('#rb-filter-template')
+    end
+
+    def render(config, task_collection)
+      @back_button_mediator.render
+
+      config.tags.each do |tag|
+        new_filter_widget = FilterWidget.new(
+          nil,
+          @back_button_mediator,
+          task_collection.with_tag(tag),
+          @filter_template,
+          Element['#rb-tag-nav ul']
+        )
+
+        new_filter_widget.render(tag)
+      end
+
+      Element['.rb-filter-widget'].each do |element|
+        tag = element.attr('data-task-collection-with-tag')
+        scope = element.attr('data-task-collection-scope')
+
+        tasks = tag ? task_collection.with_tag(tag) : task_collection.send(scope)
+
+        FilterWidget.new(element, @back_button_mediator, tasks).render
+      end
     end
   end
 
