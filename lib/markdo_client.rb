@@ -36,25 +36,13 @@ module Markdo
           end
         end
 
-        tasks_by_selector = {
-          '#rb-all' => task_collection.all,
-          '#rb-complete' => task_collection.complete,
+        filter_widgets = Element['.rb-filter-widget'].map { |element|
+          tag = element.attr('data-task-collection-with-tag')
+          scope = element.attr('data-task-collection-scope')
 
-          '#rb-overdue' => task_collection.overdue,
-          '#rb-due-today' => task_collection.due_today,
-          '#rb-wip' => task_collection.with_tag('wip'),
-          '#rb-starred' => task_collection.starred,
+          tasks = tag ? task_collection.with_tag(tag) : task_collection.send(scope)
 
-          '#rb-waiting' => task_collection.with_tag('waiting'),
-          '#rb-due-tomorrow' => task_collection.due_tomorrow,
-          '#rb-due-soon' => task_collection.due_soon,
-          '#rb-deferred-until-today' => task_collection.deferred_until_today,
-          '#rb-next' => task_collection.with_tag('next'),
-        }
-
-        filter_widgets = tasks_by_selector.map { |selector, tasks|
-          li_element = Element[selector]
-          FilterWidget.new(li_element, @back_button_mediator, tasks)
+          FilterWidget.new(element, @back_button_mediator, tasks)
         }
 
         filter_widgets.each(&:render)
