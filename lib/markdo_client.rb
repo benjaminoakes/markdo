@@ -3,9 +3,9 @@ require 'jquery'
 require 'opal-jquery'
 require 'bootstrap'
 require 'markdo/models/config'
-require 'markdo/markdown_renderer'
 require 'markdo/models/task_collection'
 require 'markdo/browser/browser_template'
+require 'markdo/browser/markdown_view'
 
 module Markdo
   class Client
@@ -85,32 +85,6 @@ module Markdo
       @element.find('a').on(:click) do |event|
         @back_button_mediator.show(event.current_target, @tasks)
       end
-    end
-  end
-
-  class MarkdownView
-    def initialize(element, heading_element)
-      @element = element
-      @heading_element = heading_element
-    end
-
-    def render(tasks, heading_html)
-      lines = tasks.map { |task| task.line }
-      markdown = lines.join("\n")
-      html = MarkdownRenderer.new(markdown).to_html
-
-      @element.html = html
-      @element.find('a').attr('target', '_blank')
-      @heading_element.html = heading_html
-    end
-
-    def show
-      @element.remove_class('hidden-xs')
-    end
-
-    def hide
-      @element.add_class('hidden-xs')
-      @element.html = ''
     end
   end
 
