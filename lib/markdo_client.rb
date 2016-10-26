@@ -77,8 +77,8 @@ module Markdo
       config.tags.each do |tag|
         new_filter_widget = FilterWidget.new(
           nil,
-          @back_button_mediator,
           task_collection.with_tag(tag),
+          @back_button_mediator,
           @filter_template
         )
 
@@ -93,16 +93,16 @@ module Markdo
 
         tasks = tag ? task_collection.with_tag(tag) : task_collection.send(scope)
 
-        FilterWidget.new(element, @back_button_mediator, tasks).render
+        FilterWidget.new(element, tasks, @back_button_mediator).render
       end
     end
   end
 
   class FilterWidget
-    def initialize(element, back_button_mediator, tasks, filter_template)
+    def initialize(element, tasks, back_button_mediator, filter_template)
       @element = element
-      @back_button_mediator = back_button_mediator
       @tasks = tasks
+      @back_button_mediator = back_button_mediator
       @filter_template = filter_template
     end
 
