@@ -107,8 +107,8 @@ module Markdo
     end
 
     def append(container_element, label)
-      @container_element = container_element
-      @element = append_element(label)
+      filter = @filter_template.render(label: label)
+      @element = container_element.append(filter).children.last
       render
     end
 
@@ -118,13 +118,6 @@ module Markdo
       @element.find('a').on(:click) do |event|
         @back_button_mediator.show(event.current_target, @tasks)
       end
-    end
-
-    private
-
-    def append_element(label)
-      filter = @filter_template.render(label: label)
-      @container_element.append(filter).children.last
     end
   end
 
