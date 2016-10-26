@@ -74,6 +74,8 @@ module Markdo
     private
 
     def render_tag_filters(task_collection, config)
+      container_element = Element['#rb-tag-nav ul']
+
       config.tags.each do |tag|
         new_filter_widget = FilterWidget.new(
           nil,
@@ -82,7 +84,7 @@ module Markdo
           @filter_template
         )
 
-        new_filter_widget.append(Element['#rb-tag-nav ul'], tag)
+        new_filter_widget.append(container_element, tag)
       end
     end
 
