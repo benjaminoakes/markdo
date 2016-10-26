@@ -17,8 +17,9 @@ module Markdo
 
   class TasksController
     def index
+      view = TasksView.new
+
       Promise.when(Config.fetch, TaskCollection.fetch).then do |config, task_collection|
-        view = TasksView.new
         view.render(config, task_collection)
       end
     end
