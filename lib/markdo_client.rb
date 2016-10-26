@@ -36,16 +36,14 @@ module Markdo
           end
         end
 
-        filter_widgets = Element['.rb-filter-widget'].map { |element|
+        Element['.rb-filter-widget'].each do |element|
           tag = element.attr('data-task-collection-with-tag')
           scope = element.attr('data-task-collection-scope')
 
           tasks = tag ? task_collection.with_tag(tag) : task_collection.send(scope)
 
-          FilterWidget.new(element, @back_button_mediator, tasks)
-        }
-
-        filter_widgets.each(&:render)
+          FilterWidget.new(element, @back_button_mediator, tasks).render
+        end
       end
     end
   end
