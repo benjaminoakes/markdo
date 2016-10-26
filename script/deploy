@@ -22,6 +22,8 @@ if [ -n "$GITHUB_API_KEY" ]; then
   hostname >> build_info.html
   date -Iseconds >> build_info.html
 
+  cp -r ../demo data
+
   git init
   git checkout -b gh-pages
   git add .

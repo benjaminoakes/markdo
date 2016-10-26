@@ -61,9 +61,6 @@ module Markdo
             lines = markdown.split("\n")
             task_collection = TaskCollection.new(lines)
             promise.resolve(task_collection)
-          end.fail do
-            task_collection = TaskCollection.new(example_lines)
-            promise.resolve(task_collection)
           end
         end
       end
@@ -74,9 +71,6 @@ module Markdo
         Promise.new.tap do |promise|
           get('data/config.json').then do |response|
             config.tags = response.json['tags']
-            promise.resolve(config)
-          end.fail do
-            config.tags = example_tags
             promise.resolve(config)
           end
         end
@@ -97,35 +91,6 @@ module Markdo
             end
           end
         end
-      end
-
-      def example_tags
-        %w[Downtown Shopping]
-      end
-
-      def example_lines
-        [
-          '# Example',
-          '',
-          'Any Markdown you want',
-          '',
-          '## Like headings',
-          '',
-          '### And subheadings',
-          '',
-          '> Quoted text.',
-          '',
-          'And of course:',
-          '',
-          '- [x] A completed task',
-          '- [ ] An incomplete task',
-          '- [ ] @due(2016-01-01) A task with a due date',
-          '- [ ] A task with a tag @downtown',
-          '- [ ] A starred task @star',
-          '- [ ] A work-in-progress task @wip',
-          '- [ ] A deferred task @defer(2016-10-01)',
-          '- [ ] A task I want to do soon @next',
-        ]
       end
     end
   end
