@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Markdo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/template.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" id="rb-nav">
+          <div class="btn-group btn-group-justified" role="group" id="rb-nav-selector">
+            <a href="#" class="btn btn-default col-xs-6 active" data-show-selector="#rb-filter-nav" data-hide-selector="#rb-tag-nav"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Overview</a>
+            <a href="#" class="btn btn-default col-xs-6" data-show-selector="#rb-tag-nav" data-hide-selector="#rb-filter-nav"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Tags</a>
+          </div>
+
+          <div id="rb-filter-nav">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+              <li role="presentation" class="rb-filter-widget" data-task-collection-scope="all"><a href="#"><span class="badge"></span> All</a></li>
+              <li role="presentation" class="rb-filter-widget" data-task-collection-scope="complete"><a href="#"><span class="badge"></span> Complete</a></li>
+            </ul>
+
+            <hr />
+
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+              <li role="presentation" class="rb-filter-widget" data-task-collection-scope="overdue"><a href="#"><span class="badge"></span> Overdue</a></li>
+              <li role="presentation" class="rb-filter-widget" data-task-collection-scope="due_today"><a href="#"><span class="badge"></span> Due Today</a></li>
+              <li role="presentation" class="rb-filter-widget" data-task-collection-with-tag="wip"><a href="#"><span class="badge"></span> Work in Progress</a></li>
+              <li role="presentation" class="rb-filter-widget" data-task-collection-scope="starred"><a href="#"><span class="badge"></span> Starred</a></li>
+            </ul>
+
+            <hr />
+
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+              <li role="presentation" class="rb-filter-widget" data-task-collection-with-tag="waiting"><a href="#"><span class="badge"></span> Waiting For</a></li>
+              <li role="presentation" class="rb-filter-widget" data-task-collection-scope="due_tomorrow"><a href="#"><span class="badge"></span> Due Tomorrow</a></li>
+              <li role="presentation" class="rb-filter-widget" data-task-collection-scope="due_soon"><a href="#"><span class="badge"></span> Due Soon</a></li>
+              <li role="presentation" class="rb-filter-widget" data-task-collection-scope="deferred_until_today"><a href="#"><span class="badge"></span> Deferred until Today</a></li>
+              <li role="presentation" class="rb-filter-widget" data-task-collection-with-tag="next"><a href="#"><span class="badge"></span> Next</a></li>
+            </ul>
+          </div>
+
+          <div id="rb-tag-nav" class="hidden">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div id="rb-back-button" class="hidden-xs hidden-sm hidden-md hidden-lg">
+            <div class="clearfix">
+              <h4 id="rb-document-heading" class="pull-right"></h4>
+
+              <ul class="nav nav-pills nav-stacked pull-left" role="tablist">
+                <li role="presentation"><a href="#">&laquo; Back</a></li>
+              </ul>
+            </div>
+
+            <hr />
+          </div>
+
+          <div class="hidden-xs" id="rb-markdown-document">
+            <h2>Markdo</h2>
+
+            <p>Make a selection on the left to see your tasks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script id="rb-filter-template" type="text/html">
+      <li role="presentation"><a href="#"><span class="badge"></span> {{label}}</a></li>
+    </script>
+    <script src="js/markdo_client.min.js"></script>
+  </body>
+</html>
