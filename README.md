@@ -6,7 +6,7 @@ Markdown-based task manager.  Inspired by [OmniFocus][omnifocus], [TaskPaper][ta
 
   [gfm-task-lists]: https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments
   [omnifocus]: https://www.omnigroup.com/omnifocus/
-  [taskpaper]: http://www.hogbaysoftware.com/products/taskpaper
+  [taskpaper]: https://www.taskpaper.com/
 
 ## Installation
 
